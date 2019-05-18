@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import NavBar from './NavBar.js';
 import Login from './Login.js';
 import {Carousel, Card, Jumbotron, Container} from 'react-bootstrap';
-import title from './title.jpg';
 import ss1 from './slideshow1.jpg';
 import ss2 from './slideshow2.jpg';
 import ss3 from './slideshow3.jpg';
@@ -48,7 +47,7 @@ class Home extends Component {
                 <p>Effective rating system for finding qualified volunteers</p>
                 </Carousel.Caption>
             </Carousel.Item>
-            </Carousel>
+            </Carousel>;
 
             <Jumbotron fluid>
             <Container>
@@ -61,6 +60,15 @@ class Home extends Component {
                 src={vhands}
                 alt="First slide"
                 />
+            </Container>
+            </Jumbotron>;
+
+            <Jumbotron fluid style={{backgroundColor:'#4185F4'}}>
+            <Container>
+                <h1 style={{color:"white"}}>What is HVC about?</h1>
+                <p style={{color:"white"}}>
+                HVC is a volunteering platform aimed at facilitating event organization and volunteer registration. 
+                </p>
             </Container>
             </Jumbotron>;
 
