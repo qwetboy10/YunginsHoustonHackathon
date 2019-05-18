@@ -63,7 +63,7 @@ class Event(models.Model):
     tags = models.ManyToManyField(Tag, blank=True)
     skills = models.ManyToManyField(Skill, blank=True)
     address = models.CharField(max_length=200)
-    mininun_karma = models.IntegerField(default=0)
+    minimum_karmam = models.IntegerField(default=0)
     name = models.CharField(max_length=100)
     date = models.DateField()
     duration = models.DurationField()
