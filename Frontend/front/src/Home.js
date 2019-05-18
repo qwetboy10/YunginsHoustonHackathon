@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import NavBar from './NavBar.js';
 import Login from './Login.js';
 import {Carousel,  } from 'react-bootstrap';
+import title from './title.jpg';
 import ss1 from './slideshow1.jpg';
 import ss2 from './slideshow2.jpg';
 import ss3 from './slideshow3.jpg';
@@ -10,6 +11,14 @@ class Home extends Component {
     render() {
         return (
           <div>
+            <img
+                className="d-block w-100"
+                src={title}
+                alt="Title"
+            />
+            
+            <NavBar />
+
             <NavBar {...this.props}/>
             <Carousel>
             <Carousel.Item>
@@ -35,8 +44,8 @@ class Home extends Component {
                 />
 
                 <Carousel.Caption>
-                <h3>Build life-long friendships through teamwork and volunteering opportunities</h3>
-                <p>etc</p>
+                <h3 style={{color:"black"}}>Build life-long friendships through teamwork and volunteering opportunities</h3>
+                <p style={{color:"black"}}>etc</p>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
