@@ -9,4 +9,7 @@ router.register(r"organization", OrganizationViewSet)
 router.register(r"event", EventViewSet)
 router.register(r"skill", SkillViewSet)
 
-urlpatterns = [path("api/", include(router.urls))]
+urlpatterns = [
+    path("api/", include(router.urls)),
+    path("accounts/", include('django.contrib.auth.urls')),
+]

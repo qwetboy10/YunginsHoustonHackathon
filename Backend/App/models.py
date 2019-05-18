@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 
 class Tag(models.Model):
     name = models.CharField(max_length=20)
@@ -29,14 +31,16 @@ class Organization(models.Model):
 
 
 class Person(models.Model):
-    first_name = models.CharField(max_length=40)
-    last_name = models.CharField(max_length=40)
+    user = models.OneToOneField(User)
+
     karma = models.IntegerField(default=0)
     skills = models.ManyToManyField(Skill, blank=True)
-    email = models.EmailField()
     phone = models.CharField(max_length=20)
     organization = models.ForeignKey(Organization, models.CASCADE, null=True, blank=True)
-     
+
+    def __unicode__(self):
+	    return self.user.username
+
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
 
