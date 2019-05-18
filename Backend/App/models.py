@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Q
 
 class Tag(models.Model):
     name = models.CharField(max_length=20)
@@ -53,7 +54,7 @@ class Event(models.Model):
     tags = models.ManyToManyField(Tag, blank=True)
     skills = models.ManyToManyField(Skill)
     address = models.CharField(max_length=200)
-    minimun_karma = models.IntegerField(default=0)
+    mininun_karma = models.IntegerField(default=0)
     name = models.CharField(max_length=100)
     date = models.DateField()
     duration = models.DurationField()
@@ -61,4 +62,6 @@ class Event(models.Model):
     def __str__(self):
         return self.name
 
-# Create your models here.
+    def contains_tag(self, tag):
+        return self.tags.filter(name=tag).count() > 0
+
