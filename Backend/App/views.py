@@ -50,7 +50,18 @@ class UserViewSet(viewsets.ViewSet):
 class PersonViewSet(viewsets.ModelViewSet):
     queryset = Person.objects.all()
     serializer_class = PersonSerializer
-    def list(self, request, *args, **kwargs):
+    def search_by_name(self, request, *args, **kwargs):
+        search = request.query_params.get('search', None)
+        if search is None:
+            serializer = self.get_serializer(Person.objects.all(), many=True)
+            return Response(serializer.data)
+        else:
+            queryset = [i for i in Person.objects.all() if search in Person.get_name()]
+            serializer = self.get_serializer(queryset, many=True)
+            return Response(serializer.data)
+
+    @action(methods=['get'], detail=False)
+    def search_by_skill(self, request, *args, **kwargs):
         search = request.query_params.get('search', None)
         if search is None:
             serializer = self.get_serializer(Person.objects.all(), many=True)
