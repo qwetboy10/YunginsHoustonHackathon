@@ -45,7 +45,7 @@ class Person(models.Model):
         return self.user.username
 
     def __str__(self):
-        return f"{self.user.username}"
+        return str(self.user.username)
 
     def is_volunteer(self):
         return self.organization is None
