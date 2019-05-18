@@ -8,10 +8,13 @@ from .models import *
 from .serializers import *
 # Create your views here.
 
-class PersonViewSet(viewsets.ViewSet):
+class PersonViewSet(viewsets.ModelViewSet):
     queryset = Person.objects.all()
     serializer_class = PersonSerializer
     
+class TagViewSet(viewsets.ModelViewSet):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
 
 class OrganizationViewSet(viewsets.ModelViewSet):
     queryset = Organization.objects.all()

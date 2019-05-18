@@ -32,7 +32,7 @@ class Organization(models.Model):
 
 
 class Person(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, models.CASCADE)
     id = models.AutoField(primary_key=True)
     karma = models.IntegerField(default=0)
     skills = models.ManyToManyField(Skill, blank=True)
