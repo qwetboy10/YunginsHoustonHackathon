@@ -9,6 +9,7 @@ router.register(r"organizations", OrganizationViewSet)
 router.register(r"events", EventViewSet)
 router.register(r"skills", SkillViewSet)
 router.register(r"tags", TagViewSet)
+router.register(r"users", UserViewSet, "users")
 
 urlpatterns = [
     path("api/", include(router.urls)),
