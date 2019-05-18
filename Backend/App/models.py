@@ -53,6 +53,9 @@ class Person(models.Model):
     def is_organizer(self):
         return self.organization is not None
 
+    def contains_skill(self, tag):
+        return self.skills.filter(short_name=tag).count() > 0
+
 
 class Event(models.Model):
     organization = models.ForeignKey(Organization, models.CASCADE)
