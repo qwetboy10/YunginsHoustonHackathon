@@ -34,8 +34,8 @@ class Home extends Component {
                 />
 
                 <Carousel.Caption>
-                <h3>Build life-long friendships through teamwork and volunteering opportunities</h3>
-                <p>etc</p>
+                <h3 style={{color:"black"}}>Build life-long friendships through teamwork and volunteering opportunities</h3>
+                <p style={{color:"black"}}>etc</p>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
