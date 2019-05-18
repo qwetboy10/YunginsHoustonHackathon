@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-import NavBar from './NavBar.js';
+//other imports go here
 
-class Home extends Component {
+class template extends Component {
     render() {
         return (
           <div>
-            <NavBar />
+              REPLACE ME
           </div>
         );
       }
 }
 
-export default Home;
+export default template;
