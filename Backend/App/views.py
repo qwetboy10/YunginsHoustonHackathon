@@ -21,7 +21,6 @@ class TagViewSet(viewsets.ModelViewSet):
 class OrganizationViewSet(viewsets.ModelViewSet):
     queryset = Organization.objects.all()
     serializer_class = OrganizationSerializer
-<<<<<<< HEAD
     @action(methods=['get'], detail=True)
     def get_people(self, request, pk=None):
         people = Person.objects.filter(organization__id=pk)
@@ -33,10 +32,6 @@ class OrganizationViewSet(viewsets.ModelViewSet):
         serializer = EventSerializer(events, many=True)
         return Response(serializer.data)
 #212
-=======
-    
-
->>>>>>> 8b0ea546fae3311ed3b06bf2622b764b01ac6e3a
 class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
