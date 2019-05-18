@@ -9,8 +9,8 @@ import ss3 from './slideshow3.jpg';
 class Home extends Component {
     render() {
         return (
-          <div>
-            <img
+          <div >
+            <img onClick={() => this.props.history.push("/")}
                 className="d-block w-100"
                 src={title}
                 alt="Title"
