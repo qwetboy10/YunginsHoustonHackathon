@@ -58,7 +58,7 @@ class Event(models.Model):
     organization = models.ForeignKey(Organization, models.CASCADE)
     organizers_volunteers = models.ManyToManyField(Person, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
-    skills = models.ManyToManyField(Skill)
+    skills = models.ManyToManyField(Skill, blank=True)
     address = models.CharField(max_length=200)
     mininun_karma = models.IntegerField(default=0)
     name = models.CharField(max_length=100)
