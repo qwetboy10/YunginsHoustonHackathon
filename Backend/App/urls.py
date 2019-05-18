@@ -11,5 +11,5 @@ router.register(r"skill", SkillViewSet)
 
 urlpatterns = [
     path("api/", include(router.urls)),
-    path("accounts/", include('django.contrib.auth.urls')),
+    path("accounts/", include("django.contrib.auth.urls")),
 ]

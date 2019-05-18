@@ -1,11 +1,5 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-<<<<<<< HEAD
-from django.shortcuts import get_object_or_404
-from rest_framework.response import Response
-from rest_framework.exceptions import  ParseError
-=======
->>>>>>> 432dc5865383874bae9799526a006717fbab707b
 from .models import *
 from .serializers import *
 from rest_framework.decorators import action
