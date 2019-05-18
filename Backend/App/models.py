@@ -3,6 +3,7 @@ from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 
+
 class Tag(models.Model):
     name = models.CharField(max_length=20)
 
@@ -32,8 +33,7 @@ class Organization(models.Model):
 
 
 class Person(models.Model):
-    user = models.OneToOneField(User, models.CASCADE)
-    id = models.AutoField(primary_key=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     karma = models.IntegerField(default=0)
     skills = models.ManyToManyField(Skill, blank=True)
     phone = models.CharField(max_length=20)
@@ -44,11 +44,8 @@ class Person(models.Model):
     def __unicode__(self):
         return self.user.username
 
-    def get_id(self):
-        return self.id
-
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.user.username}"
 
     def is_volunteer(self):
         return self.organization is None
