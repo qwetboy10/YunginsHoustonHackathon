@@ -41,6 +41,9 @@ class Person(models.Model):
         Organization, models.CASCADE, null=True, blank=True
     )
 
+    def get_name(self):
+        return self.user.first_name + " " + self.user.last_name
+
     def __unicode__(self):
         return self.user.username
 
@@ -53,6 +56,9 @@ class Person(models.Model):
     def is_organizer(self):
         return self.organization is not None
 
+    def contains_skill(self, tag):
+        return self.skills.filter(short_name=tag).count() > 0
+
 
 class Event(models.Model):
     organization = models.ForeignKey(Organization, models.CASCADE)
@@ -60,10 +66,12 @@ class Event(models.Model):
     tags = models.ManyToManyField(Tag, blank=True)
     skills = models.ManyToManyField(Skill, blank=True)
     address = models.CharField(max_length=200)
-    mininun_karma = models.IntegerField(default=0)
+    minimum_karmam = models.IntegerField(default=0)
     name = models.CharField(max_length=100)
     date = models.DateField()
     duration = models.DurationField()
+    blurb = models.TextField(blank=True)
+    description = models.CharField(max_length=280, blank=True)
 
     def __str__(self):
         return self.name
