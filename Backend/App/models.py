@@ -1,5 +1,12 @@
 from django.db import models
 
+class Tag(models.Model):
+    name = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.name
+
+
 class Skill(models.Model):
     short_name = models.CharField(max_length=10)
     long_name = models.CharField(max_length=100)
@@ -42,7 +49,8 @@ class Person(models.Model):
 
 class Event(models.Model):
     organization = models.ForeignKey(Organization, models.CASCADE)
-    organizers_volunteers = models.ManyToManyField(Person)
+    organizers_volunteers = models.ManyToManyField(Person, blank=True)
+    tags = models.ManyToManyField(Tag, blank=True)
     skills = models.ManyToManyField(Skill)
     address = models.CharField(max_length=200)
     minimun_karma = models.IntegerField(default=0)
