@@ -3,7 +3,6 @@ import logo from './logo.svg';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import './App.css';
 import {getEvents, getOrganizations, getSkills} from './DataFetcher.js';
-import NavBar from './NavBar.js';
 import Home from './Home.js';
 
 class App extends Component {
@@ -14,9 +13,11 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
-        <Home />
-      </div>
+      <Router>
+        <Route path='/' exact component={(props) => 
+          <Home {...props}/>
+        }></Route>
+      </Router>
     );
   }
 }
