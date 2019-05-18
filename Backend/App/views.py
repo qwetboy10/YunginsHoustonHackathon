@@ -1,15 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from rest_framework import viewsets
-<<<<<<< HEAD
-from django.shortcuts import get_object_or_404
-from rest_framework.response import Response
-from rest_framework.exceptions import  ParseError
-=======
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.exceptions import ParseError
->>>>>>> 998c321d1706d3bfc082689c994887ceba120b2a
 from .models import *
 from .serializers import *
 # Create your views here.
@@ -27,8 +21,13 @@ class OrganizationViewSet(viewsets.ModelViewSet):
     serializer_class = OrganizationSerializer
     @action(methods=['get'], detail=True)
     def get_people(self, request, pk=None):
-        people = [i for i in Person.objects.all() if Person.organization_id == pk]
+        people = Person.objects.filter(organization__id=pk)
         serializer = PersonSerializer(people, many=True)
+        return Response(serializer.data)
+    @action(methods=['get'], detail=True)
+    def get_events(self,request,pk=None):
+        events = Event.objects.filter(organization__id=pk)
+        serializer = EventSerializer(events, many=True)
         return Response(serializer.data)
 #212
 class EventViewSet(viewsets.ModelViewSet):
