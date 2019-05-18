@@ -63,6 +63,8 @@ class EventViewSet(viewsets.ModelViewSet):
         for tag in tag_list:
             print(tag)
             queryset += [i for i in Event.objects.all() if Event.contains_tag(i, tag)]
+        #filter by date
+
         #finalize query
         queryset = list(set(queryset))
         serializer = EventSerializer(queryset , many=True)
