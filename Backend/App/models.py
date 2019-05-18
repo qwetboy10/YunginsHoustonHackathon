@@ -41,6 +41,9 @@ class Person(models.Model):
         Organization, models.CASCADE, null=True, blank=True
     )
 
+    def get_name(self):
+        return self.user.first_name + " " + self.user.last_name
+
     def __unicode__(self):
         return self.user.username
 
