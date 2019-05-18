@@ -1,22 +1,14 @@
 import React, {Component} from 'react';
 import NavBar from './NavBar.js';
-<<<<<<< HEAD
-import Login from './Login.js';
-=======
 import {Carousel,  } from 'react-bootstrap';
 import ss1 from './slideshow1.jpg';
 import ss2 from './slideshow2.jpg';
 import ss3 from './slideshow3.jpg';
->>>>>>> ff10800f0dfb51b2b2e9e4d7701dcfaf86a72997
 
 class Home extends Component {
     render() {
         return (
           <div>
-<<<<<<< HEAD
-            <NavBar/>
-            <Login/>
-=======
             <NavBar />
             <Carousel>
             <Carousel.Item>
@@ -62,7 +54,6 @@ class Home extends Component {
             </Carousel.Item>
             </Carousel>
 
->>>>>>> ff10800f0dfb51b2b2e9e4d7701dcfaf86a72997
           </div>
         );
       }
