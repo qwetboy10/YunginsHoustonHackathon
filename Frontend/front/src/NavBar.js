@@ -1,13 +1,18 @@
 import React, {Component} from 'react';
-import {Nav, Navbar, NavDropdown, Form, FormControl, Button} from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.css';
+import {Nav, Navbar, NavDropdown, Form, FormControl, Button, Popover, OverlayTrigger} from 'react-bootstrap';
+import { MDBContainer, MDBCard, MDBCardBody, MDBCol, MDBRow,MDBCardHeader, MDBIcon, MDBBtn, MDBModalFooter} from "mdbreact";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "bootstrap-css-only/css/bootstrap.min.css";
+import "mdbreact/dist/css/mdb.css";
 
 class NavBar extends Component {
     onClick() {
         alert("Moog");
     }
     render() {
-        return <Navbar bg="light" expand="lg">
+        return (
+        <div>
+        <Navbar bg="light" expand="lg">
         {/* <Navbar.Brand href="#home">Houston Volunteer Central</Navbar.Brand> */}
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -18,20 +23,18 @@ class NavBar extends Component {
             <Nav.Link href="#rankings">Rankings</Nav.Link>
             <Nav.Link href="#contact">Contact</Nav.Link>
             <Nav.Link href="#profile">Profile</Nav.Link>
-            <Nav.Link href="#login">Login</Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-            </NavDropdown>
           </Nav>
           <Form inline>
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-            <Button variant="outline-success" onClick={this.onClick.bind(this)}>Search</Button>
+            <Button variant="primary" onClick={this.onClick.bind(this)}>Search</Button>
           </Form>
+          <MDBBtn color="orange">Login</MDBBtn>
+          
         </Navbar.Collapse>
-      </Navbar>;
+        </Navbar>
+        </div>
+        );
+      
     }
 }
 
