@@ -16,7 +16,6 @@ class Home extends Component {
                 alt="Title"
             />
             
-            <NavBar />
 
             <NavBar {...this.props}/>
             <Carousel>
