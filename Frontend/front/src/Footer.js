@@ -6,17 +6,19 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 
-class NavBar extends Component {
+class Footer extends Component {
     onClick() {
         alert("Moog");
     }
     render() {
-        return (<Navbar bg="light" expand="lg">
+        return (
+        <Navbar bg="light" expand="lg">
+        <Navbar.Brand><Nav.Link onClick={() => this.props.history.push("/")}>Houston Volunteer Central</Nav.Link></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            {["Home", "Events", "FAQ", "Rankings", "Contact", "Profile", "Login"].map((str) => (
-              <Nav.Link onClick={() => this.props.history.push(`/${str.replace(/ /g, '_').toLowerCase().replace("home", "")}`)}>
+            {["Events", "FAQ", "Rankings", "Contact", "Profile", "Login"].map((str) => (
+              <Nav.Link onClick={() => this.props.history.push(`/${str.replace(/ /g, '_').toLowerCase()}`)}>
                 {str}
               </Nav.Link>
             ))}
@@ -34,4 +36,4 @@ class NavBar extends Component {
     }
 }
 
-export default NavBar;
+export default Footer;

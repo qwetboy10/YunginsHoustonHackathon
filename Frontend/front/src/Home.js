@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import NavBar from './NavBar.js';
-import {Carousel,  } from 'react-bootstrap';
+import {Carousel, Card, Jumbotron, Container} from 'react-bootstrap';
+import title from './title.jpg';
 import ss1 from './slideshow1.jpg';
 import ss2 from './slideshow2.jpg';
 import ss3 from './slideshow3.jpg';
+import vhands from './volunteerhands.jpg';
 
 class Home extends Component {
     render() {
@@ -13,8 +15,6 @@ class Home extends Component {
             <Carousel.Item>
                 <img
                 className="d-block w-100"
-                //src="holder.js/800x400?text=First slide&bg=373940"
-                //src="https://www.bswllc.com/assets/htmldocuments/wp-content/uploads/2013/07/iStock_000018254025Medium.jpg"
                 src={ss1}
                 alt="First slide"
                 />
@@ -26,32 +26,42 @@ class Home extends Component {
             <Carousel.Item>
                 <img
                 className="d-block w-100"
-                //src="holder.js/800x400?text=Second slide&bg=282c34"
-                //src="https://media.istockphoto.com/photos/group-of-volunteers-putting-hands-on-top-in-park-picture-id540095144?k=6&m=540095144&s=612x612&w=0&h=rY3FrgzoZB8-5G9GkTaKtL9uYAYambvXtPCM1cFFFQ0="
                 src={ss2}
                 alt="Third slide"
                 />
 
                 <Carousel.Caption>
-                <h3>Build life-long friendships through teamwork and volunteering opportunities</h3>
-                <p>etc</p>
+                <h3 style={{color:"black"}}>Build life-long friendships through teamwork and volunteering opportunities</h3>
+                <p style={{color:"black"}}>Volunteering creates community and helps out our wonderful city</p>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
                 <img
                 className="d-block w-100"
-                //src="holder.js/800x400?text=Third slide&bg=20232a"
-                //src="https://www.oregon.gov/highered/institutions-programs/workforce/PublishingImages/AdobeStock_176681813-web2.jpg"
                 src={ss3}
                 alt="Third slide"
                 />
 
                 <Carousel.Caption>
-                <h3>etc</h3>
-                <p>etc</p>
+                <h3>Helping volunteers find events, and event organizers find volunteers</h3>
+                <p>Effective rating system for finding qualified volunteers</p>
                 </Carousel.Caption>
             </Carousel.Item>
             </Carousel>
+
+            <Jumbotron fluid>
+            <Container>
+                <h1>What is HVC about?</h1>
+                <p>
+                HVC is a volunteering platform aimed at facilitating event organization and volunteer registration. 
+                </p>
+                <img
+                className="d-block w-100"
+                src={vhands}
+                alt="First slide"
+                />
+            </Container>
+            </Jumbotron>;
 
           </div>
         );
