@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 
+
 class Tag(models.Model):
     name = models.CharField(max_length=20)
 
@@ -16,7 +17,7 @@ class Skill(models.Model):
 
     def __str__(self):
         return self.short_name
-    
+
 
 class Organization(models.Model):
     name = models.CharField(max_length=100)
@@ -32,20 +33,22 @@ class Organization(models.Model):
 
 class Person(models.Model):
     user = models.OneToOneField(User)
-    id = models.AutoField(primary_key=True;
+    id = models.AutoField(primary_key=True)
     karma = models.IntegerField(default=0)
     skills = models.ManyToManyField(Skill, blank=True)
     phone = models.CharField(max_length=20)
-    organization = models.ForeignKey(Organization, models.CASCADE, null=True, blank=True)
+    organization = models.ForeignKey(
+        Organization, models.CASCADE, null=True, blank=True
+    )
 
     def __unicode__(self):
-	    return self.user.username
+        return self.user.username
 
-    def id(self):
+    def get_id(self):
         return self.id
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+        return f"{self.first_name} {self.last_name}"
 
     def is_volunteer(self):
         return self.organization is None
@@ -67,5 +70,6 @@ class Event(models.Model):
 
     def __str__(self):
         return self.name
+
 
 # Create your models here.
