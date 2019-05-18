@@ -64,6 +64,8 @@ class Event(models.Model):
     name = models.CharField(max_length=100)
     date = models.DateField()
     duration = models.DurationField()
+    blurb = models.TextField(blank=True)
+    description = models.CharField(max_length=280, blank=True)
 
     def __str__(self):
         return self.name
