@@ -3,7 +3,7 @@ import NavBar from './NavBar.js';
 import Login from './Login.js';
 import {Carousel, Card, Jumbotron, Container} from 'react-bootstrap';
 
-class Profile extends Component {
+class Rankings extends Component {
     render() {
         return (
           <div>
@@ -29,4 +29,4 @@ class Profile extends Component {
       }
 }
 
-export default Profile;
+export default Rankings;
