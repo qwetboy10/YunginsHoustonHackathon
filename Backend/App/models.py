@@ -1,4 +1,8 @@
 from django.db import models
+from django.db.models import Q
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=20)
@@ -14,7 +18,7 @@ class Skill(models.Model):
 
     def __str__(self):
         return self.short_name
-    
+
 
 class Organization(models.Model):
     name = models.CharField(max_length=100)
@@ -29,16 +33,19 @@ class Organization(models.Model):
 
 
 class Person(models.Model):
-    first_name = models.CharField(max_length=40)
-    last_name = models.CharField(max_length=40)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     karma = models.IntegerField(default=0)
     skills = models.ManyToManyField(Skill, blank=True)
-    email = models.EmailField()
     phone = models.CharField(max_length=20)
-    organization = models.ForeignKey(Organization, models.CASCADE, null=True, blank=True)
-     
+    organization = models.ForeignKey(
+        Organization, models.CASCADE, null=True, blank=True
+    )
+
+    def __unicode__(self):
+        return self.user.username
+
     def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+        return str(self.user.username)
 
     def is_volunteer(self):
         return self.organization is None
@@ -51,9 +58,9 @@ class Event(models.Model):
     organization = models.ForeignKey(Organization, models.CASCADE)
     organizers_volunteers = models.ManyToManyField(Person, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
-    skills = models.ManyToManyField(Skill)
+    skills = models.ManyToManyField(Skill, blank=True)
     address = models.CharField(max_length=200)
-    minimun_karma = models.IntegerField(default=0)
+    mininun_karma = models.IntegerField(default=0)
     name = models.CharField(max_length=100)
     date = models.DateField()
     duration = models.DurationField()
@@ -61,4 +68,5 @@ class Event(models.Model):
     def __str__(self):
         return self.name
 
-# Create your models here.
+    def contains_tag(self, tag):
+        return self.tags.filter(name=tag).count() > 0
