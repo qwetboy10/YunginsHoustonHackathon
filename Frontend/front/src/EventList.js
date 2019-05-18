@@ -1,24 +1,46 @@
 import React, {Component} from 'react';
 import {getEvents} from './DataFetcher.js';
 import NavBar from './NavBar.js';
+import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBRow, MDBCol, MDBIcon } from 'mdbreact';
 
 class EventList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            eventData: null
+            eventData: [{
+                name: "Event Name",
+                date: "Date",
+                id: 1,
+                description: "An Event"
+            }]
         };
     }
     componentDidMount() {
         getEvents((data) => this.setState({eventData: data}));
     }
     getEventComponent(event) { //TODO: Make this not disgusting
-        return <div key={event.id}>
-            <h1>{event.name}</h1>
-            <p>{event.address}</p>
-            <p>{event.date}</p>
-            <p>{event.organization}</p>
+        return (
+        
+        <div key={event.id}>
+        <MDBRow>
+            <MDBCol style={{ maxWidth: "22rem" }}>
+                <MDBCard wide>
+                <MDBCardImage className="view view-cascade gradient-card-header peach-gradient" cascade tag="div">
+                    <h2 className="h2-responsive mb-2">{event.name}</h2>
+                    <p className="">
+                    <MDBIcon icon="calendar-alt" /> {event.date}</p>
+                </MDBCardImage>
+                <MDBCardBody cascade>
+                    <MDBCardText>{event.description}</MDBCardText>
+                    <MDBCardText>Organized by: {event.organization}</MDBCardText>
+                    <MDBCardText>Address: {event.address}</MDBCardText>
+                    <MDBBtn href="#">View Event</MDBBtn>
+                </MDBCardBody>
+                </MDBCard>
+            </MDBCol>
+        </MDBRow>
         </div>
+        );
     }
     render() {
         const {eventData} = this.state;

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import NavBar from './NavBar.js';
+import Login from './Login.js';
 import {Carousel, Card, Jumbotron, Container} from 'react-bootstrap';
 import title from './title.jpg';
 import ss1 from './slideshow1.jpg';
