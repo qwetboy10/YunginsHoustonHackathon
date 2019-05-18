@@ -1,18 +1,57 @@
 from datetime import *
+from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from rest_framework.exceptions import ParseError
+from rest_framework.exceptions import ParseError, AuthenticationFailed
 from .models import *
 from .serializers import *
+
+
+class UserViewSet(viewsets.ViewSet):
+    def list(self, request):
+        queryset = User.objects.all()
+        serializer = UserSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def create(self, request):
+        username = request.data.get("username", None)
+        password = request.data.get("password", None)
+        first_name = request.data.get("first_name", None)
+        last_name = request.data.get("last_name", None)
+        email = request.data.get("email", None)
+        if (
+            username is None
+            or password is None
+            or first_name is None
+            or last_name is None
+            or email is None
+        ):
+            print(f"{username} {password} {first_name} {last_name} {email}")
+            raise ParseError()
+        else:
+            try:
+                user = User.objects.create_user(username, password)
+                user.first_name = first_name
+                user.last_name = last_name
+                user.email = email
+                user.save()
+            except:
+                raise AuthenticationFailed(detail="User already exists")
+
+    def retreive(self, request, pk=None):
+        queryset = User.objects.all()
+        user = get_object_or_404(queryset, pk=pk)
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
 
 
 class PersonViewSet(viewsets.ModelViewSet):
     queryset = Person.objects.all()
     serializer_class = PersonSerializer
-    
+
 
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
@@ -41,7 +80,7 @@ class EventViewSet(viewsets.ModelViewSet):
     serializer_class = EventSerializer
 
     def list(self, request, *args, **kwargs):
-        search = request.query_params.get('search', None)
+        search = request.query_params.get("search", None)
         if search is None:
             serializer = self.get_serializer(Event.objects.all(), many=True)
             return Response(serializer.data)
@@ -50,7 +89,7 @@ class EventViewSet(viewsets.ModelViewSet):
             serializer = self.get_serializer(queryset, many=True)
             return Response(serializer.data)
 
-    @action(methods=['get'], detail=False)
+    @action(methods=["get"], detail=False)
     def advanced_search(self, request):
         #filter by date
         after = request.query_params.get('after', None)
@@ -85,15 +124,23 @@ class EventViewSet(viewsets.ModelViewSet):
         serializer = EventSerializer(query2 , many=True)
         return Response(serializer.data)
 
-    @action(methods=['get'], detail=True)
+    @action(methods=["get"], detail=True)
     def get_organizers(self, request, pk=None):
-        organizers = [i for i in Event.objects.get(pk=pk).organizers_volunteers.all() if Person.is_organizer(i)]
+        organizers = [
+            i
+            for i in Event.objects.get(pk=pk).organizers_volunteers.all()
+            if Person.is_organizer(i)
+        ]
         serializer = PersonSerializer(organizers, many=True)
         return Response(serializer.data)
 
-    @action(methods=['get'], detail=True)
+    @action(methods=["get"], detail=True)
     def get_volunteers(self, request, pk=None):
-        volunteers = [i for i in Event.objects.get(pk=pk).organizers_volunteers.all() if Person.is_volunteer(i)]
+        volunteers = [
+            i
+            for i in Event.objects.get(pk=pk).organizers_volunteers.all()
+            if Person.is_volunteer(i)
+        ]
         serializer = PersonSerializer(volunteers, many=True)
         return Response(serializer.data)
 
