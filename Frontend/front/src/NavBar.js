@@ -12,12 +12,11 @@ class NavBar extends Component {
     }
     render() {
         return (<Navbar bg="light" expand="lg">
-        <Navbar.Brand><Nav.Link onClick={() => this.props.history.push("/")}>Houston Volunteer Central</Nav.Link></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            {["Events", "FAQ", "Rankings", "Contact", "Profile", "Login"].map((str) => (
-              <Nav.Link onClick={() => this.props.history.push(`/${str.replace(/ /g, '_').toLowerCase()}`)}>
+            {["Home", "Events", "FAQ", "Rankings", "Contact", "Profile", "Login"].map((str) => (
+              <Nav.Link onClick={() => this.props.history.push(`/${str.replace(/ /g, '_').toLowerCase().replace("home", "")}`)}>
                 {str}
               </Nav.Link>
             ))}
