@@ -8,8 +8,6 @@ from rest_framework.exceptions import ParseError, AuthenticationFailed
 from .models import *
 from .serializers import *
 
-# Create your views here.
-
 
 class UserViewSet(viewsets.ViewSet):
     def list(self, request):
@@ -63,11 +61,32 @@ class OrganizationViewSet(viewsets.ModelViewSet):
     queryset = Organization.objects.all()
     serializer_class = OrganizationSerializer
 
+    @action(methods=["get"], detail=True)
+    def get_people(self, request, pk=None):
+        people = Person.objects.filter(organization__id=pk)
+        serializer = PersonSerializer(people, many=True)
+        return Response(serializer.data)
 
-# 212
+    @action(methods=["get"], detail=True)
+    def get_events(self, request, pk=None):
+        events = Event.objects.filter(organization__id=pk)
+        serializer = EventSerializer(events, many=True)
+        return Response(serializer.data)
+
+
 class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
+
+    def list(self, request, *args, **kwargs):
+        search = request.query_params.get("search", None)
+        if search is None:
+            serializer = self.get_serializer(Event.objects.all(), many=True)
+            return Response(serializer.data)
+        else:
+            queryset = Event.objects.filter(name__contains=search)
+            serializer = self.get_serializer(queryset, many=True)
+            return Response(serializer.data)
 
     @action(methods=["get"], detail=False)
     def advanced_search(self, request):
@@ -77,6 +96,8 @@ class EventViewSet(viewsets.ModelViewSet):
         for tag in tag_list:
             print(tag)
             queryset += [i for i in Event.objects.all() if Event.contains_tag(i, tag)]
+        # filter by date
+
         # finalize query
         queryset = list(set(queryset))
         serializer = EventSerializer(queryset, many=True)
