@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Nav, Navbar, NavDropdown, Form, FormControl, Button} from 'react-bootstrap';
+import {BrowserRouter as Router, Link} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 
 class NavBar extends Component {
@@ -7,18 +8,17 @@ class NavBar extends Component {
         alert("Moog");
     }
     render() {
-        return <Navbar bg="light" expand="lg">
+        return <Router>
+          <Navbar bg="light" expand="lg">
         <Navbar.Brand href="#home">Houston Volunteer Central</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#home">Events</Nav.Link>
-            <Nav.Link href="#home">FAQ</Nav.Link>
-            <Nav.Link href="#home">Rankings</Nav.Link>
-            <Nav.Link href="#link">Contact</Nav.Link>
-            <Nav.Link href="#link">Profile</Nav.Link>
-            <Nav.Link href="#link">Login</Nav.Link>
+            {["A","B","C"].map(str => 
+              <Link to={`/${str}`}>
+                {str}
+              </Link>
+              )}
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -31,7 +31,7 @@ class NavBar extends Component {
             <Button variant="outline-success" onClick={this.onClick.bind(this)}>Search</Button>
           </Form>
         </Navbar.Collapse>
-      </Navbar>;
+      </Navbar></Router>;
     }
 }
 
