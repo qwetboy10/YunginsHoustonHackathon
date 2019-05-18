@@ -108,6 +108,17 @@ class EventViewSet(viewsets.ModelViewSet):
             serializer = self.get_serializer(queryset, many=True)
             return Response(serializer.data)
 
+    @action(methods=['get'], detail=False)
+    def search_by_name(self, request, *args, **kwargs):
+        search = request.query_params.get('search', None)
+        if search is None:
+            serializer = self.get_serializer(Event.objects.all(), many=True)
+            return Response(serializer.data)
+        else:
+            queryset = Event.objects.filter(name__contains=search)
+            serializer = self.get_serializer(queryset, many=True)
+            return Response(serializer.data)
+
     @action(methods=["get"], detail=False)
     def advanced_search(self, request):
         #filter by date
