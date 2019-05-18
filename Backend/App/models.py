@@ -32,7 +32,7 @@ class Organization(models.Model):
 
 class Person(models.Model):
     user = models.OneToOneField(User)
-
+    id = models.AutoField(primary_key=True;
     karma = models.IntegerField(default=0)
     skills = models.ManyToManyField(Skill, blank=True)
     phone = models.CharField(max_length=20)
@@ -40,6 +40,9 @@ class Person(models.Model):
 
     def __unicode__(self):
 	    return self.user.username
+
+    def id(self):
+        return self.id
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
