@@ -25,10 +25,10 @@ class Person(models.Model):
     first_name = models.CharField(max_length=40)
     last_name = models.CharField(max_length=40)
     karma = models.IntegerField(default=0)
-    skills = models.ManyToManyField(Skill)
+    skills = models.ManyToManyField(Skill, blank=True)
     email = models.EmailField()
     phone = models.CharField(max_length=20)
-    organization = models.ForeignKey(Organization, models.CASCADE, null=True)
+    organization = models.ForeignKey(Organization, models.CASCADE, null=True, blank=True)
      
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
