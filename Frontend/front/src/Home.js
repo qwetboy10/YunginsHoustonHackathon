@@ -4,12 +4,14 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import './App.css';
 import {getEvents, getOrganizations, getSkills} from './DataFetcher.js';
 import NavBar from './NavBar.js';
+import Login from './Login.js';
 
 class Home extends Component {
     render() {
         return (
           <div>
-            <NavBar />
+            <NavBar/>
+            <Login/>
           </div>
         );
       }
