@@ -1,13 +1,6 @@
 from django.shortcuts import render
 from .models import *
 from .serializers import *
-
-# Create your views here.
-
-class PersonViewSet(viewsets.ViewSet):
-    queryset = Person.objects.all()
-    serializer_class = PersonSerializer
-    
 class OrganizationViewSet(viewsets.ModelViewSet):
     queryset = Organization.objects.all()
     serializer_class = OrganizationSerializer
@@ -19,3 +12,5 @@ class EventViewSet(viewsets.ModelViewSet):
 class SkillViewSet(viewsets.ModelViewSet):
     queryset = Skill.objects.all()
     serializer_class = SkillSerializer
+
+# Create your views here.

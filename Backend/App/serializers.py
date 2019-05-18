@@ -1,6 +1,5 @@
 from rest_framework import serializers
-from .models import Person, Organization, Event, Skill
-
+from .models import Person, Organization, Event, Skill, Tag
 
 class PersonSerializer(serializers.ModelSerializer):
     class Meta:
@@ -19,8 +18,12 @@ class EventSerializer(serializers.ModelSerializer):
         model = Event
         fields = ("__all__")
 
-
 class SkillSerializer(serializers.ModelSerializer):
     class Meta:
         model = Skill
-        fields = ("__all__")
+        fields = ('__all__')
+
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        fields = ('__all__')
