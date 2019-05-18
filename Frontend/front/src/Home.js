@@ -43,7 +43,7 @@ class Home extends Component {
 
                 <Carousel.Caption>
                 <h3 style={{color:"black"}}>Build life-long friendships through teamwork and volunteering opportunities</h3>
-                <p style={{color:"black"}}>etc</p>
+                <p style={{color:"black"}}>Volunteering creates community and helps out our wonderful city</p>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -56,8 +56,8 @@ class Home extends Component {
                 />
 
                 <Carousel.Caption>
-                <h3>etc</h3>
-                <p>etc</p>
+                <h3>Helping volunteers find events, and event organizers find volunteers</h3>
+                <p>Effective rating system for finding qualified volunteers</p>
                 </Carousel.Caption>
             </Carousel.Item>
             </Carousel>
