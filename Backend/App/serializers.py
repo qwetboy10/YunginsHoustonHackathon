@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Person, Organization, Event
+from .models import Person, Organization, Event, Skill
 
 class PersonSerializer(serializers.ModelSerializer):
     class Meta:
@@ -16,3 +16,7 @@ class EventSerializer(serializers.ModelSerializer):
         model = Event
         fields = ('__all__')
 
+class SkillSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Skill
+        fields = ('__all__')
