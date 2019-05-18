@@ -45,8 +45,8 @@ class Login extends Component {
                  </div>
                  <MDBModalFooter>
                    <div className="font-weight-light">
-                     <p>Not a member? Sign Up</p>
-                     <p>Forgot Password?</p>
+                     <a>Not a member? </a><a href=""onClick={()=> this.props.history.push("/signup")}>Sign Up</a><br/>
+                     <a href=""onClick={()=> this.props.history.push("/forgot")}>Forgot Password?</a>
                    </div>
                  </MDBModalFooter>
                </MDBCardBody>
