@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import './App.css';
 import {getEvents, getOrganizations, getSkills} from './DataFetcher.js';
 import NavBar from './NavBar.js';
+import Home from './Home.js';
 
 class App extends Component {
   componentDidMount() {
@@ -14,7 +15,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <NavBar />  
+        <Home />
       </div>
     );
   }
