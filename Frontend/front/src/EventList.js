@@ -25,7 +25,6 @@ class EventList extends Component {
         if(!eventData) return <div>Loading...</div>; //TODO: make a loading page, probably make it Loading.js so it can be used everywhere
         return (
           <div>
-              <NavBar/>
               {eventData.map(event => this.getEventComponent(event))}
           </div>
         );

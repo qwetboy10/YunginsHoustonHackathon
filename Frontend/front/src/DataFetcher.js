@@ -22,3 +22,9 @@ export function getSkills(loadData) {
         loadData(res);
     }).catch(logError);
 }
+
+export function getPersonByID(id, loadData) {
+    fetch(`${djangoIP}person/${id}/`).then(res => res.json()).then(res => {
+        loadData(res);
+    }).catch(logError);
+}

@@ -9,7 +9,6 @@ class Home extends Component {
     render() {
         return (
           <div>
-            <NavBar {...this.props}/>
             <Carousel>
             <Carousel.Item>
                 <img
