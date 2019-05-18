@@ -8,7 +8,7 @@ class NavBar extends Component {
     }
     render() {
         return <Navbar bg="light" expand="lg">
-        <Navbar.Brand href="#home">Houston Volunteer Central</Navbar.Brand>
+        {/* <Navbar.Brand href="#home">Houston Volunteer Central</Navbar.Brand> */}
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
