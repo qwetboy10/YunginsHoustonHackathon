@@ -9,18 +9,10 @@ class Profile extends Component {
           <div>
             <Jumbotron fluid>
             <Container>
-                <h1>FAQ</h1>
-                <h3>Registration</h3>
+                <h1>Profile</h1>
+                <h3>Profile Picture</h3>
                 <p>
                 hi
-                </p>
-                <h3>Security</h3>
-                <p>
-                yes
-                </p>
-                <h3>Staff</h3>
-                <p>
-                pizza
                 </p>
             </Container>
             </Jumbotron>;

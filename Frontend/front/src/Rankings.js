@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import NavBar from './NavBar.js';
 import Login from './Login.js';
-import {Carousel, Card, Jumbotron, Container} from 'react-bootstrap';
+import {Carousel, Card, Jumbotron, Container, Table} from 'react-bootstrap';
 
 class Rankings extends Component {
     render() {
@@ -9,19 +9,41 @@ class Rankings extends Component {
           <div>
             <Jumbotron fluid>
             <Container>
-                <h1>FAQ</h1>
-                <h3>Registration</h3>
-                <p>
-                hi
-                </p>
-                <h3>Security</h3>
-                <p>
-                yes
-                </p>
-                <h3>Staff</h3>
-                <p>
-                pizza
-                </p>
+                <h1>Rankings</h1>
+                <Table striped bordered hover>
+                <thead>
+                  <tr>
+                    <th>Ranking</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
+                    <th>Karma</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Stoov</td>
+                    <td>Moo</td>
+                    <td>@bessie</td>
+                    <td>100</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Zook</td>
+                    <td>Moo</td>
+                    <td>@turkey</td>
+                    <td>50</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Rol</td>
+                    <td>Moo</td>
+                    <td>@fat</td>
+                    <td>10</td>
+                  </tr>
+                </tbody>
+              </Table>;
             </Container>
             </Jumbotron>;
           </div>
