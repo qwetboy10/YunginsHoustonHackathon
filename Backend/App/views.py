@@ -1,11 +1,17 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.db.models import Q
 from rest_framework import viewsets
+<<<<<<< HEAD
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.exceptions import  ParseError
+=======
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework.exceptions import ParseError
+>>>>>>> 998c321d1706d3bfc082689c994887ceba120b2a
 from .models import *
 from .serializers import *
-from rest_framework.decorators import action
 # Create your views here.
 
 class PersonViewSet(viewsets.ViewSet):
@@ -25,6 +31,19 @@ class OrganizationViewSet(viewsets.ModelViewSet):
 class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
+    @action(methods=['get'], detail=False)
+    def advanced_search(self, request):
+        queryset = [] 
+        #filter by tags
+        tag_list = request.query_params.getlist('tags')
+        for tag in tag_list:
+            print(tag)
+            queryset += [i for i in Event.objects.all() if Event.contains_tag(i, tag)]
+        #finalize query
+        queryset = list(set(queryset))
+        serializer = EventSerializer(queryset , many=True)
+        return Response(serializer.data)
+
     @action(methods=['get'], detail=True)
     def get_organizers(self, request, pk=None):
         organizers = [i for i in Event.objects.get(pk=pk).organizers_volunteers.all() if Person.is_organizer(i)]
