@@ -4,6 +4,7 @@ import EventList from './EventList.js';
 import Home from './Home.js';
 import Profile from './Profile.js';
 import NavBar from './NavBar.js';
+import FAQ from './FAQ.js';
 class App extends Component {
   render() {
     return (
@@ -12,6 +13,7 @@ class App extends Component {
           <Switch>
             <Route path='/profile' component={Profile}/>
             <Route path='/events' component={EventList}/>
+            <Route path='/faq' component={FAQ}/>
             <Route path='/' component={Home} />
           </Switch>
       </div>
