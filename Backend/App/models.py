@@ -41,6 +41,9 @@ class Person(models.Model):
         Organization, models.CASCADE, null=True, blank=True
     )
 
+    def get_name(self):
+        return self.user.first_name + " " + self.user.last_name
+
     def __unicode__(self):
         return self.user.username
 
@@ -67,6 +70,8 @@ class Event(models.Model):
     name = models.CharField(max_length=100)
     date = models.DateField()
     duration = models.DurationField()
+    blurb = models.TextField(blank=True)
+    description = models.CharField(max_length=280, blank=True)
 
     def __str__(self):
         return self.name
