@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component,Fragment} from 'react';
 import {Link} from 'react-router-dom';
 import {Nav, Navbar, NavDropdown, Form, FormControl, Button, Popover, OverlayTrigger} from 'react-bootstrap';
 import { MDBContainer, MDBCard, MDBCardBody, MDBCol, MDBRow,MDBCardHeader, MDBIcon, MDBBtn, MDBModalFooter} from "mdbreact";
@@ -11,7 +11,7 @@ class NavBar extends Component {
         alert("Moog");
     }
     render() {
-        return (<Navbar bg="light" expand="lg">
+        return (<Navbar bg="white" expand="lg" sticky="top">
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Brand><Nav.Link onClick={()=>this.props.history.push("/")}>Houston Volunteer Central</Nav.Link></Navbar.Brand>
         <Navbar.Collapse id="basic-navbar-nav">
