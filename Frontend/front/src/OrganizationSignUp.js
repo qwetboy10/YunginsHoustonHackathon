@@ -30,7 +30,7 @@ class OrganizationSignUp extends Component {
             alert("Passwords do not match, please try again.");
             return;
         }
-        createOrganization(username, password, firstName, lastName, email, phoneNum, orgname, orgemail, orgaddress, orghomepage, orgphone (data) => {
+        createOrganization(username, password, firstName, lastName, email, phoneNum, orgname, orgemail, orgaddress, orghomepage, orgphone, (data) => {
             new Cookies().set("user", data.id, { path: "/"});
             console.log(data);
             this.props.update(() => this.props.history.push("/profile"));

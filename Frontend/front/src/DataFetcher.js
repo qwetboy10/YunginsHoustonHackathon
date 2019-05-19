@@ -94,13 +94,13 @@ export function authenticateUser(username, password, success, failure) {
     });
 }
 
-export function createUser(username, password, firstName, lastName, email, phoneNum, success) {
+export function createUser(username, password, firstName, lastName, email, phoneNum, success, organization) {
     fetch(`${djangoIP}users/`, {
         method: "POST",
         headers: {
             "content-type": "application/json"
         },
-        body: JSON.stringify({username, password, first_name: firstName, last_name:lastName, email})
+        body: JSON.stringify({username, password, first_name: firstName, last_name:lastName, email, organization})
     }).then(res => res.json()).then(res => {
         if(res.detail) logError(res.detail);
         else fetch(`${djangoIP}people/`, {
@@ -114,6 +114,19 @@ export function createUser(username, password, firstName, lastName, email, phone
             else success(res2);
         });
     })
+}
+
+export function createOrganization(username, password, firstName, lastName, email, phoneNum, orgname, orgemail, orgaddress, orghomepage, orgphone, success) {
+    fetch(`${djangoIP}organizations/`, {
+        method: "POST",
+        headers: {
+            "content-type": "application/json"
+        },
+        body: JSON.stringify({name: orgname, email: orgemail, phone: orgphone, address: orgaddress, home_page: orghomepage})
+    }).then(res => res.json()).then(res => {
+        if(res.detail) logError(res.detail);
+        else createUser(username, password, firstName, lastName, email, phoneNum, success, res.id);
+    });
 }
 
 function unixTime(date) {
