@@ -38,7 +38,6 @@ class Profile extends Component {
   }
     render() {
         const {loading, user, failed, notLoggedIn} = this.state;
-        console.log(this.state);
         if(failed) return <div>This user does not exist.</div>  //make this pretty
         if(notLoggedIn) return (
           <div>

@@ -11,6 +11,12 @@ export function getEvents(url, loadData) {
     }).catch(logError);
 }
 
+export function getEventsByUsername(username, loadData) {
+    getPersonByUsername(username, (data) => {
+        fetch(`${djangoIP}people/${data.id}/events`).then(res => res.json()).then(loadData)
+    }, () => console.log("Error occured"));
+}
+
 export function getOrganizations(loadData) {
     fetch(`${djangoIP}organizations/`).then(res => res.json()).then(res => {
         loadData(res);
@@ -27,17 +33,17 @@ export function getPersonByID(id, loadData) {
     fetch(`${djangoIP}people/${id}/`).then(res => res.json()).then(res => {
         if(res.details) logError(res.details);
         else fetch(`${djangoIP}users/${res.user}/`).then(res2 => res2.json()).then(res2 =>
-            loadData({...res, ...res2})
+            loadData({...res2, ...res})
         );
     }).catch(logError);
 }
 export function getPersonByUsername(username, loadData, failed) {
-    fetch(`${djangoIP}people/get_user_by_username/?username=${username}`).then(res => {
+    fetch(`${djangoIP}people/get_person_by_username/?username=${username}`).then(res => {
         if(res.ok) 
             res.json().then(res => {
                 if(res.details) logError(res.details);
                 else fetch(`${djangoIP}users/${res.user}/`).then(res2 => res2.json()).then(res2 =>
-                loadData({...res, ...res2})
+                loadData({...res2, ...res})
             );
         });
         else failed();
@@ -87,10 +93,12 @@ function unixTime(date) {
 
 }
 
-export function searchEvents(name, additional = {}) {
+export function searchEvents(name, history, additional = {}) {
     var url = `?search=${encodeURI(name)}`;
     if(additional.before) url += `&before=${unixTime(additional.before)}`;
     if(additional.after) url += `&after=${unixTime(additional.after)}`;
     if(additional.tags) url += `&tags=${additional.tags.join("&tags=")}`;
-    return url;
+
+    if(additional.user) url += `&user=${additional.user}`;
+    history.push(`events/${url}`);
 }
