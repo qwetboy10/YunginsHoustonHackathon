@@ -4,40 +4,69 @@ import Login from './Login.js';
 import {Carousel, Card, Jumbotron, Container} from 'react-bootstrap';
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBRow, MDBCol, MDBIcon, MDBContainer } from 'mdbreact';
 import asd from './asd.jpeg';
-import {getPersonByID, getPersonByUsername} from './DataFetcher.js';
+import {getPersonByID, getPersonByUsername, getEventsByUsername} from './DataFetcher.js';
 import Cookies from 'universal-cookie';
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: true,
+      loading: 1,
+      loaded: 0,
       user: null,
+      events: null,
       failed: false,
       notLoggedIn: false
     };
     this.storeData = this.storeData.bind(this);
   }
   componentDidMount() {
-    this.setState({loading: true, user: null});
     if(!this.props.location.pathname.substring(9)) {
       var id = new Cookies().get("user");
       if(id === undefined) this.setState({notLoggedIn: true});
       else {
+        this.setState({loading: 1});
         getPersonByID(id, data => this.props.history.push(`/profile/${data.username}`));
       }
     } else {
-      getPersonByUsername(this.props.location.pathname.substring(9), this.storeData, () => this.setState({failed: true}));
+      this.setState({loading: 2});
+      getPersonByUsername(this.props.location.pathname.substring(9), (data) => this.storeData(data, 'user'), () => this.setState({failed: true}));
+      getEventsByUsername(this.props.location.pathname.substring(9), (data) => this.storeData(data, 'events'), () => this.setState({failed: true}));
     }
 
   }
-  storeData(data) {
-    this.setState({
-      loading: false,
-      user: data
-    });
+  getEventComponent(event) { //TODO: Make this not disgusting
+    return (
+    
+    <div key={event.id}>
+    <br/><br/>
+    <MDBCol style={{ maxWidth: "50rem" }} >
+                <MDBCard wide display="inline">
+                <MDBCardImage className="view view-cascade gradient-card-header blue-gradient" cascade tag="div">
+                    <h2  center="true" className="h2-responsive mb-2">{event.name}</h2>
+                    <p className=""> <MDBIcon icon="calendar-alt" /> {event.date}</p>
+                </MDBCardImage>
+                <MDBCardBody cascade>
+                    <MDBCardText>{event.description}</MDBCardText>
+                    <MDBCardText>Organized by: {event.organization}</MDBCardText>
+                    <MDBCardText>Address: {event.address}</MDBCardText>
+                    <p>
+                    <MDBBtn color="primary" onClick={() => this.props.history.push("/event/?event_id=")}>View Event</MDBBtn>
+                    </p>
+                </MDBCardBody>
+                </MDBCard>
+            </MDBCol>
+    
+    </div>
+    );
+}
+  storeData(data, key) {
+    this.setState(prevState => ({
+      loaded: prevState.loaded+1,
+      [key]: data
+    }));
   }
     render() {
-        const {loading, user, failed, notLoggedIn} = this.state;
+        const {loading, loaded, user, failed, notLoggedIn, events} = this.state;
         if(failed) return <div>This user does not exist.</div>  //make this pretty
         if(notLoggedIn) return (
           <div>
@@ -63,7 +92,7 @@ class Profile extends Component {
         </MDBContainer>
           </div>
         );
-        if(loading) return <div>Loading...</div>//make this pretty
+        if(loaded != loading) return <div>Loading...</div>//make this pretty
         return ( //TODO: add other things for user, console.log(user) for the things u can use
           <div>
             <Jumbotron fluid>
@@ -76,6 +105,12 @@ class Profile extends Component {
                 <h3>{user.first_name + " " + user.last_name}</h3>
                 <h3>Contact Information</h3>
             </Container>
+            <MDBContainer className="event">
+              <h3>{user.first_name + " " + user.last_name + "'s Events"}</h3>
+                <MDBRow>
+                    {this.state.events.map(event => this.getEventComponent(event))}
+                 </MDBRow>
+             </MDBContainer>
             </Jumbotron>;
           </div>
         );
