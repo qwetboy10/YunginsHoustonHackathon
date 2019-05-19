@@ -9,6 +9,7 @@ import Contact from './Contact.js';
 import Rankings from './Rankings.js';
 import Login from './Login.js';
 import Signup from './Signup.js';
+import UserList from "./UserList.js";
 import Cookies from 'universal-cookie';
 import { getPersonByID } from './DataFetcher.js';
 import Search from './Search.js';
@@ -56,6 +57,7 @@ class App extends Component {
             <Route path='/' component={Home} />
             
           </Switch>
+          <UserList/>
       </div>
     );
   }
