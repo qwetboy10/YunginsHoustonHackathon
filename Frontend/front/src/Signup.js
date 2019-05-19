@@ -21,9 +21,8 @@ class Signup extends Component {
     onClick() {
         const {username, password, firstName, lastName, email, phoneNum} = this.state;
         createUser(username, password, firstName, lastName, email, phoneNum, (data) => {
-            this.props.history.push("/profile");
             new Cookies().set("user", data.id, { path: "/"});
-            this.props.update();
+            this.props.update(() => this.props.history.push("/profile"));
         });
     }
     render() {

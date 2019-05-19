@@ -21,10 +21,13 @@ class App extends Component {
   componentDidMount() {
     this.checkCookies();
   }
-  checkCookies() {
+  checkCookies(callback) {
     const cookie = new Cookies();
     const userID = cookie.get("user");
-    if(userID !== undefined) getPersonByID(cookie.get("user"), (data) => this.setState({user: data}));
+    if(userID !== undefined) getPersonByID(cookie.get("user"), (data) => {
+      this.setState({user: data});
+      if(callback) callback();
+    });
     else this.setState({user: null});
   }
   render() {
@@ -38,7 +41,7 @@ class App extends Component {
             <Route path='/faq' component={FAQ}/>
             <Route path='/contact' component={Contact} />
             <Route path='/rankings' component={Rankings} />
-            <Route path='/profile' component={(props) => <Profile user={user}/>} />
+            <Route path='/profile' component={(props) => <Profile {...props} user={user}/>} />
             <Route path='/login' component={(props) => <Login {...props} update={this.checkCookies.bind(this)}/>} />
             <Route path='/signup' component={Signup} />
             <Route path='/' component={Home} />

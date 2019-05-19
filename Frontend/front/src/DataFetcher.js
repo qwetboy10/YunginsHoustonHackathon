@@ -65,3 +65,19 @@ export function createUser(username, password, firstName, lastName, email, phone
         });
     })
 }
+
+function unixTime(date) {
+
+}
+
+export function searchEvents(name, additional = {}) {
+    var url = `${djangoIP}/events?search=${encodeURI(name)}`;
+    if(additional.before) url += `&&before=${unixTime(additional.before)}`;
+    if(additional.after) url += `&&after=${unixTime(additional.after)}`;
+    if(additional.tags) url += `&&tags=${additional.tags.join("&&tags=")}`;
+
+}
+
+export function searchEventsAdvanced() {
+    
+}
