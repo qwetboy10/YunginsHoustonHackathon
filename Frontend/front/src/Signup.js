@@ -22,6 +22,7 @@ class Signup extends Component {
         createUser(username, password, firstName, lastName, email, phoneNum, (data) => {
             this.props.history.push("/profile");
             cookies.set("user", data.id, { path: "/"});
+            this.props.update();
         });
     }
     render() {
