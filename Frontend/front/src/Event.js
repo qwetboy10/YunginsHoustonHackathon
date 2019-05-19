@@ -96,10 +96,10 @@ class Event extends Component {
                     <img cascade style={{ width: '40rem' }} src={stockeventpic} />
                     <br/>
                     <h2 style={{textAlign:"left"}}> 
-                      Event Name
+                      Event Name: {event.name}
                     </h2>
                     <h2 style={{textAlign:"left"}}>
-                      Organization
+                      Organization: {event.organization}
                     </h2>
                 </MDBCol>
                 <MDBCol style={{ maxWidth: "40rem" }}>
@@ -109,23 +109,8 @@ class Event extends Component {
                     <hr/>
                     <br/>
                     <p> 
-                      Lorem ipsum dolor sit amet, pri in ridens recteque, ex eum choro utinam. Vis perpetua appellantur no, discere facilis fuisset est te. Esse appellantur disputationi per in, ne case intellegat vix. Primis mucius mediocritatem ex sea, vim ei facete impedit oporteat.
+                      {event.description}
                     </p>
-                    <h2 style={{textAlign:"left"}}>
-                      Information
-                    </h2>
-                    <hr/>
-                </MDBCol>
-                <MDBCol> 
-                  <div class="flex-center">
-                  
-                  </div>
-                
-                </MDBCol>
-                <MDBCol col={10}>
-                  
-
-                    
                     <MDBCardBody cascade className="text-center">
                         <MDBCardTitle>{event.name}</MDBCardTitle>
                         <h5 className="indigo-text"><strong>{event.organization}</strong></h5>
@@ -137,9 +122,27 @@ class Event extends Component {
                         }
                         
                     </MDBCardBody>
-                    
+                </MDBCol>
+                <MDBCol> 
+                  <div class="flex-center">
+                  
+                  </div>
+                
                 </MDBCol>
                 <MDBCol col={5}>
+                </MDBCol>
+                
+            </MDBRow>
+              <MDBRow>
+                  <MDBCol> 
+                    <h2 style={{textAlign: "left"}}>
+                    Location: {event.address}
+                   </h2> 
+                   <hr/>
+                   <br/>
+                      <Map/>
+                  </MDBCol>
+                  <MDBCol col={5}>
                   <h2>Organizers</h2>
                   <ul>
                   {organizers.map(this.doStuff)}
@@ -148,16 +151,6 @@ class Event extends Component {
                   <ul>
                   {volunteers.map(this.doStuff)}
                   </ul>
-                  </MDBCol>
-            </MDBRow>
-              <MDBRow>
-                  <MDBCol> 
-                    <h2 style={{textAlign: "left"}}>
-                    Location  
-                   </h2> 
-                   <hr/>
-                   <br/>
-                      <Map/>
                   </MDBCol>
               </MDBRow>
             </Jumbotron>
