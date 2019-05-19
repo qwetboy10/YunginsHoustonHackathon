@@ -116,3 +116,33 @@ export function searchEvents(name, history, additional = {}) {
     if(additional.user) url += `&user=${additional.user}`;
     history.push(`events/${url}`);
 }
+
+export function signUpEvent(eventID, volunteers, newPerson, success, failure) {
+    fetch(`${djangoIP}events/${eventID}/`, {
+        method: "PATCH",
+        headers: {
+            "content-type": "application/json"
+        },
+        body: JSON.stringify({organizers_volunteers: [...volunteers, newPerson]})
+    }).then(res => res.json()).then(res => {
+        if(res.details) {
+            logError();
+            failure();
+        } else success();
+    });
+}
+
+export function unSignUpEvent(eventID, volunteers, oldPerson, success, failure) {
+    fetch(`${djangoIP}events/${eventID}/`, {
+        method: "PATCH",
+        headers: {
+            "content-type": "application/json"
+        },
+        body: JSON.stringify({organizers_volunteers: volunteers.filter(volunteer => volunteer !== oldPerson)})
+    }).then(res => res.json()).then(res => {
+        if(res.details) {
+            logError();
+            failure();
+        } else success();
+    });
+}
