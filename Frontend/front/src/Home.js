@@ -6,6 +6,7 @@ import ss1 from './slideshow1.jpg';
 import ss2 from './slideshow2.jpg';
 import ss3 from './slideshow3.jpg';
 import vhands from './volunteerhands.jpg';
+import Footer from './Footer.js';
 
 class Home extends Component {
     render() {
@@ -63,14 +64,7 @@ class Home extends Component {
             </Container>
             </Jumbotron>;
 
-            <Jumbotron fluid style={{backgroundColor:'#4185F4'}}>
-            <Container>
-                <h1 style={{color:"white"}}>What is HVC about?</h1>
-                <p style={{color:"white"}}>
-                HVC is a volunteering platform aimed at facilitating event organization and volunteer registration. 
-                </p>
-            </Container>
-            </Jumbotron>;
+            <Footer />;
 
           </div>
         );
