@@ -2,11 +2,17 @@ import React, {Component} from 'react';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
+<<<<<<< HEAD
+import {getEventByID, getPersonByEventID, getPersonByID, signUpEvent, unSignUpEvent} from './DataFetcher.js';
+import { MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBRow, MDBCol, MDBIcon, MDBBtn, MDBContainer } from 'mdbreact';
+=======
 import {getEventByID, getOrganizersByEventID, getVolunteersByEventID, getPersonByID, signUpEvent, unSignUpEvent} from './DataFetcher.js';
 import { MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBRow, MDBCol, MDBIcon, MDBBtn } from 'mdbreact';
+>>>>>>> 922afbe56e038053e4db6fd0051f308569ab00af
 import stockeventpic from './volunteer.jpeg'
 import { Jumbotron } from 'react-bootstrap';
 import Cookies from 'universal-cookie';
+import Map from './Map.js';
 
 class Event extends Component {
   constructor(props) {
@@ -85,6 +91,43 @@ class Event extends Component {
           <div>
             <Jumbotron>
             <MDBRow>
+<<<<<<< HEAD
+                <MDBCol style={{ maxWidth: "40rem" }}>
+                    
+                    <img cascade style={{ width: '40rem' }} src={stockeventpic} />
+                    <br/>
+                    <h2 style={{textAlign:"left"}}> 
+                      Event Name
+                    </h2>
+                    <h2 style={{textAlign:"left"}}>
+                      Organization
+                    </h2>
+                </MDBCol>
+                <MDBCol style={{ maxWidth: "40rem" }}>
+                    <h2 style={{textAlign:"left"}}> 
+                      Description
+                    </h2>
+                    <hr/>
+                    <br/>
+                    <p> 
+                      Lorem ipsum dolor sit amet, pri in ridens recteque, ex eum choro utinam. Vis perpetua appellantur no, discere facilis fuisset est te. Esse appellantur disputationi per in, ne case intellegat vix. Primis mucius mediocritatem ex sea, vim ei facete impedit oporteat.
+                    </p>
+                    <h2 style={{textAlign:"left"}}>
+                      Information
+                    </h2>
+                    <hr/>
+                </MDBCol>
+                <MDBCol> 
+                  <div class="flex-center">
+                  <MDBBtn>{//TODO: make this not ass
+              notLoggedIn ? "Log in to do thingys" :
+              people.filter(person => person.id === user.id).length > 0 ? "Unsign up" : "Sign up"
+            }</MDBBtn>
+                  </div>
+                
+                </MDBCol>
+            
+=======
                 <MDBCol col={10}>
                     <MDBCardImage cascade style={{ width: '40rem' }} src={stockeventpic} />
                     <MDBCardBody cascade className="text-center">
@@ -98,7 +141,20 @@ class Event extends Component {
                         }
                     </MDBCardBody>
                 </MDBCol>
+>>>>>>> 922afbe56e038053e4db6fd0051f308569ab00af
             </MDBRow>
+            </Jumbotron>
+            <Jumbotron> 
+              <MDBRow>
+                  <MDBCol> 
+                    <h2 style={{textAlign: "left"}}>
+                    Location  
+                   </h2> 
+                   <hr/>
+                   <br/>
+                      <Map/>
+                  </MDBCol>
+              </MDBRow>
             </Jumbotron>
         </div>
         );
