@@ -8,11 +8,11 @@ class EventList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            eventData: null
+            eventData: []
         };
     }
     componentDidMount() {
-        getEvents(this.props.location.search, (data) => this.setState({eventData: data}));
+        getEvents(this.props.location.search, (data) => this.setState(prevState => ({eventData: [...prevState.eventData, data]})));
     }
     getEventComponent(event) { //TODO: Make this not disgusting
         return (

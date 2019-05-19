@@ -3,10 +3,10 @@ import { MDBContainer, MDBCard, MDBCardBody, MDBCol, MDBRow,MDBCardHeader, MDBIn
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
-import { createUser } from './DataFetcher.js';
+import { createOrganization } from './DataFetcher.js';
 import Cookies from 'universal-cookie';
 
-class Signup extends Component {
+class OrganizationSignUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -25,7 +25,7 @@ class Signup extends Component {
             alert("Passwords do not match, please try again.");
             return;
         }
-        createUser(username, password, firstName, lastName, email, phoneNum, (data) => {
+        createOrganization(username, password, firstName, lastName, email, phoneNum, (data) => {
             new Cookies().set("user", data.id, { path: "/"});
             console.log(data);
             this.props.update(() => this.props.history.push("/profile"));
@@ -134,4 +134,4 @@ class Signup extends Component {
     }
 }
 
-export default Signup;
+export default OrganizationSignUp;
