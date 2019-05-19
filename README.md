@@ -40,10 +40,9 @@ python3 manage.py runserver
 Leave that running and in a different terminal or emulator
 
 ```
-cd ../
 cd Frontend
 cd front
-yarn start
+npm start
 ```
 
 If the webpage does not open automagically, then navigate to localhost:3000 in your web browser of choice.
