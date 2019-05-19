@@ -15,9 +15,15 @@ class Search extends Component {
         sort: null
       };
     }
+    onChange(val, key) {
+      console.log(key);
+      console.log(val);
+      this.setState({
+        [key]: val
+      });
+    } 
     render() {
     const {name, date, sort} = this.state;
-    console.log(this.state);
         return (
           <div>
             <Jumbotron fluid>
@@ -29,7 +35,7 @@ class Search extends Component {
                 </Form.Group>
                 <Form.Group controlId="exampleForm.ControlSelect1">
                     <Form.Label>Sort by</Form.Label>
-                    <Form.Control as="select" value={sort} onChange={(e) => console.log(e.target)}>
+                    <Form.Control as="select" value={sort} onChange={(e) => this.onChange(e.target.value, "sort")}>
                     <option>Alphabetical</option>
                     <option>Date</option>
                     <option>Location</option>
@@ -37,12 +43,12 @@ class Search extends Component {
                     <option>Openings</option>
                     </Form.Control>
                 </Form.Group>
-                <Datetime value={date} onChange={(e) => this.onChange(e.target.value, "date")}/>
+                <Datetime value={date} onChange={(e) => this.onChange(e._d, "date")}/>
                 
                 </Form>
             </Container>
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-            <MDBBtn onClick={() => (searchEvents(document.getElementById("keywords").innerHTML, this.props, {after: date}))}>Submit</MDBBtn>
+            <MDBBtn onClick={() => (searchEvents(name, this.props.history, {after: date, sort: sort}))}>Submit</MDBBtn>
             </Jumbotron>
           </div>
         );

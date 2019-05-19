@@ -45,7 +45,7 @@ class App extends Component {
             <Route path='/profile' component={(props) => <Profile {...props} user={user}/>} />
             <Route path='/login' component={(props) => <Login {...props} update={this.checkCookies.bind(this)}/>} />
             <Route path='/signup' component={Signup} />
-            <Route path='/search' component = {Search} />
+            <Route path='/search' component = {(props) => <Search {...props}/>} />
             <Route path='/event' component={(props) => <Event {...props} />} />
             <Route path='/' component={Home} />
           </Switch>
