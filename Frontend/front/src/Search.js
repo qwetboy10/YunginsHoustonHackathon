@@ -15,6 +15,7 @@ class Search extends Component {
         date: [new Date(), new Date()],
         sort: null
       };
+      this.state.date[1].setDate(this.state.date[1].getDate() + 31);
     }
     onChange = date => this.setState({date})
     render() {
@@ -40,8 +41,12 @@ class Search extends Component {
                 </Form.Group>
                 </Form>
             </Container>
+            <div class="text-center">  </div>
+
+            <br></br>
+            <div class="text-center"> <DateTimeRangePicker onChange = {this.onChange} value={this.state.date}/> </div>
+            <br></br>
             <div class="text-center"> <button onClick={() => (searchEvents(name, this.props.history, {before: date[1], after: date[0], sort: sort}))} type="button" class="btn btn-primary">Submit</button> </div>
-            <DateTimeRangePicker onChange = {this.onChange} value={this.state.date}/>
             </Jumbotron>
           </div>
         );
