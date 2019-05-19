@@ -19,9 +19,7 @@ class EventList extends Component {
         
         <div key={event.id}>
         <br/><br/>
-        <MDBContainer className="event">
-            <MDBRow center>
-                <MDBCol bottom style={{ maxWidth: "25rem" }} >
+        <MDBCol bottom style={{ maxWidth: "50rem" }} >
                     <MDBCard wide display="inline">
                     <MDBCardImage className="view view-cascade gradient-card-header blue-gradient" cascade tag="div">
                         <h2  center="true" className="h2-responsive mb-2">{event.name}</h2>
@@ -34,13 +32,10 @@ class EventList extends Component {
                         <p>
                         <MDBBtn color="primary" href="#">View Event</MDBBtn>
                         </p>
-                        
                     </MDBCardBody>
                     </MDBCard>
                 </MDBCol>
-                
-            </MDBRow>
-        </MDBContainer>
+        
         </div>
         );
     }
@@ -48,8 +43,15 @@ class EventList extends Component {
         const {eventData} = this.state;
         if(!eventData) return <div>Loading...</div>; //TODO: make a loading page, probably make it Loading.js so it can be used everywhere
         return (
-          <div>
-              {eventData.map(event => this.getEventComponent(event))}
+          <div> 
+            <MDBContainer className="event">
+                <MDBRow center>
+                    
+                    {eventData.map(event => this.getEventComponent(event))}
+                
+                 </MDBRow>
+                 
+             </MDBContainer>
           </div>
         );
       }

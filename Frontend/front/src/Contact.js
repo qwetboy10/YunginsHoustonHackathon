@@ -11,6 +11,7 @@ class Contact extends Component {
             <Container>
                 <h1>Contact</h1>
                 <h3>Questions, Suggestions, Feedback...</h3>
+                <br/>
                 <p>
                 We really value the input of our users. Thank you for your time!
                 </p>
