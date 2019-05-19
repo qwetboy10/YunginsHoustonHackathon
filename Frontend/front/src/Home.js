@@ -195,7 +195,7 @@ class Home extends Component {
                 <Card.Text style={{fontSize:20}}>
                 Join us and 200,000+ other registered volunteers to help make a difference today!
                 </Card.Text>
-                <Button variant="primary" style={{fontSize:25}}>SIGN ME UP!</Button>
+                <Button variant="primary" style={{fontSize:25}} onClick={() => this.props.history.push("/signup")}>SIGN ME UP!</Button>
             </Card.Body>
             </Card>
 

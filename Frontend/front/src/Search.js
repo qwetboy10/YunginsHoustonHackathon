@@ -2,26 +2,21 @@ import React, {Component} from 'react';
 import NavBar from './NavBar.js';
 import Login from './Login.js';
 import {Carousel, Card, Jumbotron, Container, Form} from 'react-bootstrap';
-import Datetime from 'react-datetime';
-import './react-datetime.css';
 import { MDBContainer, MDBCard, MDBCardBody, MDBCol, MDBRow,MDBCardHeader, MDBInput, MDBIcon, MDBBtn, MDBModalFooter} from "mdbreact";
 import {searchEvents} from './DataFetcher.js';
+
+import DateTimeRangePicker from '@wojtekmaj/react-datetimerange-picker';
+
 class Search extends Component {
     constructor(props) {
       super(props);
       this.state = {
         name: "",
-        date: new Date(),
+        date: [new Date(), new Date()],
         sort: null
       };
     }
-    onChange(val, key) {
-      console.log(key);
-      console.log(val);
-      this.setState({
-        [key]: val
-      });
-    } 
+    onChange = date => this.setState({date})
     render() {
     const {name, date, sort} = this.state;
         return (
@@ -43,12 +38,11 @@ class Search extends Component {
                     <option>Openings</option>
                     </Form.Control>
                 </Form.Group>
-                <Datetime value={date} onChange={(e) => this.onChange(e._d, "date")}/>
                 
                 </Form>
             </Container>
-            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-            <MDBBtn onClick={() => (searchEvents(name, this.props.history, {after: date, sort: sort}))}>Submit</MDBBtn>
+            <MDBBtn onClick={() => (searchEvents(name, this.props.history, {before: date[1], after: date[0], sort: sort}))}>Submit</MDBBtn>
+            <DateTimeRangePicker onChange = {this.onChange} value={this.state.date}/>
             </Jumbotron>
           </div>
         );
