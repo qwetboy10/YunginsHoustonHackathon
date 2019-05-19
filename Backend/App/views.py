@@ -81,6 +81,12 @@ class PersonViewSet(viewsets.ModelViewSet):
             serializer = self.get_serializer(queryset, many=True)
             return Response(serializer.data)
 
+    @action(methods=['get'], detail=False)
+    def sort_by_karma(self, request):
+        queryset = Person.objects.all().order_by('-karma')
+        serializer = PersonSerializer(queryset, many=True)
+        return Response(serializer.data)
+
     @action(methods=["get"], detail=False)
     def search_by_skill(self, request, *args, **kwargs):
         search = request.query_params.get("search", None)
@@ -93,7 +99,6 @@ class PersonViewSet(viewsets.ModelViewSet):
             ]
             serializer = self.get_serializer(queryset, many=True)
             return Response(serializer.data)
-<<<<<<< HEAD
 
     @action(methods=['get'], detail=True)
     def get_events_by_person(self,request,pk=None):
@@ -103,7 +108,6 @@ class PersonViewSet(viewsets.ModelViewSet):
 
 
 
-=======
     @action(methods=['get'], detail=False)
     def get_user_by_username(self, request):
         username = request.query_params.get("username", None)
@@ -117,7 +121,6 @@ class PersonViewSet(viewsets.ModelViewSet):
         except:
             return Response({"detail":"Not found."})
             
->>>>>>> 8164ecaa01672d5afe3dfff574a3810a4bf8a96b
 
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
@@ -151,6 +154,12 @@ class OrganizationViewSet(viewsets.ModelViewSet):
         serializer = EventSerializer(events, many=True)
         return Response(serializer.data)
 
+    @action(methods=['get'], detail=False)
+    def sort_by_karma(self, request):
+        queryset = Organization.objects.all().order_by('-karma')
+        #print(queryset)
+        serializer = OrganizationSerializer(queryset, many=True)
+        return Response(serializer.data)
 
 class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
