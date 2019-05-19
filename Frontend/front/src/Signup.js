@@ -12,6 +12,7 @@ class Signup extends Component {
         this.state = {
             username: "",
             password: "",
+            password2: "",
             firstName: "",
             lastName: "",
             email: "",
@@ -19,13 +20,23 @@ class Signup extends Component {
         };
     }
     onClick() {
-        const {username, password, firstName, lastName, email, phoneNum} = this.state;
+        const {username, password, password2, firstName, lastName, email, phoneNum} = this.state;
+        if(password !== password2) {
+            alert("Passwords do not match, please try again.");
+            return;
+        }
         createUser(username, password, firstName, lastName, email, phoneNum, (data) => {
             new Cookies().set("user", data.id, { path: "/"});
             this.props.update(() => this.props.history.push("/profile"));
         });
     }
+    onChange(key, val) {
+        this.setState({
+            [key]: val
+        });
+    }
     render() {
+        const {username, password, password2, firstName, lastName, email, phoneNum} = this.state;
         return (
             <div>
                 <br/>
@@ -38,31 +49,61 @@ class Signup extends Component {
                           <form>
                               <p className="h4 text-center py-4">Sign up</p>
                               <div className="grey-text">
-                              <MDBInput
-                                  label="Your name"
-                                  icon="user"
-                                  group
-                                  type="text"
-                                  validate
-                                  error="wrong"
-                                  success="right"
-                              />
+                              <MDBRow>
+                                <MDBInput
+                                    label="First Name"
+                                    icon="user"
+                                    group
+                                    type="text"
+                                    validate
+                                    value={firstName}
+                                    onChange={(e) => this.onChange("firstName", e.target.value)}
+                                />
+                                <MDBInput
+                                    label="Last Name"
+                                    group
+                                    type="text"
+                                    validate
+                                    value={lastName}
+                                    onChange={(e) => this.onChange("lastName", e.target.value)}
+                                />
+                              </MDBRow>
+                             
                               <MDBInput
                                   label="Your email"
                                   icon="envelope"
                                   group
                                   type="email"
                                   validate
-                                  error="wrong"
-                                  success="right"
+                                  value={email}
+                                  onChange={(e) => this.onChange("email", e.target.value)}
                               />
-                              
+                              <MDBInput
+                                  label="Your Phone Number"
+                                  icon="phone"
+                                  group
+                                  type="phone"
+                                  validate
+                                  value={phoneNum}
+                                  onChange={(e) => this.onChange("phoneNum", e.target.value)}
+                              />
+                               <MDBInput
+                                  label="Your Username"
+                                  icon="envelope"
+                                  group
+                                  type="username"
+                                  validate
+                                  value={username}
+                                  onChange={(e) => this.onChange("username", e.target.value)}
+                              />
                               <MDBInput
                                   label="Your password"
                                   icon="lock"
                                   group
                                   type="password"
                                   validate
+                                  value={password}
+                                  onChange={(e) => this.onChange("password", e.target.value)}
                               />
                               <MDBInput
                                   label="Confirm your password"
@@ -70,6 +111,8 @@ class Signup extends Component {
                                   group
                                   type="password"
                                   validate
+                                  value={password2}
+                                  onChange={(e) => this.onChange("password2", e.target.value)}
                               />
                               
                               </div>

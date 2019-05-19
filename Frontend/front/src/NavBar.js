@@ -5,7 +5,6 @@ import { MDBContainer, MDBCard, MDBCardBody, MDBCol, MDBRow,MDBCardHeader, MDBIc
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
-import Cookies from "universal-cookie";
 import { searchEvents } from './DataFetcher.js';
 class NavBar extends Component {
   constructor(props) {
@@ -15,11 +14,10 @@ class NavBar extends Component {
     }
   }
     logout() {
-        new Cookies().remove("user");
         this.props.update();
     }
     onClick() {
-      this.props.history.push(`events/${searchEvents(this.state.searchQuery)}`);
+      this.props.history.push(`events${searchEvents(this.state.searchQuery)}`);
     }
     onChange(s) {
       this.setState({
