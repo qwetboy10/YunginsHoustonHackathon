@@ -7,6 +7,7 @@ import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
 
 class OrganizationPage extends Component {
     render() {
+      const {org} = this.state;
         return (
           <div>
             <Jumbotron fluid>
@@ -27,15 +28,11 @@ class OrganizationPage extends Component {
                 <h1>Contact Information</h1>
                 <hr color="black"></hr>
                 <br/>
-                <h5 style={{textAlign:"left"}}>{"First Name: "}</h5>
-                <h5 style={{textAlign:"left"}}>{"Last Name: "}</h5>
-                <h5 style={{textAlign:"left"}}>{"Email: "}</h5>
-                <h5 style={{textAlign:"left"}}>{"Phone Number: "}</h5>
-                <h5 style={{textAlign:"left"}}>{"Address: "}</h5>
-                <h5 style={{textAlign:"left"}}>{"Website: "}</h5>
-                
-
-               
+                <h5 style={{textAlign:"left"}}>Email: {org.email}</h5>
+                <h5 style={{textAlign:"left"}}>Phone Number: {org.phone}</h5>
+                <h5 style={{textAlign:"left"}}>Address: {org.address}</h5>
+                <h5 style={{textAlign:"left"}}>Website: {org.home_page}</h5>
+                <h5 style={{textAlign:"left"}}>Karma: {org.karma}</h5>
                 <br/>
                 <br/>
 
