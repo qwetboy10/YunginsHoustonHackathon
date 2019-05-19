@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import NavBar from './NavBar.js';
 import Login from './Login.js';
+import asd from './asd.jpeg';
 import {Carousel, Card, Jumbotron, Container} from 'react-bootstrap';
+import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
 
 class OrganizationPage extends Component {
     render() {
@@ -9,13 +11,47 @@ class OrganizationPage extends Component {
           <div>
             <Jumbotron fluid>
             <Container>
-                <h1>Organization Page</h1>
+            <h1>Organization Page</h1>
+                <hr color="black"></hr>
                 <br/>
-                <h3>Registration</h3>
-                <p>
-                  something something something
-                </p>
-                <Map />
+                <div style={{height:"100px", width:"100px", overflow:"hidden", border_radius:"100px", position:"relative", text_align:"center", color:"white"}}> 
+                  <img style={{height:"100%", width:"100%"}} src={asd} />
+        {/*<a onClick = {() => }style={{position:"absolute", top: "70px", left:"25px", height:"100%", width:"100%", font_size:"5px"}}>Change</a>*/}
+                </div>
+                <br/>
+                <h2 style={{textAlign:"left"}}></h2>
+                <h2 style={{textAlign:"left"}}>{"Name of Organization "}</h2>
+                <br/>
+                <br/>
+                
+                <h1>Contact Information</h1>
+                <hr color="black"></hr>
+                <br/>
+                <h5 style={{textAlign:"left"}}>{"First Name: "}</h5>
+                <h5 style={{textAlign:"left"}}>{"Last Name: "}</h5>
+                <h5 style={{textAlign:"left"}}>{"Email: "}</h5>
+                <h5 style={{textAlign:"left"}}>{"Phone Number: "}</h5>
+                <h5 style={{textAlign:"left"}}>{"Address: "}</h5>
+                <h5 style={{textAlign:"left"}}>{"Website: "}</h5>
+                
+
+               
+                <br/>
+                <br/>
+
+                <h1>Events</h1>
+                <hr color="black"/>
+                <br></br>
+                <MDBContainer>
+                  <MDBRow center>
+                    <MDBCol> 
+
+                    </MDBCol>
+                  </MDBRow>
+                </MDBContainer>
+
+
+
             </Container>
             </Jumbotron>;
           </div>
