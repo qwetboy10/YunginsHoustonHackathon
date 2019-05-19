@@ -49,7 +49,10 @@ function getUserByID(id, loadData) {
 export function getPersonByID(id, loadData) {
     fetch(`${djangoIP}people/${id}/`).then(res => res.json()).then(res => {
         if(res.details) logError(res.details);
-        else getUserByID(res.user, (data) => loadData({...data, ...res}));
+        else getUserByID(res.user, (data) => {
+            console.log(res);
+            getOrganizationByID(res.organization, (org) => loadData({...data, ...res, organization: org}))
+        });
     }).catch(logError);
 }
 export function getPersonByUsername(username, loadData, failed) {
@@ -57,7 +60,9 @@ export function getPersonByUsername(username, loadData, failed) {
         if(res.ok) 
             res.json().then(res => {
                 if(res.details) logError(res.details);
-                else getUserByID(res.user, (data) => loadData({...data, ...res}));
+                else getUserByID(res.user, (data) => {
+                    getOrganizationByID(res.organization, (org) => loadData({...data, ...res, organization: org}))
+                });
         });
         else failed();
     }).catch((err) => {
@@ -171,4 +176,36 @@ export function unSignUpEvent(eventID, volunteers, oldPerson, success, failure) 
             failure();
         } else success();
     });
+}
+
+export function createEvent(orgID, eventAddress, eventName, eventDate, eventDuration, eventBlurb, eventDesc, success) {
+    fetch(`${djangoIP}events/`, {
+        method: "POST",
+        headers: {
+            "content-type": "application/json"
+        },
+        body: JSON.stringify({
+            "address": eventAddress,
+            "name": eventName,
+            "date": eventDate,
+            "duration": eventDuration,
+            "blurb": eventBlurb,
+            "description": eventDesc,
+            "organization": orgID,
+            "organizers_volunteers": [],
+        }).then(res => {
+            if(res.ok) success(); 
+        }) 
+    })
+}
+export function deleteEvent(eventID, success) {
+    fetch(`${djangoIP}events/${eventID}/`, {
+        method: "DELETE",
+        headers: {
+            "content-type": "application/json"
+        }
+    }).then(res => {
+        if(res.ok) success();
+        else logError(res);
+    })
 }

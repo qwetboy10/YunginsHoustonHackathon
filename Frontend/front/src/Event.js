@@ -2,12 +2,14 @@ import React, {Component} from 'react';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
-import {getEventByID, getOrganizersByEventID, getVolunteersByEventID, getPersonByID, signUpEvent, unSignUpEvent} from './DataFetcher.js';
+import {getEventByID, getOrganizersByEventID, getVolunteersByEventID, getPersonByID, signUpEvent, unSignUpEvent, deleteEvent} from './DataFetcher.js';
 import { MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBRow, MDBCol, MDBIcon, MDBBtn } from 'mdbreact';
 import {Carousel, Card, Container, Row, Col, Image, Figure, Button, Jumbotron} from 'react-bootstrap';
 import stockeventpic from './volunteer.jpeg'
 import Cookies from 'universal-cookie';
 import Map from './Map.js';
+import Loading from './Loading.js';
+
 class Event extends Component {
   constructor(props) {
     super(props);
@@ -84,7 +86,7 @@ class Event extends Component {
     render() {
       const {loading, loaded, event, people, user, notLoggedIn, organizers, volunteers} = this.state;
       console.log(this.state);
-      if(loading !== loaded) return <div>Loading...</div>; //TODO; pretty
+      if(loading !== loaded) return <div><Loading/></div>; //TODO; pretty
         return ( //TODO: display info about event and people
           //Create a signup button too and then tell Steven once ur done
           <div>
@@ -158,6 +160,7 @@ class Event extends Component {
                           : <MDBBtn onClick={this.signUp.bind(this)}>Register</MDBBtn>}
             </Card.Body>
           </Card>
+              {organizers.map(organizer => organizer.id).includes(user.id) && <MDBBtn onClick={() => deleteEvent(event.id, () => this.props.history.push("/"))}>DELETE EVENT</MDBBtn>}
             <MDBRow>
                 <MDBCol style={{ maxWidth: "40rem" }}>
                 

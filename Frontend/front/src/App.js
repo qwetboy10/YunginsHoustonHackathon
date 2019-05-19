@@ -14,6 +14,7 @@ import Event from './Event.js';
 import Search from './Search.js';
 import { getPersonByID } from './DataFetcher.js';
 import OrganizationSignUp from './OrganizationSignUp.js';
+import OrganizationPage from './OrganizationPage.js';
 class App extends Component {
   constructor(props) {
     super(props);
@@ -51,8 +52,9 @@ class App extends Component {
             <Route path='/rankings' component={Rankings} />
             <Route path='/profile' component={(props) => <Profile {...props} user={user}/>} />
             <Route path='/login' component={(props) => <Login {...props} update={this.checkCookies.bind(this)}/>} />
-            <Route path='/signup' component={Signup} />
-            <Route path='/orgsignup' component={{OrganizationSignUp}}/>
+            <Route path='/signup' component={(props) => <Signup {...props} update={this.checkCookies.bind(this)}/>} />
+            <Route path='/orgsignup' component={(props) => <OrganizationSignUp {...props} update={this.checkCookies.bind(this)}/>}/>
+            <Route path='/organization'component={(props) => <OrganizationPage {...props} />}/>
             <Route path='/events' component={(props) => <EventList {...props}/>}/>
             <Route path='/search' component = {(props) => <Search {...props}/>} />
             <Route path='/event' component={(props) => <Event {...props} />} />
