@@ -11,6 +11,7 @@ import Login from './Login.js';
 import Signup from './Signup.js';
 import Cookies from 'universal-cookie';
 import { getPersonByID } from './DataFetcher.js';
+import Search from './Search.js';
 class App extends Component {
   constructor(props) {
     super(props);
@@ -44,6 +45,7 @@ class App extends Component {
             <Route path='/profile' component={(props) => <Profile {...props} />} />
             <Route path='/login' component={(props) => <Login {...props} update={this.checkCookies.bind(this)}/>} />
             <Route path='/signup' component={Signup} />
+            <Route path='/search' component={Search}/>
             <Route path='/' component={Home} />
             
           </Switch>

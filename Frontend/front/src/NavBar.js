@@ -34,8 +34,8 @@ class NavBar extends Component {
         <Navbar.Brand><Nav.Link onClick={()=>this.props.history.push("/")}>Houston Volunteer Central</Nav.Link></Navbar.Brand>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            {["Events", "FAQ", "Rankings", "Contact", "Profile"].map((str) => (
-              <Nav.Link onClick={() => this.props.history.push(`/${str.replace(/ /g, '_').toLowerCase().replace("home", "")}`)}>
+            {["Events", "FAQ", "Rankings", "Contact", "Profile", "Advanced Search"].map((str) => (
+              <Nav.Link onClick={() => this.props.history.push(`/${str.replace(/ /g, '_').toLowerCase().replace("home", "").replace("advanced_search", "search")}`)}>
                 {str}
               </Nav.Link>
             ))}
