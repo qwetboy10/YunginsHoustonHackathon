@@ -24,7 +24,7 @@ class OrganizationSignUp extends Component {
         if(password !== password2) {
             alert("Passwords do not match, please try again.");
             return;
-        }
+        }   
         createOrganization(username, password, firstName, lastName, email, phoneNum, (data) => {
             new Cookies().set("user", data.id, { path: "/"});
             console.log(data);
