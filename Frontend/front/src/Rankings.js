@@ -4,7 +4,25 @@ import Login from './Login.js';
 import {Carousel, Card, Jumbotron, Container, Table} from 'react-bootstrap';
 
 class Rankings extends Component {
+  mapToComponent(data, index)
+  {
+    return (<tr>
+      <td>{index}</td>
+      <td>{data.first_name}</td>
+      <td>{data.last_name}</td>
+      <td>{data.username}</td>
+      <td>{data.karma}</td>
+    </tr>);
+  }
     render() {
+      const data = [
+        {
+          first_name:"Stebby",
+          last_name:"Chong",
+          username:"s692098",
+          karma:2
+        }
+      ]
         return (
           <div>
             <Jumbotron fluid>
@@ -21,13 +39,7 @@ class Rankings extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Stoov</td>
-                    <td>Moo</td>
-                    <td>@bessie</td>
-                    <td>100</td>
-                  </tr>
+                  {data.map(mapToComponents)}
                   <tr>
                     <td>2</td>
                     <td>Zook</td>
