@@ -29,12 +29,15 @@ export function getSkills(loadData) {
     }).catch(logError);
 }
 
+function getUserByID(id, loadData) {
+    fetch(`${djangoIP}users/${id}/`).then(res2 => res2.json()).then(res2 =>
+        loadData(res2)
+    );
+}
 export function getPersonByID(id, loadData) {
     fetch(`${djangoIP}people/${id}/`).then(res => res.json()).then(res => {
         if(res.details) logError(res.details);
-        else fetch(`${djangoIP}users/${res.user}/`).then(res2 => res2.json()).then(res2 =>
-            loadData({...res2, ...res})
-        );
+        else getUserByID(res.user, (data) => loadData({...data, ...res}));
     }).catch(logError);
 }
 export function getPersonByUsername(username, loadData, failed) {
@@ -42,9 +45,7 @@ export function getPersonByUsername(username, loadData, failed) {
         if(res.ok) 
             res.json().then(res => {
                 if(res.details) logError(res.details);
-                else fetch(`${djangoIP}users/${res.user}/`).then(res2 => res2.json()).then(res2 =>
-                loadData({...res2, ...res})
-            );
+                else getUserByID(res.user, (data) => loadData({...data, ...res}));
         });
         else failed();
     }).catch((err) => {
@@ -53,6 +54,13 @@ export function getPersonByUsername(username, loadData, failed) {
     });
 }
 
+export function getPersonByEvents(eventID, addPerson) {
+    fetch(`${djangoIP}/events/${eventID}/get_volunteers`).then(res => res.json()).then(res => 
+        res.map(person => {
+            getUserByID(res.user, (data) => addPerson({...data, ...res}));
+        })
+    );
+}
 
 export function authenticateUser(username, password, success, failure) {
     fetch(`${djangoIP}users/login/`, {
