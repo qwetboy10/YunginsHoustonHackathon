@@ -78,3 +78,8 @@ class Event(models.Model):
 
     def contains_tag(self, tag):
         return self.tags.filter(name=tag).count() > 0
+
+    def contains_person(self, pk):
+        return self.organizers_volunteers.filter(pk=pk).count() > 0
+
+

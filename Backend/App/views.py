@@ -85,7 +85,15 @@ class PersonViewSet(viewsets.ModelViewSet):
             queryset = [i for i in Person.objects.all() if Person.contains_skill(i, search)]
             serializer = self.get_serializer(queryset, many=True)
             return Response(serializer.data)
-            
+
+    @action(methods=['get'], detail=True)
+    def get_events_by_person(self,request,pk=None):
+        queryset= queryset = [i for i in Event.objects.all() if Event.contains_person(i, pk)]
+        serializer = EventSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+
 
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
