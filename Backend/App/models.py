@@ -27,6 +27,7 @@ class Organization(models.Model):
     phone = models.CharField(max_length=20)
     address = models.CharField(max_length=200)
     home_page = models.URLField()
+    icon = models.ImageField(default=None, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -40,6 +41,7 @@ class Person(models.Model):
     organization = models.ForeignKey(
         Organization, models.CASCADE, null=True, blank=True
     )
+    icon = models.ImageField(default=None, blank=True, null=True)
 
     def get_name(self):
         return self.user.first_name + " " + self.user.last_name
@@ -72,6 +74,7 @@ class Event(models.Model):
     duration = models.DurationField()
     blurb = models.TextField(blank=True)
     description = models.CharField(max_length=280, blank=True)
+    icon = models.ImageField(default=None, blank=True, null=True)
 
     def __str__(self):
         return self.name
