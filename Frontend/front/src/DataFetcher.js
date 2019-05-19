@@ -25,7 +25,6 @@ export function getSkills(loadData) {
 
 export function getPersonByID(id, loadData) {
     fetch(`${djangoIP}people/${id}/`).then(res => res.json()).then(res => {
-        console.log("wat");
         fetch(`${djangoIP}users/${res.id}/`).then(res2 => res2.json()).then(res2 =>
             loadData({...res, ...res2})
         );

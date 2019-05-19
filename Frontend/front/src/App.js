@@ -21,9 +21,10 @@ class App extends Component {
     this.checkCookies();
   }
   checkCookies() {
-    console.log("tf");
     const cookie = new Cookies();
-    getPersonByID(cookie.get("user"), (data) => this.setState({user: data}));
+    const userID = cookie.get("user");
+    if(userID !== undefined) getPersonByID(cookie.get("user"), (data) => this.setState({user: data}));
+    else this.setState({user: null});
   }
   render() {
     const {user} = this.state;
