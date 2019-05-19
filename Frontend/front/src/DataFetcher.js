@@ -30,6 +30,21 @@ export function getPersonByID(id, loadData) {
         );
     }).catch(logError);
 }
+export function getPersonByUsername(username, loadData, failed) {
+    fetch(`${djangoIP}people/get_user_by_username/?username=${username}`).then(res => {
+        if(res.ok) 
+            res.json().then(res => {
+            fetch(`${djangoIP}users/${res.user}/`).then(res2 => res2.json()).then(res2 =>
+                loadData({...res, ...res2})
+            );
+        });
+        else failed();
+    }).catch((err) => {
+        logError(err);
+        failed();
+    });
+}
+
 
 export function authenticateUser(username, password, success, failure) {
     fetch(`${djangoIP}users/login/`, {
@@ -67,13 +82,13 @@ export function createUser(username, password, firstName, lastName, email, phone
 }
 
 function unixTime(date) {
-
+    
 }
 
 export function searchEvents(name, additional = {}) {
     var url = `?search=${encodeURI(name)}`;
-    if(additional.before) url += `&&before=${unixTime(additional.before)}`;
-    if(additional.after) url += `&&after=${unixTime(additional.after)}`;
-    if(additional.tags) url += `&&tags=${additional.tags.join("&&tags=")}`;
+    if(additional.before) url += `&before=${unixTime(additional.before)}`;
+    if(additional.after) url += `&after=${unixTime(additional.after)}`;
+    if(additional.tags) url += `&tags=${additional.tags.join("&tags=")}`;
     return url;
 }

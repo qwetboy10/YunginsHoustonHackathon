@@ -5,7 +5,6 @@ import { MDBContainer, MDBCard, MDBCardBody, MDBCol, MDBRow,MDBCardHeader, MDBIc
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
-import Cookies from "universal-cookie";
 import { searchEvents } from './DataFetcher.js';
 class NavBar extends Component {
   constructor(props) {
@@ -15,11 +14,10 @@ class NavBar extends Component {
     }
   }
     logout() {
-        new Cookies().remove("user");
         this.props.update();
     }
     onClick() {
-      this.props.history.push(`events/${searchEvents(this.state.searchQuery)}`);
+      this.props.history.push(`events${searchEvents(this.state.searchQuery)}`);
     }
     onChange(s) {
       this.setState({
@@ -34,8 +32,8 @@ class NavBar extends Component {
         <Navbar.Brand><Nav.Link onClick={()=>this.props.history.push("/")}>Houston Volunteer Central</Nav.Link></Navbar.Brand>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            {["Events", "FAQ", "Rankings", "Contact", "Profile"].map((str) => (
-              <Nav.Link onClick={() => this.props.history.push(`/${str.replace(/ /g, '_').toLowerCase().replace("home", "")}`)}>
+            {["Events", "FAQ", "Rankings", "Contact", "Profile", "Advanced Search"].map((str) => (
+              <Nav.Link onClick={() => this.props.history.push(`/${str.replace(/ /g, '_').toLowerCase().replace("home", "").replace("advanced_search", "search")}`)}>
                 {str}
               </Nav.Link>
             ))}

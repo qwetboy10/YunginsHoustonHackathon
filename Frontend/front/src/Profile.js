@@ -4,10 +4,43 @@ import Login from './Login.js';
 import {Carousel, Card, Jumbotron, Container} from 'react-bootstrap';
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBRow, MDBCol, MDBIcon, MDBContainer } from 'mdbreact';
 import asd from './asd.jpeg';
+import {getPersonByID, getPersonByUsername} from './DataFetcher.js';
+import Cookies from 'universal-cookie';
 class Profile extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true,
+      user: null,
+      failed: false,
+      notLoggedIn: false
+    };
+    this.storeData = this.storeData.bind(this);
+  }
+  componentDidMount() {
+    this.setState({loading: true, user: null});
+    if(!this.props.location.pathname.substring(9)) {
+      var id = new Cookies().get("user");
+      if(id === undefined) this.setState({notLoggedIn: true});
+      else {
+        getPersonByID(id, data => this.props.history.push(`/profile/${data.username}`));
+      }
+    } else {
+      getPersonByUsername(this.props.location.pathname.substring(9), this.storeData, () => this.setState({failed: true}));
+    }
+
+  }
+  storeData(data) {
+    this.setState({
+      loading: false,
+      user: data
+    });
+  }
     render() {
-        const {user} = this.props;
-        if(!user) return (
+        const {loading, user, failed, notLoggedIn} = this.state;
+        console.log(this.state);
+        if(failed) return <div>This user does not exist.</div>  //make this pretty
+        if(notLoggedIn) return (
           <div>
             <br/>
             <MDBContainer>
@@ -31,6 +64,7 @@ class Profile extends Component {
         </MDBContainer>
           </div>
         );
+        if(loading) return <div>Loading...</div>//make this pretty
         return ( //TODO: add other things for user, console.log(user) for the things u can use
           <div>
             <Jumbotron fluid>
