@@ -7,7 +7,7 @@ class Rankings extends Component {
   mapToComponent(data, index)
   {
     return (<tr>
-      <td>{index}</td>
+      <td>{index+1}</td>
       <td>{data.first_name}</td>
       <td>{data.last_name}</td>
       <td>{data.username}</td>
@@ -21,6 +21,18 @@ class Rankings extends Component {
           last_name:"Chong",
           username:"s692098",
           karma:2
+        },
+        {
+          first_name:"Zook",
+          last_name:"Moo",
+          username:"turkey",
+          karma:50
+        },
+        {
+          first_name:"Rol",
+          last_name:"Moo",
+          username:"fat",
+          karma:10
         }
       ]
         return (
@@ -40,20 +52,6 @@ class Rankings extends Component {
                 </thead>
                 <tbody>
                   {data.map(this.mapToComponent)}
-                  <tr>
-                    <td>2</td>
-                    <td>Zook</td>
-                    <td>Moo</td>
-                    <td>@turkey</td>
-                    <td>50</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Rol</td>
-                    <td>Moo</td>
-                    <td>@fat</td>
-                    <td>10</td>
-                  </tr>
                 </tbody>
               </Table>;
             </Container>

@@ -2,13 +2,8 @@ import React, {Component} from 'react';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
-<<<<<<< HEAD
-import {getEventByID, getPersonByEventID, getPersonByID, signUpEvent, unSignUpEvent} from './DataFetcher.js';
-import { MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBRow, MDBCol, MDBIcon, MDBBtn, MDBContainer } from 'mdbreact';
-=======
 import {getEventByID, getOrganizersByEventID, getVolunteersByEventID, getPersonByID, signUpEvent, unSignUpEvent} from './DataFetcher.js';
 import { MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBRow, MDBCol, MDBIcon, MDBBtn } from 'mdbreact';
->>>>>>> 922afbe56e038053e4db6fd0051f308569ab00af
 import stockeventpic from './volunteer.jpeg'
 import { Jumbotron } from 'react-bootstrap';
 import Cookies from 'universal-cookie';
@@ -91,7 +86,6 @@ class Event extends Component {
           <div>
             <Jumbotron>
             <MDBRow>
-<<<<<<< HEAD
                 <MDBCol style={{ maxWidth: "40rem" }}>
                     
                     <img cascade style={{ width: '40rem' }} src={stockeventpic} />
@@ -127,21 +121,6 @@ class Event extends Component {
                 
                 </MDBCol>
             
-=======
-                <MDBCol col={10}>
-                    <MDBCardImage cascade style={{ width: '40rem' }} src={stockeventpic} />
-                    <MDBCardBody cascade className="text-center">
-                        <MDBCardTitle>{event.name}</MDBCardTitle>
-                        <h5 className="indigo-text"><strong>{event.organization}</strong></h5>
-                        <MDBCardText>{event.description}</MDBCardText>
-                        {//TODO: make this not ass
-                          notLoggedIn ? <MDBBtn onClick={this.goToLogin.bind(this)}>Log in to do thingys</MDBBtn> :
-                          people.filter(person => person === user.id).length > 0 ? <MDBBtn onClick={this.unSignUp.bind(this)}>Unsign up</MDBBtn> 
-                          : <MDBBtn onClick={this.signUp.bind(this)}>Sign up</MDBBtn>
-                        }
-                    </MDBCardBody>
-                </MDBCol>
->>>>>>> 922afbe56e038053e4db6fd0051f308569ab00af
             </MDBRow>
             </Jumbotron>
             <Jumbotron> 
