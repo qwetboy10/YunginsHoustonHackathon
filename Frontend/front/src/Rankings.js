@@ -17,22 +17,52 @@ class Rankings extends Component {
     render() {
       const data = [
         {
-          first_name:"Stebby",
-          last_name:"Chong",
-          username:"s692098",
+          first_name:"Steven",
+          last_name:"Cheng",
+          username:"helloworld",
+          karma:212
+        },
+        {
+          first_name:"Sam",
+          last_name:"Armstrong",
+          username:"jawns",
+          karma:100
+        },
+        {
+          first_name:"Squid",
+          last_name:"The Kid",
+          username:"squidthekid",
+          karma:87
+        },
+        {
+          first_name:"Tristan",
+          last_name:"Weaselpaper",
+          username:"wheeeee",
+          karma:53
+        },
+        {
+          first_name:"Ronak",
+          last_name:"Idk",
+          username:"hallo",
+          karma:30
+        },
+        {
+          first_name:"Meggie",
+          last_name:"Cheng",
+          username:"birb",
+          karma:27
+        },
+        {
+          first_name:"Zeki",
+          last_name:"Gerbil",
+          username:"quack",
+          karma:12
+        },
+        {
+          first_name:"Ral",
+          last_name:"Cow",
+          username:"moo",
           karma:2
-        },
-        {
-          first_name:"Zook",
-          last_name:"Moo",
-          username:"turkey",
-          karma:50
-        },
-        {
-          first_name:"Rol",
-          last_name:"Moo",
-          username:"fat",
-          karma:10
         }
       ]
         return (
