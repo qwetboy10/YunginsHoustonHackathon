@@ -1,25 +1,49 @@
-# Cypress Woods Hackathon Team
+# Houston Volunteer Matchmaking
+
+## Cypress Woods Hackathon Team: The Yungins
+
+## Inspiration
+Each year our school hosts a competitive programming contest, and we ask for volunteers from our school's volunteer organization, but many of these volunteers choose not to show up or eat the provided food and leave. We found that many other nonprofits in Houston also face this problem, and we would like to fix that.
+
+## What it does
+Houston Volunteer Central is a matchmaking website for finding volunteer events near you, allowing volunteers and organizers to rate the quality of each other's service, improving matchmaking in future events.
+
+
+### Pre-initialization Script - Setting up dependencies on host computer 
+
 ```
 #!/bin/bash
-echo "Setting up SSH"
-ssh-keygen -t rsa
 echo "Installing dependencies"
-apt-get install python3-pip git vim woof npm httpie
-#spooky fucking microsoft ppa stuff
-echo "spooky microsoft stuff to download vscode"
-curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
-sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
-sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
-sudo apt-get install apt-transport-https
-sudo apt-get update
-sudo apt-get install code
-echo "installing django stuff"
-pip3 install django djangorestframework django-cors-headers
-echo "installing npm stuff / react stuff"
+apt-get install -y python3-pip git npm
+echo "installing django and django based dependencies"
+pip3 install -y django djangorestframework django-cors-headers
+echo "installing npm and react"
 npm install -g create-react-app
-apt remove cmdtest
+apt remove -y cmdtest
 npm install -g yarn
-echo 'run these commands to set up git'
-echo 'git config --global user.email "you@example.com"'
-echo 'git config --global user.name "Your Name"'
+cd Frontend/front
+npm install
+yarn install
 ```
+
+## Starting the server
+
+Starting the server takes a few steps due to the nature of REACT-Django, follow the steps below.
+Starting in the github repo's root directory
+
+```
+cd Backend
+python3 manage.py migrate
+python3 manage.py runserver
+```
+
+Leave that running and in a different terminal or emulator
+
+```
+cd ../
+cd Frontend
+cd front
+yarn start
+```
+
+If the webpage does not open automagically, then navigate to localhost:3000 in your web browser of choice.
