@@ -31,7 +31,10 @@ class EventList extends Component {
                         <MDBCardText>{event.description}</MDBCardText>
                         <MDBCardText>Organized by: {event.organization}</MDBCardText>
                         <MDBCardText>Address: {event.address}</MDBCardText>
+                        <p>
                         <MDBBtn color="primary" href="#">View Event</MDBBtn>
+                        </p>
+                        
                     </MDBCardBody>
                     </MDBCard>
                 </MDBCol>
