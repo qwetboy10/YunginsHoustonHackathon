@@ -27,7 +27,8 @@ class Signup extends Component {
         }
         createUser(username, password, firstName, lastName, email, phoneNum, (data) => {
             new Cookies().set("user", data.id, { path: "/"});
-            this.props.update(() => this.props.history.push("/profile"));
+            console.log(data);
+            //this.props.update(() => this.props.history.push("/profile"));
         });
     }
     onChange(key, val) {
@@ -117,7 +118,7 @@ class Signup extends Component {
                               
                               </div>
                               <div className="text-center py-4 mt-3">
-                              <MDBBtn onClick={this.onClick.bind(this)} color="orange" type="submit">
+                              <MDBBtn onClick={this.onClick.bind(this)} color="orange">
                                   Register
                               </MDBBtn>
                               </div>
