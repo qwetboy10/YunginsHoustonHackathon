@@ -4,11 +4,12 @@ import Login from './Login.js';
 import {Carousel, Card, Jumbotron, Container, Form} from 'react-bootstrap';
 import Datetime from 'react-datetime';
 import './react-datetime.css';
+import { MDBContainer, MDBCard, MDBCardBody, MDBCol, MDBRow,MDBCardHeader, MDBInput, MDBIcon, MDBBtn, MDBModalFooter} from "mdbreact";
+import {searchEvents} from './DataFetcher.js';
 class Search extends Component {
   
     render() {
-      var today = new Date();
-    var lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
+    var date = new Date();
         return (
           <div>
             <Jumbotron fluid>
@@ -16,7 +17,7 @@ class Search extends Component {
                 <h1>Search</h1>
                 <Form>
                 <Form.Group controlId="exampleForm.ControlInput1">
-                    <Form.Control type="keyWords" placeholder="Key Words" />
+                    <Form.Control id="keywords" type="keyWords" placeholder="Key Words" />
                 </Form.Group>
                 <Form.Group controlId="exampleForm.ControlSelect1">
                     <Form.Label>Sort by</Form.Label>
@@ -29,9 +30,11 @@ class Search extends Component {
                     </Form.Control>
                 </Form.Group>
                 <Datetime/>
+                
                 </Form>
             </Container>
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+            <MDBBtn onClick={() => (searchEvents(document.getElementById("keywords").innerHTML, this.props, {after: date}))}>Submit</MDBBtn>
             </Jumbotron>
           </div>
         );
