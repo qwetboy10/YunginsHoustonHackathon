@@ -4,7 +4,10 @@ import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import {getEventByID, getOrganizersByEventID, getVolunteersByEventID, getPersonByID, signUpEvent, unSignUpEvent} from './DataFetcher.js';
 import { MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBRow, MDBCol, MDBIcon, MDBBtn } from 'mdbreact';
+<<<<<<< HEAD
+=======
 import {Carousel, Card, Container, Row, Col, Image, Figure, Button, Jumbotron} from 'react-bootstrap';
+>>>>>>> 74ee83967f215219c36e1f3e757df085676bcf34
 import stockeventpic from './volunteer.jpeg'
 import Cookies from 'universal-cookie';
 import Map from './Map.js';
