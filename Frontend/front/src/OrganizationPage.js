@@ -40,7 +40,6 @@ class OrganizationPage extends Component {
                 <h1>Contact Information</h1>
                 <hr color="black"></hr>
                 <br/>
-                <h5 style={{textAlign:"left"}}>Email: {org.email}</h5>
                 <h5 style={{textAlign:"left"}}>Phone Number: {org.phone}</h5>
                 <h5 style={{textAlign:"left"}}>Address: {org.address}</h5>
                 <h5 style={{textAlign:"left"}}>Website: {org.home_page}</h5>
