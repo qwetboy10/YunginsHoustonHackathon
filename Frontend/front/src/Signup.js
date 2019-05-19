@@ -28,7 +28,7 @@ class Signup extends Component {
         createUser(username, password, firstName, lastName, email, phoneNum, (data) => {
             new Cookies().set("user", data.id, { path: "/"});
             console.log(data);
-            //this.props.update(() => this.props.history.push("/profile"));
+            this.props.update(() => this.props.history.push("/profile"));
         });
     }
     onChange(key, val) {
