@@ -56,7 +56,9 @@ class UserViewSet(viewsets.ViewSet):
         password = request.data["password"]
         user = authenticate(username=username, password=password)
         if user is not None:
-            serializer = PersonSerializer(get_object_or_404(user__username=username))
+            serializer = PersonSerializer(
+                get_object_or_404(Person, user__username=username)
+            )
             return Response(serializer.data)
         else:
             return Response({"detail": "Login Failed"})
@@ -128,16 +130,15 @@ class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
 
-    def list(self, request, *args, **kwargs):
-        print(request.query_params)
-        search = request.query_params.get("search", None)
-        if search is None:
-            serializer = self.get_serializer(Event.objects.all(), many=True)
-            return Response(serializer.data)
-        else:
-            queryset = Event.objects.filter(name__contains=search)
-            serializer = self.get_serializer(queryset, many=True)
-            return Response(serializer.data)
+    # def list(self, request, *args, **kwargs):
+    #    search = request.query_params.get("search", None)
+    #    if search is None:
+    #        serializer = self.get_serializer(Event.objects.all(), many=True)
+    #        return Response(serializer.data)
+    #    else:
+    #        queryset = Event.objects.filter(name__contains=search)
+    #        serializer = self.get_serializer(queryset, many=True)
+    #        return Response(serializer.data)
 
     @action(methods=["get"], detail=False)
     def search_by_name(self, request, *args, **kwargs):
@@ -150,8 +151,13 @@ class EventViewSet(viewsets.ModelViewSet):
             serializer = self.get_serializer(queryset, many=True)
             return Response(serializer.data)
 
-    @action(methods=["get"], detail=False)
-    def advanced_search(self, request):
+    def list(self, request):
+        # search by name
+        search = request.query_params.get("search", None)
+        if search is not None:
+            queryset = Event.objects.filter(name__contains=search)
+        else:
+            queryset = Event.objects.all()
         # filter by date
         after = request.query_params.get("after", None)
         before = request.query_params.get("before", None)
@@ -164,13 +170,7 @@ class EventViewSet(viewsets.ModelViewSet):
                 maxdate = date.max
             else:
                 maxdate = date.fromtimestamp(int(before))
-            print(mindate)
-            print(maxdate)
-            print(Event.objects.get(pk=1).date)
-            queryset = Event.objects.filter(date__gt=mindate).filter(date__lt=maxdate)
-        else:
-            queryset = Event.objects.all()
-        print(queryset)
+            queryset = queryset.filter(date__gt=mindate).filter(date__lt=maxdate)
         # filter by tags
         query2 = []
         tag_list = request.query_params.getlist("tags")
