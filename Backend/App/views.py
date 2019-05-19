@@ -61,10 +61,14 @@ class UserViewSet(viewsets.ViewSet):
         print(password)
         user = authenticate(username=username, password=password)
         if user is not None:
-            serializer = PersonSerializer(get_object_or_404(Person, user__username=username))
+            serializer = PersonSerializer(
+                get_object_or_404(Person, user__username=username)
+            )
             return Response(serializer.data)
         else:
-            return Response({"detail": "Login Failed"}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response(
+                {"detail": "Login Failed"}, status=status.HTTP_401_UNAUTHORIZED
+            )
 
 
 class PersonViewSet(viewsets.ModelViewSet):
@@ -94,18 +98,16 @@ class PersonViewSet(viewsets.ModelViewSet):
             ]
             serializer = self.get_serializer(queryset, many=True)
             return Response(serializer.data)
-<<<<<<< HEAD
 
-    @action(methods=['get'], detail=True)
-    def get_events_by_person(self,request,pk=None):
-        queryset= queryset = [i for i in Event.objects.all() if Event.contains_person(i, pk)]
+    @action(methods=["get"], detail=True)
+    def get_events_by_person(self, request, pk=None):
+        queryset = queryset = [
+            i for i in Event.objects.all() if Event.contains_person(i, pk)
+        ]
         serializer = EventSerializer(queryset, many=True)
         return Response(serializer.data)
 
-
-
-=======
-    @action(methods=['get'], detail=False)
+    @action(methods=["get"], detail=False)
     def get_user_by_username(self, request):
         username = request.query_params.get("username", None)
         if username is None:
@@ -115,9 +117,8 @@ class PersonViewSet(viewsets.ModelViewSet):
             serializer = self.get_serializer(queryset, many=False)
             return Response(serializer.data)
         except:
-            return Response({"detail":"Not found."})
-            
->>>>>>> 8164ecaa01672d5afe3dfff574a3810a4bf8a96b
+            return Response({"detail": "Not found."})
+
 
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
