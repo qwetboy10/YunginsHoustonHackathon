@@ -1,0 +1,11 @@
+.spinner-border {
+    display: block;
+    position: fixed;
+    z-index: 1021;
+    top: 45%;
+    right: 45%; /* or: left: 50%; */
+    height: 100px;
+    width: 100px;
+    margin-top: 50px; /* have of the elements height */
+    margin-right: 50px; /* have of the elements widht */
+  }

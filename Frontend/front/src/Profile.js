@@ -66,7 +66,7 @@ class Profile extends Component {
     }));
   }
     render() {
-        const {loading, user, failed, notLoggedIn} = this.state;
+        const {loaded, loading, user, failed, notLoggedIn} = this.state;
         console.log(this.state);
         if(failed) return(
           <div>
@@ -132,7 +132,7 @@ class Profile extends Component {
                 <br/>
                 <h2 style={{textAlign:"left"}}>{user.first_name + " " + user.last_name}</h2>
                 <h5 style={{textAlign:"left"}}>{"Username: "+user.username}</h5>
-                
+                <br/>
                 <br/>
                 
                 <h1>Contact Infromation</h1>
@@ -140,10 +140,13 @@ class Profile extends Component {
                 <br/>
                 <h5 style={{textAlign:"left"}}>{"Email: "+user.email}</h5>
                 <h5 style={{textAlign:"left"}}>{"Phone Number: "+user.phone}</h5>
+                <br/>
+                <br/>
                 
             </Container>
             <MDBContainer className="event">
-              <h3>{user.first_name + " " + user.last_name + "'s Events"}</h3>
+              <h1>{user.first_name + " " + user.last_name + "'s Events"}</h1>
+              <hr color="black"/>
                 <MDBRow>
                     {this.state.events.map(event => this.getEventComponent(event))}
                  </MDBRow>
