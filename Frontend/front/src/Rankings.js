@@ -39,7 +39,7 @@ class Rankings extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {data.map(mapToComponents)}
+                  {data.map(this.mapToComponent)}
                   <tr>
                     <td>2</td>
                     <td>Zook</td>
