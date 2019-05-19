@@ -49,7 +49,9 @@ function getUserByID(id, loadData) {
 export function getPersonByID(id, loadData) {
     fetch(`${djangoIP}people/${id}/`).then(res => res.json()).then(res => {
         if(res.details) logError(res.details);
-        else getUserByID(res.user, (data) => loadData({...data, ...res}));
+        else getUserByID(res.user, (data) => {
+            getOrganizationByID(res.organization, (org) => loadData({...data, ...res, organization: org}))
+        });
     }).catch(logError);
 }
 export function getPersonByUsername(username, loadData, failed) {
@@ -57,7 +59,9 @@ export function getPersonByUsername(username, loadData, failed) {
         if(res.ok) 
             res.json().then(res => {
                 if(res.details) logError(res.details);
-                else getUserByID(res.user, (data) => loadData({...data, ...res}));
+                else getUserByID(res.user, (data) => {
+                    getOrganizationByID(res.organization, (org) => loadData({...data, ...res, organization: org}))
+                });
         });
         else failed();
     }).catch((err) => {
