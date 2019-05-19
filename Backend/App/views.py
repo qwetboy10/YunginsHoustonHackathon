@@ -61,10 +61,14 @@ class UserViewSet(viewsets.ViewSet):
         print(password)
         user = authenticate(username=username, password=password)
         if user is not None:
-            serializer = PersonSerializer(get_object_or_404(Person, user__username=username))
+            serializer = PersonSerializer(
+                get_object_or_404(Person, user__username=username)
+            )
             return Response(serializer.data)
         else:
-            return Response({"detail": "Login Failed"}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response(
+                {"detail": "Login Failed"}, status=status.HTTP_401_UNAUTHORIZED
+            )
 
 
 class PersonViewSet(viewsets.ModelViewSet):
@@ -81,6 +85,12 @@ class PersonViewSet(viewsets.ModelViewSet):
             queryset = [i for i in Person.objects.all() if search in Person.get_name(i)]
             serializer = self.get_serializer(queryset, many=True)
             return Response(serializer.data)
+
+    @action(methods=['get'], detail=False)
+    def sort_by_karma(self, request):
+        queryset = Person.objects.all().order_by('-karma')
+        serializer = PersonSerializer(queryset, many=True)
+        return Response(serializer.data)
 
     @action(methods=["get"], detail=False)
     def search_by_skill(self, request, *args, **kwargs):
@@ -101,7 +111,15 @@ class PersonViewSet(viewsets.ModelViewSet):
         serializer = EventSerializer(queryset, many=True)
         return Response(serializer.data)
 
-    @action(methods=['get'], detail=False)
+    @action(methods=["get"], detail=True)
+    def get_events_by_person(self, request, pk=None):
+        queryset = queryset = [
+            i for i in Event.objects.all() if Event.contains_person(i, pk)
+        ]
+        serializer = EventSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    @action(methods=["get"], detail=False)
     def get_person_by_username(self, request):
         username = request.query_params.get("username", None)
         if username is None:
@@ -145,6 +163,12 @@ class OrganizationViewSet(viewsets.ModelViewSet):
         serializer = EventSerializer(events, many=True)
         return Response(serializer.data)
 
+    @action(methods=['get'], detail=False)
+    def sort_by_karma(self, request):
+        queryset = Organization.objects.all().order_by('-karma')
+        #print(queryset)
+        serializer = OrganizationSerializer(queryset, many=True)
+        return Response(serializer.data)
 
 class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
