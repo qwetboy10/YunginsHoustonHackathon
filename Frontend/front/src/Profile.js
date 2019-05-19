@@ -61,7 +61,8 @@ class Profile extends Component {
     );
     
 }
-getOrganizationComponent(organization) { //TODO: Make this not disgusting
+getOrganizationComponent(organization) { 
+console.log(organization);
   return (
   
   <div key={organization.id}>
@@ -70,12 +71,12 @@ getOrganizationComponent(organization) { //TODO: Make this not disgusting
               <MDBCard wide display="inline">
               <MDBCardImage className="view view-cascade gradient-card-header blue-gradient" cascade tag="div">
                   <h2  center="true" className="h2-responsive mb-2">{organization.name}</h2>
-                  <p className=""> <MDBIcon icon="calendar-alt" /> {organization.date}</p>
               </MDBCardImage>
               <MDBCardBody cascade>
-                  <MDBCardText>{organization.description}</MDBCardText>
-                  <MDBCardText>Organized by: {o.organization}</MDBCardText>
-                  <MDBCardText>Address: {event.address}</MDBCardText>
+                  <MDBCardText>Home Page: {organization.home_page}</MDBCardText>
+                  <MDBCardText>Phone Number: {organization.phone} </MDBCardText>
+                  <MDBCardText>Address: {organization.address}</MDBCardText>
+                  <MDBCardText>Karma: {organization.karma}</MDBCardText>
                   <p>
                   <MDBBtn color="primary" onClick={() => this.props.history.push(`/organization/${organization.id}`)}>View Organization</MDBBtn>
                   </p>
@@ -173,7 +174,7 @@ getOrganizationComponent(organization) { //TODO: Make this not disgusting
                 <h1>Organization</h1>
                 <hr color="black"></hr>
                 <br/>
-                {user.organization ? user.organization : "You aren't part of an organization yet."}
+                {user.organization ? this.getOrganizationComponent(user.organization) : "You aren't part of an organization yet."}
                 <br/>
                 <br/>
             </Container>
