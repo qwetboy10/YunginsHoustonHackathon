@@ -2,10 +2,12 @@ from datetime import *
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.exceptions import ParseError, AuthenticationFailed
+from rest_framework.views import APIView
+from rest_framework.parsers import FileUploadParser
 from .models import *
 from .serializers import *
 
@@ -33,40 +35,44 @@ class UserViewSet(viewsets.ViewSet):
             raise ParseError()
         else:
             try:
+                print(f"{username} {password} {first_name} {last_name} {email}")
                 user = User.objects.create_user(username, password)
                 user.first_name = first_name
                 user.last_name = last_name
                 user.email = email
                 user.save()
+                serializer = UserSerializer(user)
+                return Response(serializer.data)
             except:
                 raise AuthenticationFailed(detail="User already exists")
 
-    def retreive(self, request, pk=None):
+    def retrieve(self, request, pk=None):
         queryset = User.objects.all()
         user = get_object_or_404(queryset, pk=pk)
         serializer = UserSerializer(user)
         return Response(serializer.data)
 
-    @action(methods=['post'], detail=False)
-    def login(self, request, pk = None):
-        print(request.data)
-        username = request.data['username']
-        password = request.data['password']
+    @action(methods=["post"], detail=False)
+    def login(self, request, pk=None):
+        username = request.data["username"]
+        password = request.data["password"]
+        print(username)
+        print(password)
         user = authenticate(username=username, password=password)
         if user is not None:
-            serializer = PersonSerializer(get_object_or_404(user__username=username))
+            serializer = PersonSerializer(get_object_or_404(Person, user__username=username))
             return Response(serializer.data)
         else:
-            return Response({"detail":"Login Failed"})
-           
+            return Response({"detail": "Login Failed"}, status=status.HTTP_401_UNAUTHORIZED)
 
 
 class PersonViewSet(viewsets.ModelViewSet):
     queryset = Person.objects.all()
     serializer_class = PersonSerializer
-    @action(methods=['get'], detail=False)
+
+    @action(methods=["get"], detail=False)
     def search_by_name(self, request, *args, **kwargs):
-        search = request.query_params.get('search', None)
+        search = request.query_params.get("search", None)
         if search is None:
             serializer = self.get_serializer(Person.objects.all(), many=True)
             return Response(serializer.data)
@@ -75,16 +81,19 @@ class PersonViewSet(viewsets.ModelViewSet):
             serializer = self.get_serializer(queryset, many=True)
             return Response(serializer.data)
 
-    @action(methods=['get'], detail=False)
+    @action(methods=["get"], detail=False)
     def search_by_skill(self, request, *args, **kwargs):
-        search = request.query_params.get('search', None)
+        search = request.query_params.get("search", None)
         if search is None:
             serializer = self.get_serializer(Person.objects.all(), many=True)
             return Response(serializer.data)
         else:
-            queryset = [i for i in Person.objects.all() if Person.contains_skill(i, search)]
+            queryset = [
+                i for i in Person.objects.all() if Person.contains_skill(i, search)
+            ]
             serializer = self.get_serializer(queryset, many=True)
             return Response(serializer.data)
+<<<<<<< HEAD
 
     @action(methods=['get'], detail=True)
     def get_events_by_person(self,request,pk=None):
@@ -94,6 +103,21 @@ class PersonViewSet(viewsets.ModelViewSet):
 
 
 
+=======
+    @action(methods=['get'], detail=False)
+    def get_user_by_username(self, request):
+        username = request.query_params.get("username", None)
+        if username is None:
+            raise ParseError()
+        print(Person.objects.all())
+        try:
+            queryset = Person.objects.get(user__username=username)
+            serializer = self.get_serializer(queryset, many=False)
+            return Response(serializer.data)
+        except:
+            return Response({"detail":"Not found."})
+            
+>>>>>>> 8164ecaa01672d5afe3dfff574a3810a4bf8a96b
 
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
@@ -103,9 +127,10 @@ class TagViewSet(viewsets.ModelViewSet):
 class OrganizationViewSet(viewsets.ModelViewSet):
     queryset = Organization.objects.all()
     serializer_class = OrganizationSerializer
-    @action(methods=['get'], detail=False)
+
+    @action(methods=["get"], detail=False)
     def search_by_name(self, request, *args, **kwargs):
-        search = request.query_params.get('search', None)
+        search = request.query_params.get("search", None)
         if search is None:
             serializer = self.get_serializer(Organization.objects.all(), many=True)
             return Response(serializer.data)
@@ -120,17 +145,29 @@ class OrganizationViewSet(viewsets.ModelViewSet):
         serializer = PersonSerializer(people, many=True)
         return Response(serializer.data)
 
-    @action(methods=['get'], detail=True)
-    def get_events(self,request,pk=None):
+    @action(methods=["get"], detail=True)
+    def get_events(self, request, pk=None):
         events = Event.objects.filter(organization__id=pk)
         serializer = EventSerializer(events, many=True)
         return Response(serializer.data)
+
 
 class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
 
-    def list(self, request, *args, **kwargs):
+    # def list(self, request, *args, **kwargs):
+    #    search = request.query_params.get("search", None)
+    #    if search is None:
+    #        serializer = self.get_serializer(Event.objects.all(), many=True)
+    #        return Response(serializer.data)
+    #    else:
+    #        queryset = Event.objects.filter(name__contains=search)
+    #        serializer = self.get_serializer(queryset, many=True)
+    #        return Response(serializer.data)
+
+    @action(methods=["get"], detail=False)
+    def search_by_name(self, request, *args, **kwargs):
         search = request.query_params.get("search", None)
         if search is None:
             serializer = self.get_serializer(Event.objects.all(), many=True)
@@ -140,22 +177,16 @@ class EventViewSet(viewsets.ModelViewSet):
             serializer = self.get_serializer(queryset, many=True)
             return Response(serializer.data)
 
-    @action(methods=['get'], detail=False)
-    def search_by_name(self, request, *args, **kwargs):
-        search = request.query_params.get('search', None)
-        if search is None:
-            serializer = self.get_serializer(Event.objects.all(), many=True)
-            return Response(serializer.data)
-        else:
+    def list(self, request):
+        # search by name
+        search = request.query_params.get("search", None)
+        if search is not None:
             queryset = Event.objects.filter(name__contains=search)
-            serializer = self.get_serializer(queryset, many=True)
-            return Response(serializer.data)
-
-    @action(methods=["get"], detail=False)
-    def advanced_search(self, request):
-        #filter by date
-        after = request.query_params.get('after', None)
-        before = request.query_params.get('before', None)
+        else:
+            queryset = Event.objects.all()
+        # filter by date
+        after = request.query_params.get("after", None)
+        before = request.query_params.get("before", None)
         if after is not None or before is not None:
             if after is None:
                 mindate = date.min
@@ -165,25 +196,19 @@ class EventViewSet(viewsets.ModelViewSet):
                 maxdate = date.max
             else:
                 maxdate = date.fromtimestamp(int(before))
-            print(mindate)
-            print(maxdate)
-            print(Event.objects.get(pk=1).date)
-            queryset = Event.objects.filter(date__gt=mindate).filter(date__lt=maxdate)
-        else:
-            queryset = Event.objects.all()
-        print(queryset)
-        #filter by tags
+            queryset = queryset.filter(date__gt=mindate).filter(date__lt=maxdate)
+        # filter by tags
         query2 = []
-        tag_list = request.query_params.getlist('tags')
-        if len(tag_list)==0:
+        tag_list = request.query_params.getlist("tags")
+        if len(tag_list) == 0:
             query2 += queryset
         else:
             for tag in tag_list:
                 query2 += [i for i in queryset if Event.contains_tag(i, tag)]
-            
-        #finalize query
+
+        # finalize query
         query2 = list(set(query2))
-        serializer = EventSerializer(query2 , many=True)
+        serializer = EventSerializer(query2, many=True)
         return Response(serializer.data)
 
     @action(methods=["get"], detail=True)
@@ -195,6 +220,15 @@ class EventViewSet(viewsets.ModelViewSet):
         ]
         serializer = PersonSerializer(organizers, many=True)
         return Response(serializer.data)
+
+    @action(methods=["get"], detail=True)
+    def get_number_of_organizers(self, request, pk=None):
+        organizers = [
+            i
+            for i in Event.objects.get(pk=pk).organizers_volunteers.all()
+            if Person.is_organizer(i)
+        ]
+        return Response(len(organizers))
 
     @action(methods=["get"], detail=True)
     def get_volunteers(self, request, pk=None):
@@ -215,6 +249,7 @@ class EventViewSet(viewsets.ModelViewSet):
         ]
         serializer = PersonSerializer(volunteers, many=True)
         return Response(len(volunteers))
+
 
 class SkillViewSet(viewsets.ModelViewSet):
     queryset = Skill.objects.all()
