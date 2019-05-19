@@ -35,8 +35,9 @@ class UserViewSet(viewsets.ViewSet):
             raise ParseError()
         else:
             try:
-                print(f"{username} {password} {first_name} {last_name} {email}")
-                user = User.objects.create_user(username, password)
+                print(f"{username} {password}")
+                user = User.objects.create_user(username, password=password)
+                print(f"{username} {password}")
                 user.first_name = first_name
                 user.last_name = last_name
                 user.email = email
@@ -98,7 +99,6 @@ class PersonViewSet(viewsets.ModelViewSet):
         username = request.query_params.get("username", None)
         if username is None:
             raise ParseError()
-        print(Person.objects.all())
         try:
             queryset = Person.objects.get(user__username=username)
             serializer = self.get_serializer(queryset, many=False)
