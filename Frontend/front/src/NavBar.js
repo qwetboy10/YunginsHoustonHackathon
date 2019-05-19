@@ -5,13 +5,13 @@ import { MDBContainer, MDBCard, MDBCardBody, MDBCol, MDBRow,MDBCardHeader, MDBIc
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
-
 class NavBar extends Component {
     onClick() {
         alert("Moog");
     }
     render() {
-        return (<Navbar bg="light" expand="lg">
+      const {user} = this.props;
+      return (<Navbar bg="light" expand="lg">
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Brand><Nav.Link onClick={()=>this.props.history.push("/")}>Houston Volunteer Central</Nav.Link></Navbar.Brand>
         <Navbar.Collapse id="basic-navbar-nav">
@@ -26,7 +26,8 @@ class NavBar extends Component {
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
             <Button variant="primary" onClick={this.onClick.bind(this)}>Search</Button>
           </Form>
-          <MDBBtn color="orange" onClick={() => this.props.history.push("/login")}>Login</MDBBtn>
+          {user ? user.first_name
+            : <MDBBtn color="orange" onClick={() => this.props.history.push("/login")}>Login</MDBBtn>}
           
         </Navbar.Collapse>
         </Navbar>
