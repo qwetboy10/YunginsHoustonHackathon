@@ -19,7 +19,10 @@ class Login extends Component {
         const {username, password} = this.state;
         authenticateUser(
           username, password, 
-          ((data) => cookies.set("user", data.id, { path: "/"}))
+          ((data) => {
+            this.props.history.push("/profile");
+            cookies.set("user", data.id, { path: "/"});
+          })
           ,
           (() => alert("Username and password combination not recognized. Please try again."))
         );
@@ -48,7 +51,7 @@ class Login extends Component {
                  <MDBInput label="Username" value={username} onChange={(e) => this.setUsername(e.target.value)}/>
                  <MDBInput label="Password" type="password" value={password} onChange={(e) => this.setPassword(e.target.value)}/>
                  <div className="text-center mt-4">
-                   <MDBBtn color="deep-orange" className="mb-3" type="submit">
+                   <MDBBtn color="deep-orange" className="mb-3" onClick={this.onClick.bind(this)}>
                      Login
                    </MDBBtn>
                  </div>

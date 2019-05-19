@@ -5,15 +5,14 @@ import {Carousel, Card, Jumbotron, Container} from 'react-bootstrap';
 
 class Profile extends Component {
     render() {
-        return (
+        const {user} = this.props;
+        if(!user) return <div>You arent logged in</div>//TODO: make this pretty
+        return ( //TODO: add other things for user, console.log(user) for the things u can use
           <div>
             <Jumbotron fluid>
             <Container>
                 <h1>Profile</h1>
-                <h3>Profile Picture</h3>
-                <p>
-                hi
-                </p>
+                <h3>{user.first_name + " " + user.last_name}</h3>
             </Container>
             </Jumbotron>;
           </div>

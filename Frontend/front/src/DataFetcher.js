@@ -25,7 +25,9 @@ export function getSkills(loadData) {
 
 export function getPersonByID(id, loadData) {
     fetch(`${djangoIP}people/${id}/`).then(res => res.json()).then(res => {
-        loadData(res);
+        fetch(`${djangoIP}users/${res.id}/`).then(res2 => res2.json()).then(res2 =>
+            loadData({...res, ...res2})
+        );
     }).catch(logError);
 }
 
@@ -36,8 +38,30 @@ export function authenticateUser(username, password, success, failure) {
             "content-type": "application/json"
         },
         body: JSON.stringify({username, password})
-    }).then(res => {
-        if(res.ok) res.json().then(data => success(data));
+    }).then(res => res.json()).then(res => {
+        if(res.id) success(res);
         else failure();
     });
+}
+
+export function createUser(username, password, firstName, lastName, email, phoneNum, success) {
+    fetch(`${djangoIP}users/`, {
+        method: "POST",
+        headers: {
+            "content-type": "application/json"
+        },
+        body: JSON.stringify({username, password, first_name: firstName, last_name:lastName, email})
+    }).then(res => res.json()).then(res => {
+        if(res.detail) logError(res.detail);
+        else fetch(`${djangoIP}people/`, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify({user: res.id, phone: phoneNum})
+        }).then(res2 => res2.json()).then(res2 => {
+            if(res2.details) logError(res2.detail);
+            else success(res2);
+        });
+    })
 }
