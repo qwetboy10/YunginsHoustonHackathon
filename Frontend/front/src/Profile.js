@@ -50,7 +50,7 @@ class Profile extends Component {
                     <MDBCardText>Organized by: {event.organization}</MDBCardText>
                     <MDBCardText>Address: {event.address}</MDBCardText>
                     <p>
-                    <MDBBtn color="primary" onClick={() => this.props.history.push("/event/?event_id=")}>View Event</MDBBtn>
+                    <MDBBtn color="primary" onClick={() => this.props.history.push(`/event/?event_id=${event.id}`)}>View Event</MDBBtn>
                     </p>
                 </MDBCardBody>
                 </MDBCard>
