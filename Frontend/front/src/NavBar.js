@@ -1,7 +1,7 @@
 import React, {Component,Fragment} from 'react';
 import {Link} from 'react-router-dom';
 import {Nav, Navbar, NavDropdown, Form, FormControl, Button, Popover, OverlayTrigger} from 'react-bootstrap';
-import { MDBContainer, MDBCard, MDBCardBody, MDBCol, MDBRow,MDBCardHeader, MDBIcon, MDBBtn, MDBModalFooter} from "mdbreact";
+import { MDBContainer, MDBCard, MDBCardBody, MDBCol, MDBRow,MDBCardHeader, MDBIcon, MDBBtn, MDBModalFooter, MDBBadge} from "mdbreact";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
@@ -32,7 +32,7 @@ class NavBar extends Component {
             <Button variant="primary" onClick={this.onClick.bind(this)}>Search</Button>
           </Form>
           {user ? <div>
-            {"Hello, " + user.first_name + "!"}
+            <MDBBtn onClick={() => this.props.history.push("/profile")}>{"Hello, " + user.first_name + "!"}</MDBBtn>
             <MDBBtn color="orange" onClick={() => this.logout()}>Logout</MDBBtn>
           </div>
             : <MDBBtn color="orange" onClick={() => this.props.history.push("/login")}>Login</MDBBtn>}
