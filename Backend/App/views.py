@@ -35,8 +35,9 @@ class UserViewSet(viewsets.ViewSet):
             raise ParseError()
         else:
             try:
-                print(f"{username} {password} {first_name} {last_name} {email}")
-                user = User.objects.create_user(username, password)
+                print(f"{username} {password}")
+                user = User.objects.create_user(username, password=password)
+                print(f"{username} {password}")
                 user.first_name = first_name
                 user.last_name = last_name
                 user.email = email
@@ -60,10 +61,14 @@ class UserViewSet(viewsets.ViewSet):
         print(password)
         user = authenticate(username=username, password=password)
         if user is not None:
-            serializer = PersonSerializer(get_object_or_404(Person, user__username=username))
+            serializer = PersonSerializer(
+                get_object_or_404(Person, user__username=username)
+            )
             return Response(serializer.data)
         else:
-            return Response({"detail": "Login Failed"}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response(
+                {"detail": "Login Failed"}, status=status.HTTP_401_UNAUTHORIZED
+            )
 
 
 class PersonViewSet(viewsets.ModelViewSet):
@@ -100,27 +105,37 @@ class PersonViewSet(viewsets.ModelViewSet):
             serializer = self.get_serializer(queryset, many=True)
             return Response(serializer.data)
 
-    @action(methods=['get'], detail=True)
-    def get_events_by_person(self,request,pk=None):
-        queryset= queryset = [i for i in Event.objects.all() if Event.contains_person(i, pk)]
+    @action(methods=["get"], detail=True)
+    def get_events_by_person(self, request, pk=None):
+        queryset = queryset = [
+            i for i in Event.objects.all() if Event.contains_person(i, pk)
+        ]
         serializer = EventSerializer(queryset, many=True)
         return Response(serializer.data)
 
+<<<<<<< HEAD
 
 
     @action(methods=['get'], detail=False)
+=======
+    @action(methods=["get"], detail=False)
+>>>>>>> ec2e837e2339693489704131952fe7e504007aa9
     def get_user_by_username(self, request):
         username = request.query_params.get("username", None)
         if username is None:
             raise ParseError()
-        print(Person.objects.all())
         try:
             queryset = Person.objects.get(user__username=username)
             serializer = self.get_serializer(queryset, many=False)
             return Response(serializer.data)
         except:
+<<<<<<< HEAD
             return Response({"detail":"Not found."})
             
+=======
+            return Response({"detail": "Not found."})
+
+>>>>>>> ec2e837e2339693489704131952fe7e504007aa9
 
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
