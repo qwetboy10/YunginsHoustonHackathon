@@ -38,7 +38,6 @@ class Profile extends Component {
   }
     render() {
         const {loading, user, failed, notLoggedIn} = this.state;
-        console.log(this.state);
         if(failed) return <div>This user does not exist.</div>  //make this pretty
         if(notLoggedIn) return (
           <div>
@@ -75,6 +74,7 @@ class Profile extends Component {
                   <div style={{position:"absolute", top: "70px", left:"25px", height:"100%", width:"100%", font_size:"5px"}}>Change</div>
                 </div>
                 <h3>{user.first_name + " " + user.last_name}</h3>
+                <h3>Contact Information</h3>
             </Container>
             </Jumbotron>;
           </div>

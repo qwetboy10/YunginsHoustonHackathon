@@ -12,7 +12,6 @@ class EventList extends Component {
         };
     }
     componentDidMount() {
-        console.log(this.props.location.search);
         getEvents(this.props.location.search, (data) => this.setState({eventData: data}));
     }
     getEventComponent(event) { //TODO: Make this not disgusting
@@ -20,7 +19,7 @@ class EventList extends Component {
         
         <div key={event.id}>
         <br/><br/>
-        <MDBCol bottom style={{ maxWidth: "50rem" }} >
+        <MDBCol style={{ maxWidth: "50rem" }} >
                     <MDBCard wide display="inline">
                     <MDBCardImage className="view view-cascade gradient-card-header blue-gradient" cascade tag="div">
                         <h2  center="true" className="h2-responsive mb-2">{event.name}</h2>
