@@ -70,8 +70,9 @@ class Profile extends Component {
             <Jumbotron fluid>
             <Container>
                 <h1>Profile</h1>
-                <div style={{height:"100px", width:"100px", overflow:"hidden", border_radius:"100px"}}> 
-                  <img style={{height:"100px", width:"100px"}} src={asd} />
+                <div style={{height:"100px", width:"100px", overflow:"hidden", border_radius:"100px", position:"relative", text_align:"center", color:"white"}}> 
+                  <img style={{height:"100%", width:"100%"}} src={asd} />
+                  <div style={{position:"absolute", top: "70px", left:"25px", height:"100%", width:"100%", font_size:"5px"}}>Change</div>
                 </div>
                 <h3>{user.first_name + " " + user.last_name}</h3>
             </Container>
