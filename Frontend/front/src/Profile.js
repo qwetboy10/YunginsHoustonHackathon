@@ -39,6 +39,7 @@ class Profile extends Component {
     });
   }
     render() {
+
         const {loading, user, failed, notLoggedIn, events} = this.state;
         if(failed) return <div>This user does not exist.</div>  //make this pretty
         if(notLoggedIn) return (
@@ -78,6 +79,11 @@ class Profile extends Component {
                 <h3>{user.first_name + " " + user.last_name}</h3>
                 <h3>Contact Information</h3>
             </Container>
+            <MDBContainer className="event">
+                <MDBRow>
+                    {this.state.events.map(event => this.getEventComponent(event))}
+                 </MDBRow>
+             </MDBContainer>
             </Jumbotron>;
           </div>
         );
