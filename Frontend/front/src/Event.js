@@ -3,7 +3,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 
-class template extends Component {
+class Event extends Component {
     render() {
       
         return (
@@ -15,4 +15,4 @@ class template extends Component {
     }
 }
 
-export default template;
+export default Event;
