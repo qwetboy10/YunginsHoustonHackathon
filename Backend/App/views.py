@@ -57,8 +57,7 @@ class UserViewSet(viewsets.ViewSet):
             serializer = PersonSerializer(get_object_or_404(Person,user__username=username))
             return Response(serializer.data)
         else:
-            return Response({"detail":"Login Failed"})
-           
+            return Response({"detail":"Login Failed"}) 
 
 
 class PersonViewSet(viewsets.ModelViewSet):
@@ -85,6 +84,18 @@ class PersonViewSet(viewsets.ModelViewSet):
             queryset = [i for i in Person.objects.all() if Person.contains_skill(i, search)]
             serializer = self.get_serializer(queryset, many=True)
             return Response(serializer.data)
+    @action(methods=['get'], detail=False)
+    def get_user_by_username(self, request):
+        username = request.query_params.get("username", None)
+        if username is None:
+            raise ParseError()
+        print(Person.objects.all())
+        try:
+            queryset = Person.objects.get(user__username=username)
+            serializer = self.get_serializer(queryset, many=False)
+            return Response(serializer.data)
+        except:
+            return Response({"detail":"Not found."})
             
 
 class TagViewSet(viewsets.ModelViewSet):
