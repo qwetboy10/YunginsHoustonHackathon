@@ -194,7 +194,7 @@ export function createEvent(orgID, eventAddress, eventName, eventDate, eventDura
             "organization": orgID,
             "organizers_volunteers": [],
         }).then(res => {
-            if(res.ok) success(); 
+            if(res.ok) res.json().then(res2 => success(res2.id)); 
         }) 
     })
 }
