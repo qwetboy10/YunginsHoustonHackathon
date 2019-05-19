@@ -21,6 +21,7 @@ class Login extends Component {
           ((data) => {
             this.props.history.push("/profile");
             cookies.set("user", data.id, { path: "/"});
+            this.props.update();
           })
           ,
           (() => alert("Username and password combination not recognized. Please try again."))
