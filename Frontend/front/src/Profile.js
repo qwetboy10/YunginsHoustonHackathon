@@ -50,7 +50,7 @@ class Profile extends Component {
                     <MDBCardText>Organized by: {event.organization}</MDBCardText>
                     <MDBCardText>Address: {event.address}</MDBCardText>
                     <p>
-                    <MDBBtn color="primary" onClick={() => this.props.history.push("/event/?event_id=")}>View Event</MDBBtn>
+                    <MDBBtn color="primary" onClick={() => this.props.history.push(`/event/?event_id=${event.id}`)}>View Event</MDBBtn>
                     </p>
                 </MDBCardBody>
                 </MDBCard>
@@ -66,8 +66,33 @@ class Profile extends Component {
     }));
   }
     render() {
-        const {loading, loaded, user, failed, notLoggedIn, events} = this.state;
-        if(failed) return <div>This user does not exist.</div>  //make this pretty
+        const {loaded, loading, user, failed, notLoggedIn} = this.state;
+        console.log(this.state);
+        if(failed) return(
+          <div>
+            <br/>
+            <MDBContainer>
+            <MDBRow center>
+                <MDBCol bottom style={{ maxWidth: "25rem" }} >
+                    <MDBCard wide display="inline">
+                    <MDBCardImage className="view view-cascade gradient-card-header blue-gradient" cascade tag="div">
+                        <h2  center="true" className="h2-responsive mb-2">User does not exist</h2>
+                    </MDBCardImage>
+                    <MDBCardBody cascade>
+                        
+                        <p>
+                        <MDBBtn center="true" color="primary" onClick={() => this.props.history.push("/login")}>Please Click here to Login</MDBBtn>
+                        </p>
+                        
+                    </MDBCardBody>
+                    </MDBCard>
+                </MDBCol>
+                
+            </MDBRow>
+        </MDBContainer>
+          </div>
+         
+        ) 
         if(notLoggedIn) return (
           <div>
             <br/>
@@ -98,20 +123,36 @@ class Profile extends Component {
             <Jumbotron fluid>
             <Container>
                 <h1>Profile</h1>
+                <hr color="black"></hr>
+                <br/>
                 <div style={{height:"100px", width:"100px", overflow:"hidden", border_radius:"100px", position:"relative", text_align:"center", color:"white"}}> 
                   <img style={{height:"100%", width:"100%"}} src={asd} />
         {/*<a onClick = {() => }style={{position:"absolute", top: "70px", left:"25px", height:"100%", width:"100%", font_size:"5px"}}>Change</a>*/}
                 </div>
-                <h3>{user.first_name + " " + user.last_name}</h3>
-                <h3>Contact Information</h3>
+                <br/>
+                <h2 style={{textAlign:"left"}}>{user.first_name + " " + user.last_name}</h2>
+                <h5 style={{textAlign:"left"}}>{"Username: "+user.username}</h5>
+                <br/>
+                <br/>
+                
+                <h1>Contact Infromation</h1>
+                <hr color="black"></hr>
+                <br/>
+                <h5 style={{textAlign:"left"}}>{"Email: "+user.email}</h5>
+                <h5 style={{textAlign:"left"}}>{"Phone Number: "+user.phone}</h5>
+                <br/>
+                <br/>
+                
             </Container>
             <MDBContainer className="event">
-              <h3>{user.first_name + " " + user.last_name + "'s Events"}</h3>
+              <h1>{user.first_name + " " + user.last_name + "'s Events"}</h1>
+              <hr color="black"/>
                 <MDBRow>
                     {this.state.events.map(event => this.getEventComponent(event))}
                  </MDBRow>
              </MDBContainer>
             </Jumbotron>;
+            
           </div>
         );
       }

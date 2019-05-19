@@ -17,6 +17,12 @@ export function getEventsByUsername(username, loadData) {
     }, () => console.log("Error occured"));
 }
 
+export function getEventByID(id, loadData) {
+    fetch(`${djangoIP}events/${id}/`).then(res => res.json()).then(res =>
+        loadData(res)
+    );
+}
+
 export function getOrganizations(loadData) {
     fetch(`${djangoIP}organizations/`).then(res => res.json()).then(res => {
         loadData(res);
@@ -54,10 +60,10 @@ export function getPersonByUsername(username, loadData, failed) {
     });
 }
 
-export function getPersonByEvents(eventID, addPerson) {
-    fetch(`${djangoIP}/events/${eventID}/get_volunteers`).then(res => res.json()).then(res => 
+export function getPersonByEventID(eventID, addPerson) {
+    fetch(`${djangoIP}events/${eventID}/get_volunteers`).then(res => res.json()).then(res => 
         res.map(person => {
-            getUserByID(res.user, (data) => addPerson({...data, ...res}));
+            getUserByID(person.user, (data) => addPerson({...data, ...person}));
         })
     );
 }
@@ -98,7 +104,7 @@ export function createUser(username, password, firstName, lastName, email, phone
 }
 
 function unixTime(date) {
-
+    return Date.parse(date) / 1000;
 }
 
 export function searchEvents(name, history, additional = {}) {

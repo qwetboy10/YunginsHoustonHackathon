@@ -34,7 +34,6 @@ class App extends Component {
   }
   render() {
     const {user} = this.state;
-    console.log(user);
     return (
       <div>
         <NavBar {...this.props} update={this.checkCookies.bind(this)} user={user}/>
