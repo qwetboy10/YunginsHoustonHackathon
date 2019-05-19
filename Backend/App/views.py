@@ -41,7 +41,7 @@ class UserViewSet(viewsets.ViewSet):
             except:
                 raise AuthenticationFailed(detail="User already exists")
 
-    def retreive(self, request, pk=None):
+    def retrieve(self, request, pk=None):
         queryset = User.objects.all()
         user = get_object_or_404(queryset, pk=pk)
         serializer = UserSerializer(user)
