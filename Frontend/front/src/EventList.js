@@ -15,6 +15,7 @@ class EventList extends Component {
         getEvents(this.props.location.search, (data) => this.setState(prevState => ({eventData: [...prevState.eventData, data]})));
     }
     getEventComponent(event) { //TODO: Make this not disgusting
+        console.log(event);
         return (
         
         <div key={event.id}>
