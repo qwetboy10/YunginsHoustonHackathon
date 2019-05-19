@@ -12,6 +12,7 @@ class EventList extends Component {
         };
     }
     componentDidMount() {
+        console.log(this.props.location.search);
         getEvents(this.props.location.search, (data) => this.setState({eventData: data}));
     }
     getEventComponent(event) { //TODO: Make this not disgusting
