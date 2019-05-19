@@ -6,6 +6,7 @@ import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, 
 import asd from './asd.jpeg';
 import {getPersonByID, getPersonByUsername, getEventsByUsername} from './DataFetcher.js';
 import Cookies from 'universal-cookie';
+import Loading from './Loading.js';
 class Profile extends Component {
   constructor(props) {
     super(props);
@@ -58,6 +59,34 @@ class Profile extends Component {
     
     </div>
     );
+    
+}
+getOrganizationComponent(organization) { 
+console.log(organization);
+  return (
+  
+  <div key={organization.id}>
+  <br/><br/>
+  <MDBCol style={{ maxWidth: "50rem" }} >
+              <MDBCard wide display="inline">
+              <MDBCardImage className="view view-cascade gradient-card-header blue-gradient" cascade tag="div">
+                  <h2  center="true" className="h2-responsive mb-2">{organization.name}</h2>
+              </MDBCardImage>
+              <MDBCardBody cascade>
+                  <MDBCardText>Home Page: {organization.home_page}</MDBCardText>
+                  <MDBCardText>Phone Number: {organization.phone} </MDBCardText>
+                  <MDBCardText>Address: {organization.address}</MDBCardText>
+                  <MDBCardText>Karma: {organization.karma}</MDBCardText>
+                  <p>
+                  <MDBBtn color="primary" onClick={() => this.props.history.push(`/organization/${organization.id}`)}>View Organization</MDBBtn>
+                  </p>
+              </MDBCardBody>
+              </MDBCard>
+          </MDBCol>
+  
+  </div>
+  );
+  
 }
   storeData(data, key) {
     this.setState(prevState => ({
@@ -117,7 +146,7 @@ class Profile extends Component {
         </MDBContainer>
           </div>
         );
-        if(loaded != loading) return <div>Loading...</div>//make this pretty
+        if(loaded != loading) return <div><Loading/></div>//make this pretty
         return ( //TODO: add other things for user, console.log(user) for the things u can use
           <div>
             <Jumbotron fluid>
@@ -142,7 +171,12 @@ class Profile extends Component {
                 <h5 style={{textAlign:"left"}}>{"Phone Number: "+user.phone}</h5>
                 <br/>
                 <br/>
-                
+                <h1>Organization</h1>
+                <hr color="black"></hr>
+                <br/>
+                {user.organization ? this.getOrganizationComponent(user.organization) : "You aren't part of an organization yet."}
+                <br/>
+                <br/>
             </Container>
             <MDBContainer className="event">
               <h1>{user.first_name + " " + user.last_name + "'s Events"}</h1>
