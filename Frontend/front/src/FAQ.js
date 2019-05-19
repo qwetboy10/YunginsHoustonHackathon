@@ -10,6 +10,7 @@ class FAQ extends Component {
             <Jumbotron fluid>
             <Container>
                 <h1>FAQ</h1>
+                <br/>
                 <h3>Registration</h3>
                 <p>
                   Signing up for an event is simple with HVC's intuitive user interface. Just input your skills and<br></br> interests, and HVC will allow an event organizer to

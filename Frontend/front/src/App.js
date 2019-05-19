@@ -8,6 +8,7 @@ import FAQ from './FAQ.js';
 import Contact from './Contact.js';
 import Rankings from './Rankings.js';
 import Login from './Login.js';
+import Signup from './signup.js';
 import Cookies from 'universal-cookie';
 import { getPersonByID } from './DataFetcher.js';
 class App extends Component {
@@ -39,6 +40,7 @@ class App extends Component {
             <Route path='/rankings' component={Rankings} />
             <Route path='/profile' component={(props) => <Profile user={user}/>} />
             <Route path='/login' component={(props) => <Login {...props} update={this.checkCookies.bind(this)}/>} />
+            <Route path='/signup' component={Signup} />
             <Route path='/' component={Home} />
             
           </Switch>

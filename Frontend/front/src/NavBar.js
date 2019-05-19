@@ -5,9 +5,14 @@ import { MDBContainer, MDBCard, MDBCardBody, MDBCol, MDBRow,MDBCardHeader, MDBIc
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
+import Cookies from "universal-cookie";
 class NavBar extends Component {
+    logout() {
+        new Cookies().remove("user");
+        this.props.update();
+    }
     onClick() {
-        alert("Moog");
+      alert("Moog");
     }
     render() {
       const {user} = this.props;
@@ -26,7 +31,10 @@ class NavBar extends Component {
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
             <Button variant="primary" onClick={this.onClick.bind(this)}>Search</Button>
           </Form>
-          {user ? user.first_name
+          {user ? <div>
+            {"Hello, " + user.first_name + "!"}
+            <MDBBtn color="orange" onClick={() => this.logout()}>Logout</MDBBtn>
+          </div>
             : <MDBBtn color="orange" onClick={() => this.props.history.push("/login")}>Login</MDBBtn>}
           
         </Navbar.Collapse>

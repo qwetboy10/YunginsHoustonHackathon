@@ -5,6 +5,7 @@ import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import Cookies from 'universal-cookie';
 import { authenticateUser } from './DataFetcher.js';
+import './Login.css';
 class Login extends Component {
     constructor(props) {
       super(props);
@@ -21,6 +22,7 @@ class Login extends Component {
           ((data) => {
             this.props.history.push("/profile");
             cookies.set("user", data.id, { path: "/"});
+            this.props.update();
           })
           ,
           (() => alert("Username and password combination not recognized. Please try again."))
@@ -36,8 +38,9 @@ class Login extends Component {
         const {username, password} = this.state;
         return (
           <div>
+            <br/><br/>
         <MDBContainer>
-         <MDBRow>
+         <MDBRow center>
            <MDBCol md="6">
              <MDBCard>
                <MDBCardBody>
@@ -62,6 +65,8 @@ class Login extends Component {
                </MDBCardBody>
              </MDBCard>
            </MDBCol>
+           
+           
          </MDBRow>
         </MDBContainer>
         </div>

@@ -41,7 +41,7 @@ class UserViewSet(viewsets.ViewSet):
             except:
                 raise AuthenticationFailed(detail="User already exists")
 
-    def retreive(self, request, pk=None):
+    def retrieve(self, request, pk=None):
         queryset = User.objects.all()
         user = get_object_or_404(queryset, pk=pk)
         serializer = UserSerializer(user)
@@ -54,7 +54,7 @@ class UserViewSet(viewsets.ViewSet):
         password = request.data['password']
         user = authenticate(username=username, password=password)
         if user is not None:
-            serializer = PersonSerializer(get_object_or_404(user__username=username))
+            serializer = PersonSerializer(get_object_or_404(Person,user__username=username))
             return Response(serializer.data)
         else:
             return Response({"detail":"Login Failed"})
@@ -187,6 +187,16 @@ class EventViewSet(viewsets.ModelViewSet):
         ]
         serializer = PersonSerializer(organizers, many=True)
         return Response(serializer.data)
+
+    @action(methods=["get"], detail=True)
+    def get_number_of_organizers(self, request, pk=None):
+        organizers = [
+            i
+            for i in Event.objects.get(pk=pk).organizers_volunteers.all()
+            if Person.is_organizer(i)
+        ]
+        return Response(len(organizers))
+
 
     @action(methods=["get"], detail=True)
     def get_volunteers(self, request, pk=None):
