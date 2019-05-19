@@ -68,7 +68,7 @@ class Home extends Component {
                 alt="First slide"
                 />
             </Container>
-            </Jumbotron>;
+            </Jumbotron>
 
             <Jumbotron fluid style={{backgroundColor:'#66c3ff'}}>
             <Container>
@@ -124,7 +124,22 @@ class Home extends Component {
                 </p>
 
             </Container>
-            </Jumbotron>;
+            </Jumbotron>
+
+            <Card>
+            <Card.Header>Quote</Card.Header>
+            <Card.Body>
+                <blockquote className="blockquote mb-0">
+                <p style={{fontSize:30}}>
+                    {' '}
+                    You make a living by what you get. You make a life by what you give.{' '}
+                </p>
+                <footer className="blockquote-footer">
+                    Winston Churchill
+                </footer>
+                </blockquote>
+            </Card.Body>
+            </Card>
 
             <Jumbotron fluid style={{backgroundColor:'#ffbf66'}}>
             <Container>
@@ -172,9 +187,19 @@ class Home extends Component {
                 </Container>
 
             </Container>
-            </Jumbotron>;
+            </Jumbotron>
 
-            <Footer />;
+            <Card className="text-center">
+            <Card.Body>
+                <Card.Title style={{fontSize:30}}>What are you waiting for?</Card.Title>
+                <Card.Text style={{fontSize:20}}>
+                Join us and 200,000+ other registered volunteers to help make a difference today!
+                </Card.Text>
+                <Button variant="primary" style={{fontSize:25}}>SIGN ME UP!</Button>
+            </Card.Body>
+            </Card>
+
+            <Footer />
 
           </div>
         );
