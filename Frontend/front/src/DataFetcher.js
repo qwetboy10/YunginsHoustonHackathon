@@ -1,4 +1,4 @@
-const djangoIP = 'http://localhost:8000/api/';
+const djangoIP = 'http://192.168.1.203:8000/api/';
 
 function logError(err) {
     console.log("There was an error when fetching! Exact error below:");
