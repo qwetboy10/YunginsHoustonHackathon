@@ -223,7 +223,7 @@ class EventViewSet(viewsets.ModelViewSet):
     def get_organizers(self, request, pk=None):
         organizers = [
             i
-            for i in Event.objects.get(pk=pk).organizers_volunteers.all()
+            for i in get_object_or_404(Event,pk=pk).organizers_volunteers.all()
             if Person.is_organizer(i)
         ]
         serializer = PersonSerializer(organizers, many=True)
@@ -233,7 +233,7 @@ class EventViewSet(viewsets.ModelViewSet):
     def get_number_of_organizers(self, request, pk=None):
         organizers = [
             i
-            for i in Event.objects.get(pk=pk).organizers_volunteers.all()
+            for i in get_object_or_404(Event,pk=pk).organizers_volunteers.all()
             if Person.is_organizer(i)
         ]
         return Response(len(organizers))
@@ -242,7 +242,7 @@ class EventViewSet(viewsets.ModelViewSet):
     def get_volunteers(self, request, pk=None):
         volunteers = [
             i
-            for i in Event.objects.get(pk=pk).organizers_volunteers.all()
+            for i in get_object_or_404(Event,pk=pk).organizers_volunteers.all()
             if Person.is_volunteer(i)
         ]
         serializer = PersonSerializer(volunteers, many=True)
@@ -252,7 +252,7 @@ class EventViewSet(viewsets.ModelViewSet):
     def get_number_of_volunteers(self, request, pk=None):
         volunteers = [
             i
-            for i in Event.objects.get(pk=pk).organizers_volunteers.all()
+            for i in get_object_or_404(Event,pk=pk).organizers_volunteers.all()
             if Person.is_volunteer(i)
         ]
         serializer = PersonSerializer(volunteers, many=True)
