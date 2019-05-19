@@ -34,6 +34,31 @@ class Profile extends Component {
     }
 
   }
+  getEventComponent(event) { //TODO: Make this not disgusting
+    return (
+    
+    <div key={event.id}>
+    <br/><br/>
+    <MDBCol style={{ maxWidth: "50rem" }} >
+                <MDBCard wide display="inline">
+                <MDBCardImage className="view view-cascade gradient-card-header blue-gradient" cascade tag="div">
+                    <h2  center="true" className="h2-responsive mb-2">{event.name}</h2>
+                    <p className=""> <MDBIcon icon="calendar-alt" /> {event.date}</p>
+                </MDBCardImage>
+                <MDBCardBody cascade>
+                    <MDBCardText>{event.description}</MDBCardText>
+                    <MDBCardText>Organized by: {event.organization}</MDBCardText>
+                    <MDBCardText>Address: {event.address}</MDBCardText>
+                    <p>
+                    <MDBBtn color="primary" onClick={() => this.props.history.push("/event/?event_id=")}>View Event</MDBBtn>
+                    </p>
+                </MDBCardBody>
+                </MDBCard>
+            </MDBCol>
+    
+    </div>
+    );
+}
   storeData(data, key) {
     this.setState(prevState => ({
       loaded: prevState.loaded+1,
@@ -117,6 +142,12 @@ class Profile extends Component {
                 <h5 style={{textAlign:"left"}}>{"Phone Number: "+user.phone}</h5>
                 
             </Container>
+            <MDBContainer className="event">
+              <h3>{user.first_name + " " + user.last_name + "'s Events"}</h3>
+                <MDBRow>
+                    {this.state.events.map(event => this.getEventComponent(event))}
+                 </MDBRow>
+             </MDBContainer>
             </Jumbotron>;
             
           </div>
