@@ -21,10 +21,13 @@ class App extends Component {
   componentDidMount() {
     this.checkCookies();
   }
-  checkCookies() {
+  checkCookies(callback) {
     const cookie = new Cookies();
     const userID = cookie.get("user");
-    if(userID !== undefined) getPersonByID(cookie.get("user"), (data) => this.setState({user: data}));
+    if(userID !== undefined) getPersonByID(cookie.get("user"), (data) => {
+      this.setState({user: data});
+      if(callback) callback();
+    });
     else this.setState({user: null});
   }
   render() {
