@@ -53,9 +53,9 @@ class Rankings extends Component {
                 <tbody>
                   {data.map(this.mapToComponent)}
                 </tbody>
-              </Table>;
+              </Table>
             </Container>
-            </Jumbotron>;
+            </Jumbotron>
           </div>
         );
       }
