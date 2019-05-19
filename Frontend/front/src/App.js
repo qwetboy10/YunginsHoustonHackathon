@@ -16,7 +16,6 @@ import CreateEvent from './CreateEvent.js';
 import { getPersonByID } from './DataFetcher.js';
 import OrganizationSignUp from './OrganizationSignUp.js';
 import OrganizationPage from './OrganizationPage.js';
-import CreateEvent from './CreateEvent.js';
 class App extends Component {
   constructor(props) {
     super(props);
