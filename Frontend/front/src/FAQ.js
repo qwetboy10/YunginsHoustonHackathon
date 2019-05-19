@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import NavBar from './NavBar.js';
 import Login from './Login.js';
 import {Carousel, Card, Jumbotron, Container} from 'react-bootstrap';
+import GoogleMapReact from 'google-map-react';
+import Map from './Map.js';
 
 class FAQ extends Component {
     render() {
@@ -26,6 +28,7 @@ class FAQ extends Component {
                   Our website is maintained fully by students who have large amounts of experience with web <br></br>developmentand coding. Since HVC is a non profit organization,
                   our staff volunteers their time to <br></br>make sure every event is as high quality as possible.
                 </p>
+                <Map />
             </Container>
             </Jumbotron>;
           </div>

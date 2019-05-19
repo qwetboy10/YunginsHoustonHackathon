@@ -34,19 +34,18 @@ class App extends Component {
   }
   render() {
     const {user} = this.state;
-    console.log(user);
     return (
       <div>
         <NavBar {...this.props} update={this.checkCookies.bind(this)} user={user}/>
           <Switch>
-            <Route path='/events' component={EventList}/>
+            <Route path='/events' component={(props) => <EventList {...props}/>}/>
             <Route path='/faq' component={FAQ}/>
             <Route path='/contact' component={Contact} />
             <Route path='/rankings' component={Rankings} />
             <Route path='/profile' component={(props) => <Profile {...props} user={user}/>} />
             <Route path='/login' component={(props) => <Login {...props} update={this.checkCookies.bind(this)}/>} />
             <Route path='/signup' component={Signup} />
-            <Route path='/search' component = {Search} />
+            <Route path='/search' component = {(props) => <Search {...props}/>} />
             <Route path='/event' component={(props) => <Event {...props} />} />
             <Route path='/' component={Home} />
           </Switch>
