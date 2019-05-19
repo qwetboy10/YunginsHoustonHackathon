@@ -35,11 +35,14 @@ class UserViewSet(viewsets.ViewSet):
             raise ParseError()
         else:
             try:
+                print(f"{username} {password} {first_name} {last_name} {email}")
                 user = User.objects.create_user(username, password)
                 user.first_name = first_name
                 user.last_name = last_name
                 user.email = email
                 user.save()
+                serializer = UserSerializer(user)
+                return Response(serializer.data)
             except:
                 raise AuthenticationFailed(detail="User already exists")
 
@@ -51,17 +54,16 @@ class UserViewSet(viewsets.ViewSet):
 
     @action(methods=["post"], detail=False)
     def login(self, request, pk=None):
-        print(request.data)
         username = request.data["username"]
         password = request.data["password"]
+        print(username)
+        print(password)
         user = authenticate(username=username, password=password)
         if user is not None:
-            serializer = PersonSerializer(
-                get_object_or_404(Person, user__username=username)
-            )
+            serializer = PersonSerializer(get_object_or_404(Person, user__username=username))
             return Response(serializer.data)
         else:
-            return Response({"detail": "Login Failed"})
+            return Response({"detail": "Login Failed"}, status=status.HTTP_401_UNAUTHORIZED)
 
 
 class PersonViewSet(viewsets.ModelViewSet):
