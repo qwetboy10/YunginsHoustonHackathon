@@ -61,7 +61,11 @@ class UserViewSet(viewsets.ViewSet):
             )
             return Response(serializer.data)
         else:
+<<<<<<< HEAD
+            return Response({"detail":"Login Failed"}) 
+=======
             return Response({"detail": "Login Failed"})
+>>>>>>> f0a379fddf23e25f4ad4534000843294e2002d54
 
 
 class PersonViewSet(viewsets.ModelViewSet):
@@ -91,6 +95,7 @@ class PersonViewSet(viewsets.ModelViewSet):
             ]
             serializer = self.get_serializer(queryset, many=True)
             return Response(serializer.data)
+<<<<<<< HEAD
     @action(methods=['get'], detail=False)
     def get_user_by_username(self, request):
         username = request.query_params.get("username", None)
@@ -104,6 +109,9 @@ class PersonViewSet(viewsets.ModelViewSet):
         except:
             return Response({"detail":"Not found."})
             
+=======
+
+>>>>>>> f0a379fddf23e25f4ad4534000843294e2002d54
 
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
