@@ -39,7 +39,31 @@ class Profile extends Component {
     render() {
         const {loading, user, failed, notLoggedIn} = this.state;
         console.log(this.state);
-        if(failed) return <div>This user does not exist.</div>  //make this pretty
+        if(failed) return(
+          <div>
+            <br/>
+            <MDBContainer>
+            <MDBRow center>
+                <MDBCol bottom style={{ maxWidth: "25rem" }} >
+                    <MDBCard wide display="inline">
+                    <MDBCardImage className="view view-cascade gradient-card-header blue-gradient" cascade tag="div">
+                        <h2  center="true" className="h2-responsive mb-2">User does not exist</h2>
+                    </MDBCardImage>
+                    <MDBCardBody cascade>
+                        
+                        <p>
+                        <MDBBtn center="true" color="primary" onClick={() => this.props.history.push("/login")}>Please Click here to Login</MDBBtn>
+                        </p>
+                        
+                    </MDBCardBody>
+                    </MDBCard>
+                </MDBCol>
+                
+            </MDBRow>
+        </MDBContainer>
+          </div>
+         
+        ) 
         if(notLoggedIn) return (
           <div>
             <br/>
