@@ -48,7 +48,7 @@ class Search extends Component {
                 </Form>
             </Container>
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-            <MDBBtn onClick={() => (searchEvents(name, this.props.history, {after: date, sort: sort}))}>Submit</MDBBtn>
+            <div class="text-center"> <button onClick={() => (searchEvents(name, this.props.history, {after: date, sort: sort}))} type="button" class="btn btn-primary">Submit</button> </div>
             </Jumbotron>
           </div>
         );
