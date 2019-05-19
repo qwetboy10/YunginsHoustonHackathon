@@ -3,7 +3,7 @@ import NavBar from './NavBar.js';
 import Login from './Login.js';
 import {Carousel, Card, Jumbotron, Container} from 'react-bootstrap';
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBRow, MDBCol, MDBIcon, MDBContainer } from 'mdbreact';
-
+import asd from './asd.jpeg';
 class Profile extends Component {
     render() {
         const {user} = this.props;
@@ -36,6 +36,9 @@ class Profile extends Component {
             <Jumbotron fluid>
             <Container>
                 <h1>Profile</h1>
+                <div style={{height:"100px", width:"100px", overflow:"hidden", border_radius:"100px"}}> 
+                  <img style={{height:"100px", width:"100px"}} src={asd} />
+                </div>
                 <h3>{user.first_name + " " + user.last_name}</h3>
             </Container>
             </Jumbotron>;
