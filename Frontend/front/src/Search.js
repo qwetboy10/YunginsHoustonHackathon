@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 import NavBar from './NavBar.js';
 import Login from './Login.js';
 import {Carousel, Card, Jumbotron, Container, Form} from 'react-bootstrap';
-
-
-
+import Datetime from 'react-datetime';
+import './react-datetime.css';
 class Search extends Component {
-
-    getPickerValue = (value) => {console.log(value);}
+  
     render() {
+      var today = new Date();
+    var lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
         return (
           <div>
             <Jumbotron fluid>
@@ -16,7 +16,7 @@ class Search extends Component {
                 <h1>Search</h1>
                 <Form>
                 <Form.Group controlId="exampleForm.ControlInput1">
-                    <Form.Control type="keyWords" placeholder="key words" />
+                    <Form.Control type="keyWords" placeholder="Key Words" />
                 </Form.Group>
                 <Form.Group controlId="exampleForm.ControlSelect1">
                     <Form.Label>Sort by</Form.Label>
@@ -28,9 +28,10 @@ class Search extends Component {
                     <option>Openings</option>
                     </Form.Control>
                 </Form.Group>
-
+                <Datetime/>
                 </Form>
             </Container>
+            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
             </Jumbotron>
           </div>
         );
