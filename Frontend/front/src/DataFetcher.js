@@ -5,8 +5,8 @@ function logError(err) {
     console.log(err);
 }
 
-export function getEvents(loadData) {
-    fetch(`${djangoIP}events/`).then(res => res.json()).then(res => {
+export function getEvents(url, loadData) {
+    fetch(`${djangoIP}events/${url}`).then(res => res.json()).then(res => {
         loadData(res);
     }).catch(logError);
 }
@@ -71,13 +71,9 @@ function unixTime(date) {
 }
 
 export function searchEvents(name, additional = {}) {
-    var url = `${djangoIP}/events?search=${encodeURI(name)}`;
+    var url = `?search=${encodeURI(name)}`;
     if(additional.before) url += `&&before=${unixTime(additional.before)}`;
     if(additional.after) url += `&&after=${unixTime(additional.after)}`;
     if(additional.tags) url += `&&tags=${additional.tags.join("&&tags=")}`;
-
-}
-
-export function searchEventsAdvanced() {
-    
+    return url;
 }
