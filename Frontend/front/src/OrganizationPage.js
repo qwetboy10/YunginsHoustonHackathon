@@ -4,8 +4,20 @@ import Login from './Login.js';
 import asd from './asd.jpeg';
 import {Carousel, Card, Jumbotron, Container} from 'react-bootstrap';
 import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
+import { getOrganizationByID } from './DataFetcher.js';
 
 class OrganizationPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true,
+      org: null
+    };
+  }
+  componentDidMount() {
+    var orgID = this.props.location.pathname.substring(14);
+    getOrganizationByID(orgID, data => this.setState({org: data, loading: false}));
+  }
     render() {
       const {org} = this.state;
         return (

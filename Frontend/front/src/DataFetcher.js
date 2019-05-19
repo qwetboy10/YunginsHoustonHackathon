@@ -50,6 +50,7 @@ export function getPersonByID(id, loadData) {
     fetch(`${djangoIP}people/${id}/`).then(res => res.json()).then(res => {
         if(res.details) logError(res.details);
         else getUserByID(res.user, (data) => {
+            console.log(res);
             getOrganizationByID(res.organization, (org) => loadData({...data, ...res, organization: org}))
         });
     }).catch(logError);
