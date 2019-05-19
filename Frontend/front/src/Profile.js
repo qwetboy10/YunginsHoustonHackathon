@@ -73,6 +73,7 @@ class Profile extends Component {
                   <img style={{height:"100px", width:"100px"}} src={asd} />
                 </div>
                 <h3>{user.first_name + " " + user.last_name}</h3>
+                <h3>Contact Information</h3>
             </Container>
             </Jumbotron>;
           </div>

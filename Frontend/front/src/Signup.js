@@ -50,7 +50,6 @@ class Signup extends Component {
                           <form>
                               <p className="h4 text-center py-4">Sign up</p>
                               <div className="grey-text">
-                              <MDBRow>
                                 <MDBInput
                                     label="First Name"
                                     icon="user"
@@ -62,16 +61,16 @@ class Signup extends Component {
                                 />
                                 <MDBInput
                                     label="Last Name"
+                                    icon="angle-right"
                                     group
                                     type="text"
                                     validate
                                     value={lastName}
                                     onChange={(e) => this.onChange("lastName", e.target.value)}
                                 />
-                              </MDBRow>
                              
                               <MDBInput
-                                  label="Your email"
+                                  label="Email"
                                   icon="envelope"
                                   group
                                   type="email"
@@ -80,19 +79,19 @@ class Signup extends Component {
                                   onChange={(e) => this.onChange("email", e.target.value)}
                               />
                               <MDBInput
-                                  label="Your Phone Number"
+                                  label="Phone Number"
                                   icon="phone"
                                   group
-                                  type="phone"
+                                  type="text"
                                   validate
                                   value={phoneNum}
                                   onChange={(e) => this.onChange("phoneNum", e.target.value)}
                               />
                                <MDBInput
-                                  label="Your Username"
-                                  icon="envelope"
+                                  label="Username"
+                                  icon="user-circle"
                                   group
-                                  type="username"
+                                  type="text"
                                   validate
                                   value={username}
                                   onChange={(e) => this.onChange("username", e.target.value)}
