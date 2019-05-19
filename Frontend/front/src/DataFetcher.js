@@ -5,22 +5,28 @@ function logError(err) {
     console.log(err);
 }
 
-export function getEvents(url, loadData) {
+export function getEvents(url, addEvent) {
     fetch(`${djangoIP}events/${url}`).then(res => res.json()).then(res => {
-        loadData(res);
+        res.map(event => getOrganizationByID(event.organization, (data) => addEvent({...event, organization: data.name})));
     }).catch(logError);
 }
 
-export function getEventsByUsername(username, loadData) {
+export function getEventsByUsername(username, addEvent) {
     getPersonByUsername(username, (data) => {
-        fetch(`${djangoIP}people/${data.id}/events/`).then(res => res.json()).then(loadData)
+        fetch(`${djangoIP}people/${data.id}/events/`).then(res => res.json()).then(res => {
+            res.map(event => getOrganizationByID(event.organization, (data) => addEvent({...event, organization: data.name})));  
+        })
     }, () => console.log("Error occured"));
 }
 
+export function getOrganizationByID(id, loadData) {
+    fetch(`${djangoIP}organizations/${id}/`).then(res => res.json()).then(loadData);
+}
+
 export function getEventByID(id, loadData) {
-    fetch(`${djangoIP}events/${id}/`).then(res => res.json()).then(res =>
-        loadData(res)
-    );
+    fetch(`${djangoIP}events/${id}/`).then(res => res.json()).then(res => {
+        getOrganizationByID(res.id, (data) => loadData({...res, organization: data.name}));
+    });
 }
 
 export function getOrganizations(loadData) {

@@ -85,27 +85,19 @@ class Event extends Component {
           <div>
             <Jumbotron>
             <MDBRow>
-                <MDBCol style={{ maxWidth: "40rem" }}>
-                    <MDBCard reverse>
+                <MDBCol col={10}>
                     <MDBCardImage cascade style={{ width: '40rem' }} src={stockeventpic} />
                     <MDBCardBody cascade className="text-center">
-                        <MDBCardTitle>My adventure</MDBCardTitle>
-                        <h5 className="indigo-text"><strong>Event Name</strong></h5>
-                        <MDBCardText>Full Description</MDBCardText>
-                        <a href="#!" className="icons-sm li-ic ml-1">
-                        <MDBIcon fab icon="linkedin-in" /></a>
-                        <a href="#!" className="icons-sm tw-ic ml-1">
-                        <MDBIcon fab icon="twitter" /></a>
-                        <a href="#!" className="icons-sm fb-ic ml-1">
-                        <MDBIcon fab icon="facebook-f" /></a>
+                        <MDBCardTitle>{event.name}</MDBCardTitle>
+                        <h5 className="indigo-text"><strong>{event.organization}</strong></h5>
+                        <MDBCardText>{event.description}</MDBCardText>
+                        {//TODO: make this not ass
+                          notLoggedIn ? <MDBBtn onClick={this.goToLogin.bind(this)}>Log in to do thingys</MDBBtn> :
+                          people.filter(person => person === user.id).length > 0 ? <MDBBtn onClick={this.unSignUp.bind(this)}>Unsign up</MDBBtn> 
+                          : <MDBBtn onClick={this.signUp.bind(this)}>Sign up</MDBBtn>
+                        }
                     </MDBCardBody>
-                    </MDBCard>
                 </MDBCol>
-            {//TODO: make this not ass
-              notLoggedIn ? <MDBBtn onClick={this.goToLogin.bind(this)}>Log in to do thingys</MDBBtn> :
-              people.filter(person => person === user.id).length > 0 ? <MDBBtn onClick={this.unSignUp.bind(this)}>Unsign up</MDBBtn> 
-              : <MDBBtn onClick={this.signUp.bind(this)}>Sign up</MDBBtn>
-            }
             </MDBRow>
             </Jumbotron>
         </div>

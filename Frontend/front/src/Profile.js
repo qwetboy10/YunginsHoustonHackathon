@@ -13,7 +13,7 @@ class Profile extends Component {
       loading: 1,
       loaded: 0,
       user: null,
-      events: null,
+      events: [],
       failed: false,
       notLoggedIn: false
     };
@@ -24,13 +24,13 @@ class Profile extends Component {
       var id = new Cookies().get("user");
       if(id === undefined) this.setState({notLoggedIn: true});
       else {
-        this.setState({loading: 1});
+        this.setState({loaded: 0});
         getPersonByID(id, data => this.props.history.push(`/profile/${data.username}`));
       }
     } else {
-      this.setState({loading: 2});
+      this.setState({loaded: 0});
       getPersonByUsername(this.props.location.pathname.substring(9), (data) => this.storeData(data, 'user'), () => this.setState({failed: true}));
-      getEventsByUsername(this.props.location.pathname.substring(9), (data) => this.storeData(data, 'events'), () => this.setState({failed: true}));
+      getEventsByUsername(this.props.location.pathname.substring(9), (data) => this.setState(prevState => ({events: [...prevState.events, data]})), () => this.setState({failed: true}));
     }
 
   }
