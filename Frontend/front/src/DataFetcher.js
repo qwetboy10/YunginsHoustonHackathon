@@ -25,7 +25,8 @@ export function getSkills(loadData) {
 
 export function getPersonByID(id, loadData) {
     fetch(`${djangoIP}people/${id}/`).then(res => res.json()).then(res => {
-        fetch(`${djangoIP}users/${res.user}/`).then(res2 => res2.json()).then(res2 =>
+        if(res.details) logError(res.details);
+        else fetch(`${djangoIP}users/${res.user}/`).then(res2 => res2.json()).then(res2 =>
             loadData({...res, ...res2})
         );
     }).catch(logError);
@@ -34,7 +35,8 @@ export function getPersonByUsername(username, loadData, failed) {
     fetch(`${djangoIP}people/get_user_by_username/?username=${username}`).then(res => {
         if(res.ok) 
             res.json().then(res => {
-            fetch(`${djangoIP}users/${res.user}/`).then(res2 => res2.json()).then(res2 =>
+                if(res.details) logError(res.details);
+                else fetch(`${djangoIP}users/${res.user}/`).then(res2 => res2.json()).then(res2 =>
                 loadData({...res, ...res2})
             );
         });
@@ -82,7 +84,7 @@ export function createUser(username, password, firstName, lastName, email, phone
 }
 
 function unixTime(date) {
-    
+
 }
 
 export function searchEvents(name, additional = {}) {
