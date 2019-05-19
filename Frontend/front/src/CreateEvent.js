@@ -10,17 +10,29 @@ import Cookies from 'universal-cookie';
 class CreateEvent extends Component {
     constructor(props) {
         super(props);
-        this.state = {orgID: null};
+        this.state = {orgID: null,
+             eventAddress: null, 
+             eventName: null, 
+             eventDate: null, 
+             eventDuration: null, 
+             eventBlurb: null, 
+             eventDesc: null };
     }
     componentDidMount() {
-        getPersonByID(new Cookies().get("user"), (data) => getOrganizationByID(data.organization, (org) => this.setState({orgID : org.id})));
+        getPersonByID(new Cookies().get("user"), (data) =>  {
+            this.setState({orgID : data.organization.id})});
     }
     onClick() {
         const {orgID, eventAddress, eventName, eventDate, eventDuration, eventBlurb, eventDesc } = this.state;
-        createEvent(orgID,eventAddress, eventName, eventDate, eventDuration, eventBlurb, eventDesc, (id) => this.props.history.push('/event/?=event_id=' + id));
+        createEvent(orgID,eventAddress, eventName, eventDate, eventDuration, eventBlurb, eventDesc, (id) => this.props.history.push('/event/?event_id=' + id));
+    }
+    onChange(value, key) {
+        this.setState({
+            [key]: value
+        });
     }
     render() {
-      
+        const {eventAddress, eventName, eventDate, eventDuration, eventBlurb, eventDesc } = this.state;
         return (
           <div>
             <MDBContainer>
@@ -37,7 +49,8 @@ class CreateEvent extends Component {
                                     group
                                     type="text"
                                     validate
-                                    value=""
+                                    value={eventName}
+                                    onChange={(e) => this.onChange(e.target.value, "eventName")}
                                 />
                                 <MDBInput
                                     label="Location"
@@ -45,7 +58,8 @@ class CreateEvent extends Component {
                                     group
                                     type="text"
                                     validate
-                                    value=""
+                                    value={eventAddress}
+                                    onChange={(e) => this.onChange(e.target.value, "eventAddress")}
                                 />
                              
                               <MDBInput
@@ -54,7 +68,8 @@ class CreateEvent extends Component {
                                   group
                                   type="email"
                                   validate
-                                  value=""
+                                  value={eventDate}
+                                  onChange={(e) => this.onChange(e.target.value, "eventDate")}
                               />
                               <MDBInput
                                   label="Duration"
@@ -62,7 +77,8 @@ class CreateEvent extends Component {
                                   group
                                   type="text"
                                   validate
-                                  value=""
+                                  value={eventDuration}
+                                  onChange={(e) => this.onChange(e.target.value, "eventDuration")}
                               />
                                <MDBInput
                                   label="Blurb"
@@ -70,21 +86,23 @@ class CreateEvent extends Component {
                                   group
                                   type="text"
                                   validate
-                                  value=""
+                                  value={eventBlurb}
+                                  onChange={(e) => this.onChange(e.target.value, "eventBlurb")}
                               />
                               <MDBInput
                                   label="Description"
                                   icon="pencil-alt"
                                   group
                                   validate
-                                  value=""
+                                  value={eventDesc}
+                                  onChange={(e) => this.onChange(e.target.value, "eventDesc")}
                                   type="textarea"
                                   rows="5"
 
                               />
                               </div>
                               <div className="text-center py-4 mt-3">
-                              <MDBBtn color="orange">
+                              <MDBBtn color="orange" onClick={() => this.onClick()}>
                                   Register
                               </MDBBtn>
                               </div>

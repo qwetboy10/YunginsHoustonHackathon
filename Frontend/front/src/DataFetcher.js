@@ -50,7 +50,6 @@ export function getPersonByID(id, loadData) {
     fetch(`${djangoIP}people/${id}/`).then(res => res.json()).then(res => {
         if(res.details) logError(res.details);
         else getUserByID(res.user, (data) => {
-            console.log(res);
             getOrganizationByID(res.organization, (org) => loadData({...data, ...res, organization: org}))
         });
     }).catch(logError);
@@ -193,10 +192,9 @@ export function createEvent(orgID, eventAddress, eventName, eventDate, eventDura
             "description": eventDesc,
             "organization": orgID,
             "organizers_volunteers": [],
-        }).then(res => {
-            if(res.ok) res.json().then(res2 => success(res2.id)); 
-        }) 
-    })
+    })}).then(res => {
+        if(res.ok) res.json().then(res2 => success(res2.id)); 
+    }) 
 }
 export function deleteEvent(eventID, success) {
     fetch(`${djangoIP}events/${eventID}/`, {
