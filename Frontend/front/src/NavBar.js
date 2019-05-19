@@ -6,16 +6,29 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import Cookies from "universal-cookie";
+import { searchEvents } from './DataFetcher.js';
 class NavBar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchQuery: ""
+    }
+  }
     logout() {
         new Cookies().remove("user");
         this.props.update();
     }
     onClick() {
-      alert("Moog");
+      this.props.history.push(`events/${searchEvents(this.state.searchQuery)}`);
+    }
+    onChange(s) {
+      this.setState({
+        searchQuery: s
+      });
     }
     render() {
       const {user} = this.props;
+      const {searchQuery} = this.state;
       return (<Navbar bg="white" expand="lg" sticky="top">
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Brand><Nav.Link onClick={()=>this.props.history.push("/")}>Houston Volunteer Central</Nav.Link></Navbar.Brand>
@@ -28,7 +41,7 @@ class NavBar extends Component {
             ))}
           </Nav>
           <Form inline>
-            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+            <FormControl type="text" placeholder="Search" className="mr-sm-2" value={searchQuery} onChange={(e) => this.onChange(e.target.value)}/>
             <Button variant="primary" onClick={this.onClick.bind(this)}>Search</Button>
           </Form>
           {user ? <div>
