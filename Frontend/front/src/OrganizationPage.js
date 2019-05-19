@@ -5,7 +5,7 @@ import asd from './asd.jpeg';
 import {Carousel, Card, Jumbotron, Container} from 'react-bootstrap';
 import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
 import { getOrganizationByID } from './DataFetcher.js';
-
+import Loading from './Loading.js';
 class OrganizationPage extends Component {
   constructor(props) {
     super(props);
@@ -15,11 +15,13 @@ class OrganizationPage extends Component {
     };
   }
   componentDidMount() {
+    this.setState({loading: true, org: null});
     var orgID = this.props.location.pathname.substring(14);
     getOrganizationByID(orgID, data => this.setState({org: data, loading: false}));
   }
     render() {
-      const {org} = this.state;
+      const {loading, org} = this.state;
+      if(loading) return <Loading/>;
         return (
           <div>
             <Jumbotron fluid>
