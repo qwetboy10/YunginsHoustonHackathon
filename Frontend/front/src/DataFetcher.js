@@ -104,7 +104,7 @@ export function createUser(username, password, firstName, lastName, email, phone
 }
 
 function unixTime(date) {
-
+    return Date.parse(date) / 1000;
 }
 
 export function searchEvents(name, history, additional = {}) {
