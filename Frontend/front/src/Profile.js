@@ -15,14 +15,12 @@ class Profile extends Component {
                 <MDBCol bottom style={{ maxWidth: "25rem" }} >
                     <MDBCard wide display="inline">
                     <MDBCardImage className="view view-cascade gradient-card-header peach-gradient" cascade tag="div">
-                        <h2  center="true" className="h2-responsive mb-2">You are not Logged In</h2>
+                        <h2  center="true" className="h2-responsive mb-2">You are not logged in</h2>
                     </MDBCardImage>
                     <MDBCardBody cascade>
-                        <MDBCardText></MDBCardText>
-                        <MDBCardText>Organized by: </MDBCardText>
-                        <MDBCardText>Address: </MDBCardText>
+                        
                         <p>
-                        <MDBBtn center="true" color="orange" href="#">Click here to Login</MDBBtn>
+                        <MDBBtn center="true" color="orange" href="#">Please Click here to Login</MDBBtn>
                         </p>
                         
                     </MDBCardBody>
