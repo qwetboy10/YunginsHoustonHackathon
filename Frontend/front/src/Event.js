@@ -1,0 +1,122 @@
+import React, {Component} from 'react';
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "bootstrap-css-only/css/bootstrap.min.css";
+import "mdbreact/dist/css/mdb.css";
+import {getEventByID, getPersonByEventID, getPersonByID, signUpEvent, unSignUpEvent} from './DataFetcher.js';
+import { MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBRow, MDBCol, MDBIcon, MDBBtn, MDBContainer } from 'mdbreact';
+import stockeventpic from './volunteer.jpeg'
+import { Jumbotron } from 'react-bootstrap';
+import Cookies from 'universal-cookie';
+import Map from './Map.js';
+
+class Event extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: 2,
+      loaded: 0,
+      event: null,
+      people: [],
+      user: null,
+      notLoggedIn: false
+    };
+  }
+  componentDidMount() {
+    var eventID = this.props.location.search.substring(10);
+    getEventByID(eventID, this.loadData.bind(this));
+    getPersonByEventID(eventID, this.addPerson.bind(this));
+    var userID = new Cookies().get("user");
+    if(userID === undefined) this.setState({notLoggedIn: true, loading: 1});
+    else getPersonByID(userID, this.loadUser.bind(this));
+  }
+  loadUser(data) {
+    this.setState(prevState => ({
+      loaded: prevState.loaded+1,
+      user: data
+    }));
+  }
+  loadData(data) {
+    this.setState(prevState => ({
+      loaded: prevState.loaded+1,
+      event: data
+    }));
+  }
+  addPerson(person) {
+    this.setState(prevState => ({
+      people: [...prevState.people, person]
+    }));
+  }
+  signUp() {
+    const {event, user, people} = this.state;
+    signUpEvent(event.id, people, user, this.componentDidMount.bind(this), () => alert("Sorry, an error occured."));
+  }
+  unSignUp() {
+    const {event, user, people} = this.state;
+    unSignUpEvent(event.id, people, user, this.componentDidMount.bind(this), () => alert("Sorry, an error occured."));
+  }
+    render() {
+      const {loading, loaded, event, people, user, notLoggedIn} = this.state;
+      console.log(event); //look in 
+      console.log(people);
+      if(loading !== loaded) return <div>Loading...</div>; //TODO; pretty
+        return ( //TODO: display info about event and people
+          //Create a signup button too and then tell Steven once ur done
+          <div>
+            <Jumbotron>
+            <MDBRow>
+                <MDBCol style={{ maxWidth: "40rem" }}>
+                    
+                    <img cascade style={{ width: '40rem' }} src={stockeventpic} />
+                    <br/>
+                    <h2 style={{textAlign:"left"}}> 
+                      Event Name
+                    </h2>
+                    <h2 style={{textAlign:"left"}}>
+                      Organization
+                    </h2>
+                </MDBCol>
+                <MDBCol style={{ maxWidth: "40rem" }}>
+                    <h2 style={{textAlign:"left"}}> 
+                      Description
+                    </h2>
+                    <hr/>
+                    <br/>
+                    <p> 
+                      Lorem ipsum dolor sit amet, pri in ridens recteque, ex eum choro utinam. Vis perpetua appellantur no, discere facilis fuisset est te. Esse appellantur disputationi per in, ne case intellegat vix. Primis mucius mediocritatem ex sea, vim ei facete impedit oporteat.
+                    </p>
+                    <h2 style={{textAlign:"left"}}>
+                      Information
+                    </h2>
+                    <hr/>
+                </MDBCol>
+                <MDBCol> 
+                  <div class="flex-center">
+                  <MDBBtn>{//TODO: make this not ass
+              notLoggedIn ? "Log in to do thingys" :
+              people.filter(person => person.id === user.id).length > 0 ? "Unsign up" : "Sign up"
+            }</MDBBtn>
+                  </div>
+                
+                </MDBCol>
+            
+            </MDBRow>
+            </Jumbotron>
+            <Jumbotron> 
+              <MDBRow>
+                  <MDBCol> 
+                    <h2 style={{textAlign: "left"}}>
+                    Location  
+                   </h2> 
+                   <hr/>
+                   <br/>
+                      <Map/>
+                  </MDBCol>
+              </MDBRow>
+            </Jumbotron>
+        </div>
+        );
+      
+    }
+}
+
+export default Event;
