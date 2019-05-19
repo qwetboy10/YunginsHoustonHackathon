@@ -4,7 +4,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import Cookies from 'universal-cookie';
-import { authenticateUser } from 'DataFetcher.js';
+import { authenticateUser } from './DataFetcher.js';
 class Login extends Component {
     constructor(props) {
       super(props);
