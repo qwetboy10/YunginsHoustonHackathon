@@ -8,6 +8,7 @@ import FAQ from './FAQ.js';
 import Contact from './Contact.js';
 import Rankings from './Rankings.js';
 import Login from './Login.js';
+import Signup from './signup.js';
 class App extends Component {
   render() {
     return (
@@ -20,6 +21,7 @@ class App extends Component {
             <Route path='/rankings' component={Rankings} />
             <Route path='/profile' component={Profile} />
             <Route path='/login' component={Login} />
+            <Route path='/signup' component={Signup} />
             <Route path='/' component={Home} />
             
           </Switch>

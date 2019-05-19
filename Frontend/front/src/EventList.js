@@ -21,7 +21,7 @@ class EventList extends Component {
         <br/><br/>
         <MDBContainer className="event">
             <MDBRow center>
-                <MDBCol bottom style={{ maxWidth: "50   rem" }} >
+                <MDBCol bottom style={{ maxWidth: "25rem" }} >
                     <MDBCard wide display="inline">
                     <MDBCardImage className="view view-cascade gradient-card-header blue-gradient" cascade tag="div">
                         <h2  center="true" className="h2-responsive mb-2">{event.name}</h2>
@@ -35,34 +35,7 @@ class EventList extends Component {
                     </MDBCardBody>
                     </MDBCard>
                 </MDBCol>
-                <MDBCol bottom style={{ maxWidth: "50 rem" }} >
-                    <MDBCard wide display="inline">
-                    <MDBCardImage className="view view-cascade gradient-card-header purple-gradient" cascade tag="div">
-                        <h2  center="true" className="h2-responsive mb-2">{event.name}</h2>
-                        <p className=""> <MDBIcon icon="calendar-alt" /> {event.date}</p>
-                    </MDBCardImage>
-                    <MDBCardBody cascade>
-                        <MDBCardText>{event.description}</MDBCardText>
-                        <MDBCardText>Organized by: {event.organization}</MDBCardText>
-                        <MDBCardText>Address: {event.address}</MDBCardText>
-                        <MDBBtn color="primary" href="#">View Event</MDBBtn>
-                    </MDBCardBody>
-                    </MDBCard>
-                </MDBCol>
-                <MDBCol bottom style={{ maxWidth: "50   rem" }} >
-                    <MDBCard wide display="inline">
-                    <MDBCardImage className="view view-cascade gradient-card-header peach-gradient" cascade tag="div">
-                        <h2  center="true" className="h2-responsive mb-2">{event.name}</h2>
-                        <p className=""> <MDBIcon icon="calendar-alt" /> {event.date}</p>
-                    </MDBCardImage>
-                    <MDBCardBody cascade>
-                        <MDBCardText>{event.description}</MDBCardText>
-                        <MDBCardText>Organized by: {event.organization}</MDBCardText>
-                        <MDBCardText>Address: {event.address}</MDBCardText>
-                        <MDBBtn color="primary" href="#">View Event</MDBBtn>
-                    </MDBCardBody>
-                    </MDBCard>
-                </MDBCol>
+                
             </MDBRow>
         </MDBContainer>
         </div>
