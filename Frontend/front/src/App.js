@@ -63,7 +63,6 @@ class App extends Component {
             <Route path='/event' component={(props) => <Event {...props} />} />
             <Route path='/' component={Home} />
           </Switch>
-          <CreateEvent/>
       </div>
     );
   }
