@@ -208,7 +208,17 @@ class EventViewSet(viewsets.ModelViewSet):
         serializer = PersonSerializer(volunteers, many=True)
         return Response(serializer.data)
 
+    @action(methods=["get"], detail=True)
+    def get_number_of_volunteers(self, request, pk=None):
+        volunteers = [
+            i
+            for i in Event.objects.get(pk=pk).organizers_volunteers.all()
+            if Person.is_volunteer(i)
+        ]
+        serializer = PersonSerializer(volunteers, many=True)
+        return Response(len(volunteers))
 
 class SkillViewSet(viewsets.ModelViewSet):
     queryset = Skill.objects.all()
     serializer_class = SkillSerializer
+
