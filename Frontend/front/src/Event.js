@@ -4,8 +4,8 @@ import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import {getEventByID, getOrganizersByEventID, getVolunteersByEventID, getPersonByID, signUpEvent, unSignUpEvent} from './DataFetcher.js';
 import { MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBRow, MDBCol, MDBIcon, MDBBtn } from 'mdbreact';
+import {Carousel, Card, Container, Row, Col, Image, Figure, Button, Jumbotron} from 'react-bootstrap';
 import stockeventpic from './volunteer.jpeg'
-import { Jumbotron } from 'react-bootstrap';
 import Cookies from 'universal-cookie';
 
 class Event extends Component {
@@ -56,13 +56,13 @@ class Event extends Component {
   addVolunteer(person) {
     this.setState(prevState => ({
       people: [...prevState.people, person.id],
-      volunteers: [...prevState.volunteers, person.id]
+      volunteers: [...prevState.volunteers, person]
     }));
   }
   addOrganizer(person) {
     this.setState(prevState => ({
       people: [...prevState.people, person.id],
-      organizers: [...prevState.organizers, person.id]
+      organizers: [...prevState.organizers, person]
     }));
   }
   signUp() {
@@ -76,8 +76,13 @@ class Event extends Component {
   goToLogin() {
     this.props.history.push('/login');
   }
+  doStuff(organizer) {
+    return (
+      <li>{organizer.first_name + " " + organizer.last_name}</li>
+    );
+  }
     render() {
-      const {loading, loaded, event, people, user, notLoggedIn} = this.state;
+      const {loading, loaded, event, people, user, notLoggedIn, organizers, volunteers} = this.state;
       console.log(this.state);
       if(loading !== loaded) return <div>Loading...</div>; //TODO; pretty
         return ( //TODO: display info about event and people
@@ -86,7 +91,9 @@ class Event extends Component {
             <Jumbotron>
             <MDBRow>
                 <MDBCol col={10}>
+                  
                     <MDBCardImage cascade style={{ width: '40rem' }} src={stockeventpic} />
+                    
                     <MDBCardBody cascade className="text-center">
                         <MDBCardTitle>{event.name}</MDBCardTitle>
                         <h5 className="indigo-text"><strong>{event.organization}</strong></h5>
@@ -96,14 +103,28 @@ class Event extends Component {
                           people.filter(person => person === user.id).length > 0 ? <MDBBtn onClick={this.unSignUp.bind(this)}>Unsign up</MDBBtn> 
                           : <MDBBtn onClick={this.signUp.bind(this)}>Sign up</MDBBtn>
                         }
+                        
                     </MDBCardBody>
+                    
                 </MDBCol>
+                <MDBCol col={5}>
+                  <h2>Organizers</h2>
+                  <ul>
+                  {organizers.map(this.doStuff)}
+                  </ul>
+                  <h2>Volunteers</h2>
+                  <ul>
+                  {volunteers.map(this.doStuff)}
+                  </ul>
+                  </MDBCol>
             </MDBRow>
             </Jumbotron>
         </div>
         );
       
     }
+    
 }
+
 
 export default Event;
