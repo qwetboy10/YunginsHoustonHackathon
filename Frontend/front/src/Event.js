@@ -7,6 +7,7 @@ import { MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBRow, 
 import {Carousel, Card, Container, Row, Col, Image, Figure, Button, Jumbotron} from 'react-bootstrap';
 import stockeventpic from './volunteer.jpeg'
 import Cookies from 'universal-cookie';
+import Map from './Map.js';
 
 class Event extends Component {
   constructor(props) {
@@ -90,9 +91,40 @@ class Event extends Component {
           <div>
             <Jumbotron>
             <MDBRow>
+                <MDBCol style={{ maxWidth: "40rem" }}>
+                    
+                    <img cascade style={{ width: '40rem' }} src={stockeventpic} />
+                    <br/>
+                    <h2 style={{textAlign:"left"}}> 
+                      Event Name
+                    </h2>
+                    <h2 style={{textAlign:"left"}}>
+                      Organization
+                    </h2>
+                </MDBCol>
+                <MDBCol style={{ maxWidth: "40rem" }}>
+                    <h2 style={{textAlign:"left"}}> 
+                      Description
+                    </h2>
+                    <hr/>
+                    <br/>
+                    <p> 
+                      Lorem ipsum dolor sit amet, pri in ridens recteque, ex eum choro utinam. Vis perpetua appellantur no, discere facilis fuisset est te. Esse appellantur disputationi per in, ne case intellegat vix. Primis mucius mediocritatem ex sea, vim ei facete impedit oporteat.
+                    </p>
+                    <h2 style={{textAlign:"left"}}>
+                      Information
+                    </h2>
+                    <hr/>
+                </MDBCol>
+                <MDBCol> 
+                  <div class="flex-center">
+                  
+                  </div>
+                
+                </MDBCol>
                 <MDBCol col={10}>
                   
-                    <MDBCardImage cascade style={{ width: '40rem' }} src={stockeventpic} />
+
                     
                     <MDBCardBody cascade className="text-center">
                         <MDBCardTitle>{event.name}</MDBCardTitle>
@@ -118,6 +150,16 @@ class Event extends Component {
                   </ul>
                   </MDBCol>
             </MDBRow>
+              <MDBRow>
+                  <MDBCol> 
+                    <h2 style={{textAlign: "left"}}>
+                    Location  
+                   </h2> 
+                   <hr/>
+                   <br/>
+                      <Map/>
+                  </MDBCol>
+              </MDBRow>
             </Jumbotron>
         </div>
         );
