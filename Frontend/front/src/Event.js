@@ -47,10 +47,11 @@ class Event extends Component {
   }
   signUp() {
     const {event, user, people} = this.state;
-    signUpEvent(event.id, people, user);
+    signUpEvent(event.id, people, user, this.componentDidMount.bind(this), () => alert("Sorry, an error occured."));
   }
   unSignUp() {
-
+    const {event, user, people} = this.state;
+    unSignUpEvent(event.id, people, user, this.componentDidMount.bind(this), () => alert("Sorry, an error occured."));
   }
     render() {
       const {loading, loaded, event, people, user, notLoggedIn} = this.state;
@@ -80,7 +81,7 @@ class Event extends Component {
                 </MDBCol>
             <MDBBtn>{//TODO: make this not ass
               notLoggedIn ? "Log in to do thingys" :
-              people.filter(person => person.id == user.id).length > 0 ? "Unsign up" : "Sign up"
+              people.filter(person => person.id === user.id).length > 0 ? "Unsign up" : "Sign up"
             }</MDBBtn>
             </MDBRow>
             </Jumbotron>

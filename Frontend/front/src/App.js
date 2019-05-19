@@ -32,11 +32,18 @@ class App extends Component {
     });
     else this.setState({user: null});
   }
+  removeCookies() {
+    const cookie = new Cookies();
+    cookie.remove("user");
+    this.props.history.push("/");
+    this.checkCookies();
+  }
   render() {
     const {user} = this.state;
+    console.log(user);
     return (
       <div>
-        <NavBar {...this.props} update={this.checkCookies.bind(this)} user={user}/>
+        <NavBar {...this.props} update={this.removeCookies.bind(this)} user={user}/>
           <Switch>
             <Route path='/events' component={(props) => <EventList {...props}/>}/>
             <Route path='/faq' component={FAQ}/>
