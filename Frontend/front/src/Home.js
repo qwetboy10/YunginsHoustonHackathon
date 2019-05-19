@@ -7,6 +7,7 @@ import ss1 from './slideshow1.jpg';
 import ss2 from './slideshow2.jpg';
 import ss3 from './slideshow3.jpg';
 import vhands from './volunteerhands.jpg';
+import Footer from './Footer.js';
 
 class Home extends Component {
     render() {
@@ -63,7 +64,7 @@ class Home extends Component {
                 />
             </Container>
             </Jumbotron>;
-
+            <Footer />
           </div>
         );
       }
