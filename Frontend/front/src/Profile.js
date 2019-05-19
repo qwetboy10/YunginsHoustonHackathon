@@ -20,7 +20,7 @@ class Profile extends Component {
                     <MDBCardBody cascade>
                         
                         <p>
-                        <MDBBtn center="true" color="orange" href="#">Please Click here to Login</MDBBtn>
+                        <MDBBtn center="true" color="orange" onClick={() => this.props.history.push("/login")}>Please Click here to Login</MDBBtn>
                         </p>
                         
                     </MDBCardBody>

@@ -38,7 +38,7 @@ class App extends Component {
             <Route path='/faq' component={FAQ}/>
             <Route path='/contact' component={Contact} />
             <Route path='/rankings' component={Rankings} />
-            <Route path='/profile' component={(props) => <Profile user={user}/>} />
+            <Route path='/profile' component={(props) => <Profile {...props} user={user}/>} />
             <Route path='/login' component={(props) => <Login {...props} update={this.checkCookies.bind(this)}/>} />
             <Route path='/signup' component={Signup} />
             <Route path='/' component={Home} />
