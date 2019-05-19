@@ -6,25 +6,38 @@ function logError(err) {
 }
 
 export function getEvents(loadData) {
-    fetch(`${djangoIP}event/`).then(res => res.json()).then(res => {
+    fetch(`${djangoIP}events/`).then(res => res.json()).then(res => {
         loadData(res);
     }).catch(logError);
 }
 
 export function getOrganizations(loadData) {
-    fetch(`${djangoIP}organization/`).then(res => res.json()).then(res => {
+    fetch(`${djangoIP}organizations/`).then(res => res.json()).then(res => {
         loadData(res);
     }).catch(logError);
 }
 
 export function getSkills(loadData) {
-    fetch(`${djangoIP}skill/`).then(res => res.json()).then(res => {
+    fetch(`${djangoIP}skills/`).then(res => res.json()).then(res => {
         loadData(res);
     }).catch(logError);
 }
 
 export function getPersonByID(id, loadData) {
-    fetch(`${djangoIP}person/${id}/`).then(res => res.json()).then(res => {
+    fetch(`${djangoIP}people/${id}/`).then(res => res.json()).then(res => {
         loadData(res);
     }).catch(logError);
+}
+
+export function authenticateUser(username, password, success, failure) {
+    fetch(`${djangoIP}users/login/`, {
+        method: "POST",
+        headers: {
+            "content-type": "application/json"
+        },
+        body: JSON.stringify({username, password})
+    }).then(res => {
+        if(res.ok) res.json().then(data => success(data));
+        else failure();
+    });
 }
