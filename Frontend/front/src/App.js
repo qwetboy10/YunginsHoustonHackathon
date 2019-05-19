@@ -4,6 +4,7 @@ import EventList from './EventList.js';
 import Home from './Home.js';
 import Profile from './Profile.js';
 import NavBar from './NavBar.js';
+
 class App extends Component {
   render() {
     return (

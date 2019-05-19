@@ -7,12 +7,7 @@ class EventList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            eventData: [{
-                name: "Event Name",
-                date: "Date",
-                id: 1,
-                description: "An Event"
-            }]
+            eventData: null
         };
     }
     componentDidMount() {
