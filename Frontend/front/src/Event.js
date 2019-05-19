@@ -33,7 +33,7 @@ class Event extends Component {
         return ( //TODO: display info about event and people
           //Create a signup button too and then tell Steven once ur done
           <div>
-        
+                
         </div>
         );
       
