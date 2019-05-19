@@ -16,7 +16,7 @@ class NavBar extends Component {
         <Navbar.Brand><Nav.Link onClick={()=>this.props.history.push("/")}>Houston Volunteer Central</Nav.Link></Navbar.Brand>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            {["Events", "FAQ", "Rankings", "Contact", "Profile", "Login"].map((str) => (
+            {["Events", "FAQ", "Rankings", "Contact", "Profile"].map((str) => (
               <Nav.Link onClick={() => this.props.history.push(`/${str.replace(/ /g, '_').toLowerCase().replace("home", "")}`)}>
                 {str}
               </Nav.Link>
@@ -26,7 +26,7 @@ class NavBar extends Component {
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
             <Button variant="primary" onClick={this.onClick.bind(this)}>Search</Button>
           </Form>
-          <MDBBtn color="orange">Login</MDBBtn>
+          <MDBBtn color="orange" onClick={() => this.props.history.push("/login")}>Login</MDBBtn>
           
         </Navbar.Collapse>
         </Navbar>

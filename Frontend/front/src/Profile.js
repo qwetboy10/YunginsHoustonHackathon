@@ -1,20 +1,21 @@
 import React, {Component} from 'react';
-import {getPersonByID} from './DataFetcher.js';
+import NavBar from './NavBar.js';
+import Login from './Login.js';
+import {Carousel, Card, Jumbotron, Container} from 'react-bootstrap';
 
 class Profile extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            userData: null
-        };
-    }
-    componentDidMount() {
-        getPersonByID(this.props.userID, (data) => this.setState({userData: data}));
-    }
     render() {
         return (
           <div>
-              Sorry! This page is still under development.
+            <Jumbotron fluid>
+            <Container>
+                <h1>Profile</h1>
+                <h3>Profile Picture</h3>
+                <p>
+                hi
+                </p>
+            </Container>
+            </Jumbotron>;
           </div>
         );
       }
