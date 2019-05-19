@@ -6,6 +6,7 @@ import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, 
 import asd from './asd.jpeg';
 import {getPersonByID, getPersonByUsername, getEventsByUsername} from './DataFetcher.js';
 import Cookies from 'universal-cookie';
+import Loading from './Loading.js';
 class Profile extends Component {
   constructor(props) {
     super(props);
@@ -144,7 +145,7 @@ getOrganizationComponent(organization) { //TODO: Make this not disgusting
         </MDBContainer>
           </div>
         );
-        if(loaded != loading) return <div>Loading...</div>//make this pretty
+        if(loaded != loading) return <div><Loading/></div>//make this pretty
         return ( //TODO: add other things for user, console.log(user) for the things u can use
           <div>
             <Jumbotron fluid>

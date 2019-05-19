@@ -49,7 +49,9 @@ function getUserByID(id, loadData) {
 export function getPersonByID(id, loadData) {
     fetch(`${djangoIP}people/${id}/`).then(res => res.json()).then(res => {
         if(res.details) logError(res.details);
-        else getUserByID(res.user, (data) => loadData({...data, ...res}));
+        else getUserByID(res.user, (data) => {
+            getOrganizationByID(res.organization, (org) => loadData({...data, ...res, organization: org}))
+        });
     }).catch(logError);
 }
 export function getPersonByUsername(username, loadData, failed) {
@@ -57,7 +59,9 @@ export function getPersonByUsername(username, loadData, failed) {
         if(res.ok) 
             res.json().then(res => {
                 if(res.details) logError(res.details);
-                else getUserByID(res.user, (data) => loadData({...data, ...res}));
+                else getUserByID(res.user, (data) => {
+                    getOrganizationByID(res.organization, (org) => loadData({...data, ...res, organization: org}))
+                });
         });
         else failed();
     }).catch((err) => {
@@ -94,13 +98,13 @@ export function authenticateUser(username, password, success, failure) {
     });
 }
 
-export function createUser(username, password, firstName, lastName, email, phoneNum, success) {
+export function createUser(username, password, firstName, lastName, email, phoneNum, success, organization) {
     fetch(`${djangoIP}users/`, {
         method: "POST",
         headers: {
             "content-type": "application/json"
         },
-        body: JSON.stringify({username, password, first_name: firstName, last_name:lastName, email})
+        body: JSON.stringify({username, password, first_name: firstName, last_name:lastName, email, organization})
     }).then(res => res.json()).then(res => {
         if(res.detail) logError(res.detail);
         else fetch(`${djangoIP}people/`, {
@@ -114,6 +118,19 @@ export function createUser(username, password, firstName, lastName, email, phone
             else success(res2);
         });
     })
+}
+
+export function createOrganization(username, password, firstName, lastName, email, phoneNum, orgname, orgemail, orgaddress, orghomepage, orgphone, success) {
+    fetch(`${djangoIP}organizations/`, {
+        method: "POST",
+        headers: {
+            "content-type": "application/json"
+        },
+        body: JSON.stringify({name: orgname, email: orgemail, phone: orgphone, address: orgaddress, home_page: orghomepage})
+    }).then(res => res.json()).then(res => {
+        if(res.detail) logError(res.detail);
+        else createUser(username, password, firstName, lastName, email, phoneNum, success, res.id);
+    });
 }
 
 function unixTime(date) {

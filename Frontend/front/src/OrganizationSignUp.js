@@ -16,16 +16,21 @@ class OrganizationSignUp extends Component {
             firstName: "",
             lastName: "",
             email: "",
-            phoneNum: ""
+            phoneNum: "",
+            orgname: "",
+            orgemail: "",
+            orgaddress: "",
+            orghomepage: "",
+            orgphone: ""
         };
     }
     onClick() {
-        const {username, password, password2, firstName, lastName, email, phoneNum} = this.state;
+        const {username, password, password2, firstName, lastName, email, phoneNum, orgname, orgemail, orgaddress, orghomepage, orgphone} = this.state;
         if(password !== password2) {
             alert("Passwords do not match, please try again.");
             return;
         }
-        createOrganization(username, password, firstName, lastName, email, phoneNum, (data) => {
+        createOrganization(username, password, firstName, lastName, email, phoneNum, orgname, orgemail, orgaddress, orghomepage, orgphone, (data) => {
             new Cookies().set("user", data.id, { path: "/"});
             console.log(data);
             this.props.update(() => this.props.history.push("/profile"));
@@ -37,7 +42,7 @@ class OrganizationSignUp extends Component {
         });
     }
     render() {
-        const {username, password, password2, firstName, lastName, email, phoneNum} = this.state;
+        const {username, password, password2, firstName, lastName, email, phoneNum, orgname, orgemail, orgaddress, orghomepage, orgphone} = this.state;
         return (
             <div>
                 <br/>
@@ -113,6 +118,54 @@ class OrganizationSignUp extends Component {
                                   validate
                                   value={password2}
                                   onChange={(e) => this.onChange("password2", e.target.value)}
+                              />
+                              {/*, orgname, orgemail, orgaddress, orghomepage, orgphone */}
+                              <MDBInput
+                                  label="Organization Name"
+                                  icon="user-circle"
+                                  group
+                                  type="text"
+                                  validate
+                                  value={orgname}
+                                  onChange={(e) => this.onChange("orgname", e.target.value)}
+                              />
+                              <MDBInput
+                                  label="Organization Email"
+                                  icon="envelope"
+                                  group
+                                  type="email"
+                                  validate
+                                  value={orgemail}
+                                  onChange={(e) => this.onChange("orgemail", e.target.value)}
+                              />
+                                <MDBInput
+                                  label="Organization Address"
+                                  icon="envelope"
+                                  group
+                                  type="email"
+                                  validate
+                                  value={orgaddress}
+                                  onChange={(e) => this.onChange("orgaddress", e.target.value)}
+                              />
+
+                                <MDBInput
+                                  label="Organization Homepage"
+                                  icon="angle-right"
+                                  group
+                                  type="text"
+                                  validate
+                                  value={orghomepage}
+                                  onChange={(e) => this.onChange("orghomepage", e.target.value)}
+                              />
+
+                                <MDBInput
+                                  label="Organization Phone Number"
+                                  icon="phone"
+                                  group
+                                  type="text"
+                                  validate
+                                  value={orgphone}
+                                  onChange={(e) => this.onChange("orgphone", e.target.value)}
                               />
                               
                               </div>
