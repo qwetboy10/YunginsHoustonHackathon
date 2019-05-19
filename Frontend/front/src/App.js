@@ -13,6 +13,7 @@ import Cookies from 'universal-cookie';
 import Event from './Event.js';
 import Search from './Search.js';
 import { getPersonByID } from './DataFetcher.js';
+import OrganizationSignUp from './OrganizationSignUp.js';
 class App extends Component {
   constructor(props) {
     super(props);
@@ -51,6 +52,8 @@ class App extends Component {
             <Route path='/profile' component={(props) => <Profile {...props} user={user}/>} />
             <Route path='/login' component={(props) => <Login {...props} update={this.checkCookies.bind(this)}/>} />
             <Route path='/signup' component={Signup} />
+            <Route path='/orgsignup' component={{OrganizationSignUp}}/>
+            <Route path='/events' component={(props) => <EventList {...props}/>}/>
             <Route path='/search' component = {(props) => <Search {...props}/>} />
             <Route path='/event' component={(props) => <Event {...props} />} />
             <Route path='/' component={Home} />
