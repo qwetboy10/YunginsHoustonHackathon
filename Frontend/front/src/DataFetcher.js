@@ -13,7 +13,7 @@ export function getEvents(url, loadData) {
 
 export function getEventsByUsername(username, loadData) {
     getPersonByUsername(username, (data) => {
-        fetch(`${djangoIP}people/${data.id}/events`).then(res => res.json()).then(loadData)
+        fetch(`${djangoIP}people/${data.id}/events/`).then(res => res.json()).then(loadData)
     }, () => console.log("Error occured"));
 }
 
@@ -60,8 +60,15 @@ export function getPersonByUsername(username, loadData, failed) {
     });
 }
 
-export function getPersonByEventID(eventID, addPerson) {
-    fetch(`${djangoIP}events/${eventID}/get_volunteers`).then(res => res.json()).then(res => 
+export function getVolunteersByEventID(eventID, addPerson) {
+    fetch(`${djangoIP}events/${eventID}/get_volunteers/`).then(res => res.json()).then(res => 
+        res.map(person => {
+            getUserByID(person.user, (data) => addPerson({...data, ...person}));
+        })
+    );
+}
+export function getOrganizersByEventID(eventID, addPerson) {
+    fetch(`${djangoIP}events/${eventID}/get_organizers/`).then(res => res.json()).then(res => 
         res.map(person => {
             getUserByID(person.user, (data) => addPerson({...data, ...person}));
         })
