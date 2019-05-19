@@ -40,7 +40,7 @@ class Search extends Component {
                 </Form.Group>
                 </Form>
             </Container>
-            <div class="text-center"> <button onClick={() => (searchEvents(name, this.props.history, {before: date[1], after: date[1], sort: sort}))} type="button" class="btn btn-primary">Submit</button> </div>
+            <div class="text-center"> <button onClick={() => (searchEvents(name, this.props.history, {before: date[1], after: date[0], sort: sort}))} type="button" class="btn btn-primary">Submit</button> </div>
             <DateTimeRangePicker onChange = {this.onChange} value={this.state.date}/>
             </Jumbotron>
           </div>

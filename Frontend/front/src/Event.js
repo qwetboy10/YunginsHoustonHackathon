@@ -90,4 +90,4 @@ class Event extends Component {
     }
 }
 
-export default template;
+export default Event;
