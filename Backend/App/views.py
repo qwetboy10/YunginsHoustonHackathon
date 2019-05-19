@@ -94,19 +94,15 @@ class PersonViewSet(viewsets.ModelViewSet):
             ]
             serializer = self.get_serializer(queryset, many=True)
             return Response(serializer.data)
-<<<<<<< HEAD
 
     @action(methods=['get'], detail=True)
-    def get_events_by_person(self,request,pk=None):
+    def events(self,request,pk=None):
         queryset= queryset = [i for i in Event.objects.all() if Event.contains_person(i, pk)]
         serializer = EventSerializer(queryset, many=True)
         return Response(serializer.data)
 
-
-
-=======
     @action(methods=['get'], detail=False)
-    def get_user_by_username(self, request):
+    def get_person_by_username(self, request):
         username = request.query_params.get("username", None)
         if username is None:
             raise ParseError()
@@ -117,8 +113,6 @@ class PersonViewSet(viewsets.ModelViewSet):
         except:
             return Response({"detail":"Not found."})
             
->>>>>>> 8164ecaa01672d5afe3dfff574a3810a4bf8a96b
-
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
@@ -155,16 +149,6 @@ class OrganizationViewSet(viewsets.ModelViewSet):
 class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
-
-    # def list(self, request, *args, **kwargs):
-    #    search = request.query_params.get("search", None)
-    #    if search is None:
-    #        serializer = self.get_serializer(Event.objects.all(), many=True)
-    #        return Response(serializer.data)
-    #    else:
-    #        queryset = Event.objects.filter(name__contains=search)
-    #        serializer = self.get_serializer(queryset, many=True)
-    #        return Response(serializer.data)
 
     @action(methods=["get"], detail=False)
     def search_by_name(self, request, *args, **kwargs):
