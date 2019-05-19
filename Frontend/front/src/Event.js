@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
-import {getEventByID, getOrganizersByEventID, getVolunteersByEventID, getPersonByID, signUpEvent, unSignUpEvent} from './DataFetcher.js';
+import {getEventByID, getOrganizersByEventID, getVolunteersByEventID, getPersonByID, signUpEvent, unSignUpEvent, deleteEvent} from './DataFetcher.js';
 import { MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBRow, MDBCol, MDBIcon, MDBBtn } from 'mdbreact';
 import {Carousel, Card, Container, Row, Col, Image, Figure, Button, Jumbotron} from 'react-bootstrap';
 import stockeventpic from './volunteer.jpeg'
@@ -91,6 +91,7 @@ class Event extends Component {
           //Create a signup button too and then tell Steven once ur done
           <div>
             <Jumbotron>
+              {organizers.map(organizer => organizer.id).includes(user.id) && <MDBBtn onClick={() => deleteEvent(event.id, () => this.props.history.push("/"))}>DELETE EVENT</MDBBtn>}
             <MDBRow>
                 <MDBCol style={{ maxWidth: "40rem" }}>
                     

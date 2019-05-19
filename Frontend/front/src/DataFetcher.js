@@ -176,3 +176,35 @@ export function unSignUpEvent(eventID, volunteers, oldPerson, success, failure) 
         } else success();
     });
 }
+
+export function createEvent(orgID, eventAddress, eventName, eventDate, eventDuration, eventBlurb, eventDesc, success) {
+    fetch(`${djangoIP}events/`, {
+        method: "POST",
+        headers: {
+            "content-type": "application/json"
+        },
+        body: JSON.stringify({
+            "address": eventAddress,
+            "name": eventName,
+            "date": eventDate,
+            "duration": eventDuration,
+            "blurb": eventBlurb,
+            "description": eventDesc,
+            "organization": orgID,
+            "organizers_volunteers": [],
+        }).then(res => {
+            if(res.ok) success(); 
+        }) 
+    })
+}
+export function deleteEvent(eventID, success) {
+    fetch(`${djangoIP}events/${eventID}/`, {
+        method: "DELETE",
+        headers: {
+            "content-type": "application/json"
+        }
+    }).then(res => {
+        if(res.ok) success();
+        else logError(res);
+    })
+}
