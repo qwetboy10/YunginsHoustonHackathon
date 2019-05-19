@@ -41,7 +41,7 @@ class CreateEvent extends Component {
                                 />
                                 <MDBInput
                                     label="Location"
-                                    icon="angle-right"
+                                    icon="map-marker-alt"
                                     group
                                     type="text"
                                     validate
@@ -50,7 +50,7 @@ class CreateEvent extends Component {
                              
                               <MDBInput
                                   label="Date"
-                                  icon="envelope"
+                                  icon="calendar"
                                   group
                                   type="email"
                                   validate
@@ -58,7 +58,7 @@ class CreateEvent extends Component {
                               />
                               <MDBInput
                                   label="Duration"
-                                  icon="phone"
+                                  icon="stopwatch"
                                   group
                                   type="text"
                                   validate
@@ -66,7 +66,7 @@ class CreateEvent extends Component {
                               />
                                <MDBInput
                                   label="Blurb"
-                                  icon="user-circle"
+                                  icon="clock"
                                   group
                                   type="text"
                                   validate
