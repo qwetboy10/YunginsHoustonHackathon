@@ -68,14 +68,13 @@ class Signup extends Component {
                                   label="Confirm your password"
                                   icon="exclamation-triangle"
                                   group
-                                  type="text"
+                                  type="password"
                                   validate
-                                  error="wrong"
-                                  success="right"
                               />
+                              
                               </div>
                               <div className="text-center py-4 mt-3">
-                              <MDBBtn color="orange" type="submit">
+                              <MDBBtn onClick={this.onClick.bind(this)} color="orange" type="submit">
                                   Register
                               </MDBBtn>
                               </div>
