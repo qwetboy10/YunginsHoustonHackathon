@@ -165,6 +165,16 @@ class EventViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @action(methods=["get"], detail=True)
+    def get_number_of_organizers(self, request, pk=None):
+        organizers = [
+            i
+            for i in Event.objects.get(pk=pk).organizers_volunteers.all()
+            if Person.is_organizer(i)
+        ]
+        return Response(len(organizers))
+
+
+    @action(methods=["get"], detail=True)
     def get_volunteers(self, request, pk=None):
         volunteers = [
             i
