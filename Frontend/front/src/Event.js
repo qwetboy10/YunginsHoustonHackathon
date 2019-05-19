@@ -8,7 +8,6 @@ import {Carousel, Card, Container, Row, Col, Image, Figure, Button, Jumbotron} f
 import stockeventpic from './volunteer.jpeg'
 import Cookies from 'universal-cookie';
 import Map from './Map.js';
-
 class Event extends Component {
   constructor(props) {
     super(props);
@@ -90,44 +89,84 @@ class Event extends Component {
           //Create a signup button too and then tell Steven once ur done
           <div>
             <Jumbotron>
+            <Card className="text-center">
+              <Card.Header>
+              <br/>
+              <MDBRow>
+                <MDBCol style={{ maxWidth: "35rem" }}>
+                    <img cascade style={{ width: '30rem' }} src={stockeventpic} />
+                </MDBCol>
+                <MDBCol style={{ maxWidth: "50rem" }}>
+                <br/><br/><br/><br/><br/><br/><br/>
+
+                  <p style={{textAlign:"left",fontSize:60}}>
+                   {event.name}
+                  </p>
+                  <h2 style={{textAlign:"left"}}>
+                  Organized by: {event.organization}
+                  </h2>
+                </MDBCol>
+                <MDBCol style={{ maxWidth: "40rem" }}>
+                <p style={{textAlign:"left"}}>
+                   Share this event with your friends and family!
+                  </p>
+                <a href="#!" className="fb-ic blue-text mr-3">
+                  <MDBIcon fab icon="facebook-f" size="2x"/>
+                </a>
+                <a href="#!" className="tw-ic blue-text mr-3">
+                  <MDBIcon fab icon="twitter" size="2x"/>
+                </a>
+                <a href="#!" className="ins-ic blue-text mr-3">
+                  <MDBIcon fab icon="instagram" size="2x"/>
+                </a>
+                <a href="#!" className="email-ic blue-text mr-3">
+                  <MDBIcon icon="envelope" size="2x"/>
+                </a>
+                </MDBCol>
+              </MDBRow>
+              <br/>
+              </Card.Header>
+            <Card.Body>
+              <Card.Title><p style={{fontSize:35}}>Event Details</p></Card.Title>
+              <Card.Text>
+              <p style={{textAlign:"center",fontSize:20}}>
+                {event.description}
+                  </p>
+              </Card.Text>
+              <MDBRow>
+                <MDBCol style={{ maxWidth: "40rem" }}>
+                <h2 style={{textAlign:"center"}}>Location: {event.address}</h2> 
+                  <Map/>
+                </MDBCol>
+                <MDBCol style={{ maxWidth: "40rem" }}>
+                <h2 style={{textAlign:"center"}}>Organizers</h2>
+                  <ul style={{textAlign:"center",listStyleType:"none"}}>
+                  {organizers.map(this.doStuff)}
+                  </ul>
+                </MDBCol>
+                <MDBCol style={{ maxWidth: "40rem" }}>
+                <h2 style={{textAlign:"center"}}>Volunteers</h2>
+                <ul style={{textAlign:"center",listStyleType:"none"}}>
+                  {volunteers.map(this.doStuff)}
+                  </ul>
+                </MDBCol>
+              </MDBRow>
+              
+
+              {notLoggedIn ? <MDBBtn onClick={this.goToLogin.bind(this)}>Log in to do thingys</MDBBtn> :
+                          people.filter(person => person === user.id).length > 0 ? <MDBBtn onClick={this.unSignUp.bind(this)}>Unregister</MDBBtn> 
+                          : <MDBBtn onClick={this.signUp.bind(this)}>Register</MDBBtn>}
+            </Card.Body>
+          </Card>
             <MDBRow>
                 <MDBCol style={{ maxWidth: "40rem" }}>
-                    
-                    <img cascade style={{ width: '40rem' }} src={stockeventpic} />
-                    <br/>
-                    <h2 style={{textAlign:"left"}}> 
-                      Event Name: {event.name}
-                    </h2>
-                    <h2 style={{textAlign:"left"}}>
-                      Organization: {event.organization}
-                    </h2>
+                
                 </MDBCol>
                 <MDBCol style={{ maxWidth: "40rem" }}>
-                    <h2 style={{textAlign:"left"}}> 
-                      Description
-                    </h2>
-                    <hr/>
-                    <br/>
-                    <p> 
-                      {event.description}
-                    </p>
-                    <MDBCardBody cascade className="text-center">
-                        <MDBCardTitle>{event.name}</MDBCardTitle>
-                        <h5 className="indigo-text"><strong>{event.organization}</strong></h5>
-                        <MDBCardText>{event.description}</MDBCardText>
-                        {//TODO: make this not ass
-                          notLoggedIn ? <MDBBtn onClick={this.goToLogin.bind(this)}>Log in to do thingys</MDBBtn> :
-                          people.filter(person => person === user.id).length > 0 ? <MDBBtn onClick={this.unSignUp.bind(this)}>Unsign up</MDBBtn> 
-                          : <MDBBtn onClick={this.signUp.bind(this)}>Sign up</MDBBtn>
-                        }
-                        
-                    </MDBCardBody>
+                    
                 </MDBCol>
                 <MDBCol> 
-                  <div class="flex-center">
-                  
-                  </div>
-                
+
                 </MDBCol>
                 <MDBCol col={5}>
                 </MDBCol>
@@ -135,22 +174,11 @@ class Event extends Component {
             </MDBRow>
               <MDBRow>
                   <MDBCol> 
-                    <h2 style={{textAlign: "left"}}>
-                    Location: {event.address}
-                   </h2> 
-                   <hr/>
-                   <br/>
-                      <Map/>
+                    
                   </MDBCol>
                   <MDBCol col={5}>
-                  <h2>Organizers</h2>
-                  <ul>
-                  {organizers.map(this.doStuff)}
-                  </ul>
-                  <h2>Volunteers</h2>
-                  <ul>
-                  {volunteers.map(this.doStuff)}
-                  </ul>
+                  
+                  
                   </MDBCol>
               </MDBRow>
             </Jumbotron>
