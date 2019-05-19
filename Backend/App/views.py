@@ -47,6 +47,19 @@ class UserViewSet(viewsets.ViewSet):
         serializer = UserSerializer(user)
         return Response(serializer.data)
 
+    @action(methods=['post'], detail=False)
+    def login(self, request, pk = None):
+        print(request.data)
+        username = request.data['username']
+        password = request.data['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            serializer = PersonSerializer(get_object_or_404(user__username=username))
+            return Response(serializer.data)
+        else:
+            return Response({"detail":"Login Failed"})
+           
+
 
 class PersonViewSet(viewsets.ModelViewSet):
     queryset = Person.objects.all()
