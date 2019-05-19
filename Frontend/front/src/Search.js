@@ -38,10 +38,10 @@ class Search extends Component {
                     <option>Openings</option>
                     </Form.Control>
                 </Form.Group>
-                
                 </Form>
             </Container>
-            <MDBBtn onClick={() => (searchEvents(name, this.props.history, {before: date[1], after: date[0], sort: sort}))}>Submit</MDBBtn>
+            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+            <div class="text-center"> <button onClick={() => (searchEvents(name, this.props.history, {after: date, sort: sort}))} type="button" class="btn btn-primary">Submit</button> </div>
             <DateTimeRangePicker onChange = {this.onChange} value={this.state.date}/>
             </Jumbotron>
           </div>
