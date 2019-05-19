@@ -54,7 +54,7 @@ class UserViewSet(viewsets.ViewSet):
         password = request.data['password']
         user = authenticate(username=username, password=password)
         if user is not None:
-            serializer = PersonSerializer(get_object_or_404(user__username=username))
+            serializer = PersonSerializer(get_object_or_404(Person,user__username=username))
             return Response(serializer.data)
         else:
             return Response({"detail":"Login Failed"})
