@@ -158,9 +158,9 @@ class Event extends Component {
               {notLoggedIn ? <MDBBtn onClick={this.goToLogin.bind(this)}>Log in to do thingys</MDBBtn> :
                           people.filter(person => person === user.id).length > 0 ? <MDBBtn onClick={this.unSignUp.bind(this)}>Unregister</MDBBtn> 
                           : <MDBBtn onClick={this.signUp.bind(this)}>Register</MDBBtn>}
+              {organizers.map(organizer => organizer.id).includes(user.id) && <MDBBtn onClick={() => deleteEvent(event.id, () => this.props.history.push("/"))}>DELETE EVENT</MDBBtn>}
             </Card.Body>
           </Card>
-              {organizers.map(organizer => organizer.id).includes(user.id) && <MDBBtn onClick={() => deleteEvent(event.id, () => this.props.history.push("/"))}>DELETE EVENT</MDBBtn>}
             <MDBRow>
                 <MDBCol style={{ maxWidth: "40rem" }}>
                 
