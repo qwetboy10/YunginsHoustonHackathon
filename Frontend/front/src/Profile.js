@@ -4,7 +4,7 @@ import Login from './Login.js';
 import {Carousel, Card, Jumbotron, Container} from 'react-bootstrap';
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBRow, MDBCol, MDBIcon, MDBContainer } from 'mdbreact';
 import asd from './asd.jpeg';
-import {getPersonByID, getPersonByUsername} from './DataFetcher.js';
+import {getPersonByID, getPersonByUsername, getEventsByUsername} from './DataFetcher.js';
 import Cookies from 'universal-cookie';
 class Profile extends Component {
   constructor(props) {
@@ -12,6 +12,7 @@ class Profile extends Component {
     this.state = {
       loading: true,
       user: null,
+      events: null,
       failed: false,
       notLoggedIn: false
     };
@@ -26,18 +27,19 @@ class Profile extends Component {
         getPersonByID(id, data => this.props.history.push(`/profile/${data.username}`));
       }
     } else {
-      getPersonByUsername(this.props.location.pathname.substring(9), this.storeData, () => this.setState({failed: true}));
+      getPersonByUsername(this.props.location.pathname.substring(9), (data) => this.storeData(data, 'user'), () => this.setState({failed: true}));
+      getEventsByUsername(this.props.location.pathname.substring(9), (data) => this.storeData(data, 'events'), () => this.setState({failed: true}));
     }
 
   }
-  storeData(data) {
+  storeData(data, key) {
     this.setState({
       loading: false,
-      user: data
+      [key]: data
     });
   }
     render() {
-        const {loading, user, failed, notLoggedIn} = this.state;
+        const {loading, user, failed, notLoggedIn, events} = this.state;
         if(failed) return <div>This user does not exist.</div>  //make this pretty
         if(notLoggedIn) return (
           <div>
