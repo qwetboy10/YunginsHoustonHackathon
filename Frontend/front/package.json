@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@babel/runtime": "^7.4.4",
+    "arcgis-js-api": "^4.11.1",
     "bootstrap": "^4.3.1",
     "create-react-class": "^15.6.3",
     "input-moment": "^0.4.0",
@@ -41,5 +42,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@arcgis/webpack-plugin": "^4.11.0"
   }
 }
