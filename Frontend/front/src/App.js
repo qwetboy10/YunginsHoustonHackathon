@@ -57,7 +57,7 @@ class App extends Component {
             <Route path='/orgsignup' component={(props) => <OrganizationSignUp {...props} update={this.checkCookies.bind(this)}/>}/>
             <Route path='/organization'component={(props) => <OrganizationPage {...props} />}/>
             <Route path='/events' component={(props) => <EventList {...props}/>}/>
-            <Route path='/createevent' component={(props) => <CreateEvent {...props}/>}/>
+            <Route path='/createvent' component={(props) => <CreateEvent {...props}/>}/>
             <Route path='/search' component = {(props) => <Search {...props}/>} />
             <Route path='/event' component={(props) => <Event {...props} />} />
             <Route path='/' component={Home} />
