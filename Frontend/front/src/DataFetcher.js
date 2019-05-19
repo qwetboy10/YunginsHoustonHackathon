@@ -67,7 +67,7 @@ export function createUser(username, password, firstName, lastName, email, phone
 }
 
 function unixTime(date) {
-
+    
 }
 
 export function searchEvents(name, additional = {}) {
