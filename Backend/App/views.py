@@ -47,11 +47,36 @@ class UserViewSet(viewsets.ViewSet):
         serializer = UserSerializer(user)
         return Response(serializer.data)
 
+    @action(methods=['post'], detail=False)
+    def login(self, request, pk = None):
+        print(request.data)
+        username = request.data['username']
+        password = request.data['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            serializer = PersonSerializer(get_object_or_404(user__username=username))
+            return Response(serializer.data)
+        else:
+            return Response({"detail":"Login Failed"})
+           
+
 
 class PersonViewSet(viewsets.ModelViewSet):
     queryset = Person.objects.all()
     serializer_class = PersonSerializer
-    def list(self, request, *args, **kwargs):
+    @action(methods=['get'], detail=False)
+    def search_by_name(self, request, *args, **kwargs):
+        search = request.query_params.get('search', None)
+        if search is None:
+            serializer = self.get_serializer(Person.objects.all(), many=True)
+            return Response(serializer.data)
+        else:
+            queryset = [i for i in Person.objects.all() if search in Person.get_name(i)]
+            serializer = self.get_serializer(queryset, many=True)
+            return Response(serializer.data)
+
+    @action(methods=['get'], detail=False)
+    def search_by_skill(self, request, *args, **kwargs):
         search = request.query_params.get('search', None)
         if search is None:
             serializer = self.get_serializer(Person.objects.all(), many=True)
@@ -70,8 +95,18 @@ class TagViewSet(viewsets.ModelViewSet):
 class OrganizationViewSet(viewsets.ModelViewSet):
     queryset = Organization.objects.all()
     serializer_class = OrganizationSerializer
+    @action(methods=['get'], detail=False)
+    def search_by_name(self, request, *args, **kwargs):
+        search = request.query_params.get('search', None)
+        if search is None:
+            serializer = self.get_serializer(Organization.objects.all(), many=True)
+            return Response(serializer.data)
+        else:
+            queryset = Organization.objects.filter(name__contains=search)
+            serializer = self.get_serializer(queryset, many=True)
+            return Response(serializer.data)
 
-    @action(methods=['get'], detail=True)
+    @action(methods=["get"], detail=True)
     def get_people(self, request, pk=None):
         people = Person.objects.filter(organization__id=pk)
         serializer = PersonSerializer(people, many=True)
@@ -83,13 +118,23 @@ class OrganizationViewSet(viewsets.ModelViewSet):
         serializer = EventSerializer(events, many=True)
         return Response(serializer.data)
 
-
 class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
 
     def list(self, request, *args, **kwargs):
         search = request.query_params.get("search", None)
+        if search is None:
+            serializer = self.get_serializer(Event.objects.all(), many=True)
+            return Response(serializer.data)
+        else:
+            queryset = Event.objects.filter(name__contains=search)
+            serializer = self.get_serializer(queryset, many=True)
+            return Response(serializer.data)
+
+    @action(methods=['get'], detail=False)
+    def search_by_name(self, request, *args, **kwargs):
+        search = request.query_params.get('search', None)
         if search is None:
             serializer = self.get_serializer(Event.objects.all(), many=True)
             return Response(serializer.data)
@@ -153,7 +198,17 @@ class EventViewSet(viewsets.ModelViewSet):
         serializer = PersonSerializer(volunteers, many=True)
         return Response(serializer.data)
 
+    @action(methods=["get"], detail=True)
+    def get_number_of_volunteers(self, request, pk=None):
+        volunteers = [
+            i
+            for i in Event.objects.get(pk=pk).organizers_volunteers.all()
+            if Person.is_volunteer(i)
+        ]
+        serializer = PersonSerializer(volunteers, many=True)
+        return Response(len(volunteers))
 
 class SkillViewSet(viewsets.ModelViewSet):
     queryset = Skill.objects.all()
     serializer_class = SkillSerializer
+
