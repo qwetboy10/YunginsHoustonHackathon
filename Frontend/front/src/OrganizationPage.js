@@ -3,7 +3,7 @@ import NavBar from './NavBar.js';
 import Login from './Login.js';
 import asd from './asd.jpeg';
 import {Carousel, Card, Jumbotron, Container} from 'react-bootstrap';
-import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
+import { MDBContainer, MDBRow, MDBCol, MDBBtn } from 'mdbreact';
 import { getOrganizationByID } from './DataFetcher.js';
 import Loading from './Loading.js';
 class OrganizationPage extends Component {
@@ -35,7 +35,7 @@ class OrganizationPage extends Component {
                 </div>
                 <br/>
                 <h2 style={{textAlign:"left"}}></h2>
-                <h2 style={{textAlign:"left"}}>{"Name of Organization "}</h2>
+                <h2 style={{textAlign:"left"}}>Organization Name: {org.name}</h2>
                 <br/>
                 <br/>
                 
@@ -58,6 +58,7 @@ class OrganizationPage extends Component {
 
                     </MDBCol>
                   </MDBRow>
+                  <MDBBtn onClick={() => (this.props.history.push("/createvent"))}>Create Event</MDBBtn>
                 </MDBContainer>
 
 
