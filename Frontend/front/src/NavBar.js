@@ -19,7 +19,7 @@ class NavBar extends Component {
         this.props.update();
     }
     onClick() {
-      this.props.history.push(`events/${searchEvents(this.state.searchQuery)}`);
+      this.props.history.push(`events${searchEvents(this.state.searchQuery)}`);
     }
     onChange(s) {
       this.setState({
