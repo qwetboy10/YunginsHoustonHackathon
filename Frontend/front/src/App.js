@@ -8,7 +8,7 @@ import FAQ from './FAQ.js';
 import Contact from './Contact.js';
 import Rankings from './Rankings.js';
 import Login from './Login.js';
-import Signup from './signup.js';
+import Signup from './Signup.js';
 import Cookies from 'universal-cookie';
 import { getPersonByID } from './DataFetcher.js';
 class App extends Component {

@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
+import { MDBContainer, MDBCard, MDBCardBody, MDBCol, MDBRow,MDBCardHeader, MDBInput, MDBIcon, MDBBtn, MDBModalFooter} from "mdbreact";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
-import createUser from './DataFetcher.js';
+import { createUser } from './DataFetcher.js';
 import Cookies from 'universal-cookie';
 
 class Signup extends Component {
@@ -21,7 +22,7 @@ class Signup extends Component {
         const {username, password, firstName, lastName, email, phoneNum} = this.state;
         createUser(username, password, firstName, lastName, email, phoneNum, (data) => {
             this.props.history.push("/profile");
-            cookies.set("user", data.id, { path: "/"});
+            new Cookies().set("user", data.id, { path: "/"});
             this.props.update();
         });
     }
