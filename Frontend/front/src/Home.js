@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import NavBar from './NavBar.js';
 import Login from './Login.js';
 import {Carousel, Card, Jumbotron, Container} from 'react-bootstrap';
-import title from './title.jpg';
 import ss1 from './slideshow1.jpg';
 import ss2 from './slideshow2.jpg';
 import ss3 from './slideshow3.jpg';
@@ -21,8 +20,8 @@ class Home extends Component {
                 alt="First slide"
                 />
                 <Carousel.Caption>
-                <h3>Serving the Houston community since 2019</h3>
-                <p>Free, intuitive platform to help connect volunteers to events and event organizers to volunteers</p>
+                <h1>Serving the Houston community since 2019</h1>
+                <h2>Free, intuitive platform to help connect volunteers to events and event organizers to volunteers</h2>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -33,8 +32,8 @@ class Home extends Component {
                 />
 
                 <Carousel.Caption>
-                <h3 style={{color:"black"}}>Build life-long friendships through teamwork and volunteering opportunities</h3>
-                <p style={{color:"black"}}>Volunteering creates community and helps out our wonderful city</p>
+                <h1 style={{color:"black"}}>Build life-long friendships through teamwork and volunteering opportunities</h1>
+                <h2 style={{color:"black"}}>Volunteering creates community and helps out our wonderful city</h2>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -45,11 +44,11 @@ class Home extends Component {
                 />
 
                 <Carousel.Caption>
-                <h3>Helping volunteers find events, and event organizers find volunteers</h3>
-                <p>Effective rating system for finding qualified volunteers</p>
+                <h1>Helping volunteers find events, and event organizers find volunteers</h1>
+                <h2>Effective rating system for finding qualified volunteers</h2>
                 </Carousel.Caption>
             </Carousel.Item>
-            </Carousel>
+            </Carousel>;
 
             <Jumbotron fluid>
             <Container>
@@ -64,7 +63,9 @@ class Home extends Component {
                 />
             </Container>
             </Jumbotron>;
-            <Footer />
+
+            <Footer />;
+
           </div>
         );
       }

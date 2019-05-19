@@ -1,18 +1,14 @@
 import React, {Component} from 'react';
 import {getEvents} from './DataFetcher.js';
 import NavBar from './NavBar.js';
-import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBRow, MDBCol, MDBIcon } from 'mdbreact';
+import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBRow, MDBCol, MDBIcon, MDBContainer } from 'mdbreact';
+import './EventList.css';
 
-class EventList extends Component {
+class EventList extends Component { 
     constructor(props) {
         super(props);
         this.state = {
-            eventData: [{
-                name: "Event Name",
-                date: "Date",
-                id: 1,
-                description: "An Event"
-            }]
+            eventData: null
         };
     }
     componentDidMount() {
@@ -22,23 +18,29 @@ class EventList extends Component {
         return (
         
         <div key={event.id}>
-        <MDBRow>
-            <MDBCol style={{ maxWidth: "22rem" }}>
-                <MDBCard wide>
-                <MDBCardImage className="view view-cascade gradient-card-header peach-gradient" cascade tag="div">
-                    <h2 className="h2-responsive mb-2">{event.name}</h2>
-                    <p className="">
-                    <MDBIcon icon="calendar-alt" /> {event.date}</p>
-                </MDBCardImage>
-                <MDBCardBody cascade>
-                    <MDBCardText>{event.description}</MDBCardText>
-                    <MDBCardText>Organized by: {event.organization}</MDBCardText>
-                    <MDBCardText>Address: {event.address}</MDBCardText>
-                    <MDBBtn href="#">View Event</MDBBtn>
-                </MDBCardBody>
-                </MDBCard>
-            </MDBCol>
-        </MDBRow>
+        <br/><br/>
+        <MDBContainer className="event">
+            <MDBRow center>
+                <MDBCol bottom style={{ maxWidth: "25rem" }} >
+                    <MDBCard wide display="inline">
+                    <MDBCardImage className="view view-cascade gradient-card-header blue-gradient" cascade tag="div">
+                        <h2  center="true" className="h2-responsive mb-2">{event.name}</h2>
+                        <p className=""> <MDBIcon icon="calendar-alt" /> {event.date}</p>
+                    </MDBCardImage>
+                    <MDBCardBody cascade>
+                        <MDBCardText>{event.description}</MDBCardText>
+                        <MDBCardText>Organized by: {event.organization}</MDBCardText>
+                        <MDBCardText>Address: {event.address}</MDBCardText>
+                        <p>
+                        <MDBBtn color="primary" href="#">View Event</MDBBtn>
+                        </p>
+                        
+                    </MDBCardBody>
+                    </MDBCard>
+                </MDBCol>
+                
+            </MDBRow>
+        </MDBContainer>
         </div>
         );
     }
