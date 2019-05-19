@@ -38,7 +38,7 @@ class App extends Component {
       <div>
         <NavBar {...this.props} update={this.checkCookies.bind(this)} user={user}/>
           <Switch>
-            <Route path='/events' component={EventList}/>
+            <Route path='/events' component={(props) => <EventList {...props}/>}/>
             <Route path='/faq' component={FAQ}/>
             <Route path='/contact' component={Contact} />
             <Route path='/rankings' component={Rankings} />
