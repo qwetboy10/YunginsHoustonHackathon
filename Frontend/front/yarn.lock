@@ -1731,9 +1731,9 @@ acorn-walk@^6.0.1:
   integrity sha512-OtUw6JUTgxA2QoqqmrmQ7F2NYqiBPi/L2jqHyFtllhOUvXYQXf0Z1CYUinIfyT4bTCGmrA7gX9FvHA81uzCoVw==
 
 acorn@^5.5.3:
-  version "5.7.3"
-  resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.7.3.tgz#67aa231bf8812974b85235a96771eb6bd07ea279"
-  integrity sha512-T/zvzYRfbVojPWahDsE5evJdHb3oJoQfFbsrKM7w5Zcs++Tr257tia3BmMP8XYVjp1S9RZXQMh7gao96BlqZOw==
+  version "5.7.4"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.7.4.tgz#3e8d8a9947d0599a1796d10225d7432f4a4acf5e"
+  integrity sha512-1D++VG7BhrtvQpNbBzovKNc1FLGGEE/oGe7b9xJm/RFHMBeUaUGpluV9RLjZa47YFdPcDAenEYuq9pQPcMdLJg==
 
 acorn@^6.0.1, acorn@^6.0.4, acorn@^6.0.5, acorn@^6.0.7:
   version "6.1.1"
@@ -3628,8 +3628,9 @@ detect-port-alt@1.1.6:
     address "^1.0.1"
     debug "^2.6.0"
 
-"dgrid@github:Esri/dgrid#v1.2.1/esri-3.22.0":
+dgrid@Esri/dgrid#v1.2.1/esri-3.22.0:
   version "1.2.1"
+  uid "200a7fda418bec199f3b76a493fdfa7d4440698b"
   resolved "https://codeload.github.com/Esri/dgrid/tar.gz/200a7fda418bec199f3b76a493fdfa7d4440698b"
 
 diff-sequences@^24.3.0:
@@ -3651,7 +3652,7 @@ diffie-hellman@^5.0.0:
     miller-rabin "^4.0.0"
     randombytes "^2.0.0"
 
-dijit@1.14.2, "dijit@github:Esri/dijit#v1.14.2/esri-3.28.0":
+dijit@1.14.2, dijit@Esri/dijit#v1.14.2/esri-3.28.0:
   version "1.14.2"
   resolved "https://codeload.github.com/Esri/dijit/tar.gz/ae2ed989408cbbadefcb4d5811b45fe7269b0e4e"
   dependencies:
@@ -3721,8 +3722,9 @@ dojo-dstore@1.1.2:
   dependencies:
     dojo "^1.9.0"
 
-"dojo-util@github:Esri/dojo-util#v1.14.2/esri-3.28.0":
+dojo-util@Esri/dojo-util#v1.14.2/esri-3.28.0:
   version "1.14.2"
+  uid "6cedc661ffef874e75f393f0212a9134dec96cd4"
   resolved "https://codeload.github.com/Esri/dojo-util/tar.gz/6cedc661ffef874e75f393f0212a9134dec96cd4"
 
 dojo-webpack-plugin@^2.8.1:
@@ -3741,17 +3743,19 @@ dojo@1.14.2:
   resolved "https://registry.yarnpkg.com/dojo/-/dojo-1.14.2.tgz#45ca90b19068230e1486f68b1531fa4ce0e21280"
   integrity sha512-TI+Ytgfh/VfmHWERp45Jte6NFMdoJTPsvUP/uzJUvAXET8FP2h442LePWWJ/q/xZ4V0V8OtdJhx8It/GB+Zbxg==
 
+dojo@Esri/dojo#v1.14.2/esri-3.28.0:
+  version "1.14.2"
+  uid bed2e881e70d2d5f52a7423af2ec1f6036eb9b0c
+  resolved "https://codeload.github.com/Esri/dojo/tar.gz/bed2e881e70d2d5f52a7423af2ec1f6036eb9b0c"
+
 dojo@^1.9.0:
   version "1.15.0"
   resolved "https://registry.yarnpkg.com/dojo/-/dojo-1.15.0.tgz#af8dc3e18b7c46305569affcf7e479de68d0e40f"
   integrity sha512-+1r5Nj1+iaHI8AxUadqsSp8wJMJM6sslr3INgWKhxUA0xHznBNY0htt38XLyheuy1G7oOwsh4X1An+Uzirj7Gw==
 
-"dojo@github:Esri/dojo#v1.14.2/esri-3.28.0":
+dojox@Esri/dojox#v1.14.2/esri-3.28.0:
   version "1.14.2"
-  resolved "https://codeload.github.com/Esri/dojo/tar.gz/bed2e881e70d2d5f52a7423af2ec1f6036eb9b0c"
-
-"dojox@github:Esri/dojox#v1.14.2/esri-3.28.0":
-  version "1.14.2"
+  uid "66a4f9a49808332c0573437ea2f9f78901124373"
   resolved "https://codeload.github.com/Esri/dojox/tar.gz/66a4f9a49808332c0573437ea2f9f78901124373"
   dependencies:
     dijit "1.14.2"
